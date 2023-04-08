@@ -187,6 +187,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EFA647F029D4A78100A0B451 /* Build configuration list for PBXNativeTarget "The Book Of You" */;
 			buildPhases = (
+				EFA6484D29E211E300A0B451 /* SwiftLint */,
 				EFA647C229D4A78000A0B451 /* Sources */,
 				EFA647C329D4A78000A0B451 /* Frameworks */,
 				EFA647C429D4A78000A0B451 /* Resources */,
@@ -312,6 +313,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EFA6484D29E211E300A0B451 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EFA647C229D4A78000A0B451 /* Sources */ = {

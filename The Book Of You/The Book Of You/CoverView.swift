@@ -9,8 +9,7 @@ import SwiftUI
 
 struct CoverView: View {
     @EnvironmentObject private var navStore: NavStore
-    
-    
+
     // NOTES: Questions, can I easily build an evenly spaced VStack?
     var body: some View {
         ZStack {
@@ -22,15 +21,13 @@ struct CoverView: View {
                 Spacer()
                 Text("The Book of You")
                     .font(.title)
-                
                 Text("A journal to support goals habbits and dreams")
                     .font(.subheadline)
                 Spacer()
                 Text("Author: You")
                     .font(.subheadline)
                 Spacer()
-                
-            }            
+            }
         }
     }
 }

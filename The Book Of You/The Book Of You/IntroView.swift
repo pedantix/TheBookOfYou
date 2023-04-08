@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IntroView: View {
     @EnvironmentObject var navStore: NavStore
-    
+
     var body: some View {
         ZStack {
             ClickableBackgroundView {

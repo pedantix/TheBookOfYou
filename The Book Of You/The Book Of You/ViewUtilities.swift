@@ -7,7 +7,8 @@
 
 import Foundation
 
-// The fibionacci sequence is used in the golden ration, the following enum is a convience for using the golden ratio for layout pleasentness
+// The fibionacci sequence is used in the golden ration, the following enum is a convience
+// for using the golden ratio for layout pleasentness
 
 extension CGFloat {
     static let fs1 = 1.0

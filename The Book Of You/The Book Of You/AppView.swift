@@ -7,13 +7,11 @@
 
 import SwiftUI
 
-
 struct AppView: View {
     @StateObject private var navStore = NavStore()
-    
+
     var body: some View {
         NavigationStack(path: $navStore.path) {
-            
             CoverView()
                 .navigationDestination(for: Destinations.self) { destination in
                     switch destination {
@@ -25,10 +23,8 @@ struct AppView: View {
                         AboutView()
                     }
                 }
-            
         }
         .environmentObject(navStore)
-        
     }
 }
 
