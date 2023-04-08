@@ -21,6 +21,8 @@ struct AppView: View {
                         IntroView()
                     case .cover:
                         CoverView()
+                    case .about:
+                        AboutView()
                     }
                 }
             

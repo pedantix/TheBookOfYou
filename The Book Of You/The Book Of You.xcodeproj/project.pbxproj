@@ -22,6 +22,12 @@
 		EFA6483429DF1FEA00A0B451 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6483329DF1FEA00A0B451 /* AppView.swift */; };
 		EFA6483629DF205C00A0B451 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6483529DF205C00A0B451 /* IntroView.swift */; };
 		EFA6483829DF270000A0B451 /* NavStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6483729DF270000A0B451 /* NavStore.swift */; };
+		EFA6484029E1E8D700A0B451 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6483F29E1E8D700A0B451 /* AboutView.swift */; };
+		EFA6484229E1EA6500A0B451 /* ClickableBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6484129E1EA6500A0B451 /* ClickableBackgroundView.swift */; };
+		EFA6484629E1EEA000A0B451 /* ViewUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6484529E1EEA000A0B451 /* ViewUtilities.swift */; };
+		EFA6484829E1F22000A0B451 /* Repositories.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFA6484729E1F22000A0B451 /* Repositories.plist */; };
+		EFA6484A29E1F2EA00A0B451 /* AboutDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6484929E1F2EA00A0B451 /* AboutDataService.swift */; };
+		EFA6484C29E1FA6C00A0B451 /* CitedWorks.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFA6484B29E1FA6C00A0B451 /* CitedWorks.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +66,13 @@
 		EFA6483329DF1FEA00A0B451 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		EFA6483529DF205C00A0B451 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		EFA6483729DF270000A0B451 /* NavStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavStore.swift; sourceTree = "<group>"; };
-		EFA6483E29E1E6C500A0B451 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		EFA6483E29E1E6C500A0B451 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../Config.xcconfig; sourceTree = "<group>"; };
+		EFA6483F29E1E8D700A0B451 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		EFA6484129E1EA6500A0B451 /* ClickableBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableBackgroundView.swift; sourceTree = "<group>"; };
+		EFA6484529E1EEA000A0B451 /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
+		EFA6484729E1F22000A0B451 /* Repositories.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Repositories.plist; sourceTree = "<group>"; };
+		EFA6484929E1F2EA00A0B451 /* AboutDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDataService.swift; sourceTree = "<group>"; };
+		EFA6484B29E1FA6C00A0B451 /* CitedWorks.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CitedWorks.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +104,6 @@
 		EFA647BD29D4A78000A0B451 = {
 			isa = PBXGroup;
 			children = (
-				EFA6483E29E1E6C500A0B451 /* Config.xcconfig */,
 				EFA647C829D4A78000A0B451 /* The Book Of You */,
 				EFA647DF29D4A78100A0B451 /* The Book Of YouTests */,
 				EFA647E929D4A78100A0B451 /* The Book Of YouUITests */,
@@ -113,6 +124,7 @@
 		EFA647C829D4A78000A0B451 /* The Book Of You */ = {
 			isa = PBXGroup;
 			children = (
+				EFA6483E29E1E6C500A0B451 /* Config.xcconfig */,
 				EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */,
 				EFA647CB29D4A78000A0B451 /* ContentView.swift */,
 				EFA647CD29D4A78100A0B451 /* Assets.xcassets */,
@@ -125,6 +137,9 @@
 				EFA6483329DF1FEA00A0B451 /* AppView.swift */,
 				EFA6483529DF205C00A0B451 /* IntroView.swift */,
 				EFA6483729DF270000A0B451 /* NavStore.swift */,
+				EFA6484429E1EDC200A0B451 /* About */,
+				EFA6484129E1EA6500A0B451 /* ClickableBackgroundView.swift */,
+				EFA6484529E1EEA000A0B451 /* ViewUtilities.swift */,
 			);
 			path = "The Book Of You";
 			sourceTree = "<group>";
@@ -152,6 +167,17 @@
 				EFA647EC29D4A78100A0B451 /* The_Book_Of_YouUITestsLaunchTests.swift */,
 			);
 			path = "The Book Of YouUITests";
+			sourceTree = "<group>";
+		};
+		EFA6484429E1EDC200A0B451 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				EFA6483F29E1E8D700A0B451 /* AboutView.swift */,
+				EFA6484729E1F22000A0B451 /* Repositories.plist */,
+				EFA6484929E1F2EA00A0B451 /* AboutDataService.swift */,
+				EFA6484B29E1FA6C00A0B451 /* CitedWorks.plist */,
+			);
+			path = About;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +291,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFA647D129D4A78100A0B451 /* Preview Assets.xcassets in Resources */,
+				EFA6484C29E1FA6C00A0B451 /* CitedWorks.plist in Resources */,
+				EFA6484829E1F22000A0B451 /* Repositories.plist in Resources */,
 				EFA647CE29D4A78100A0B451 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,11 +322,15 @@
 				EFA647D329D4A78100A0B451 /* Persistence.swift in Sources */,
 				EFA6483629DF205C00A0B451 /* IntroView.swift in Sources */,
 				EFA6482B29DF174700A0B451 /* CoverView.swift in Sources */,
+				EFA6484029E1E8D700A0B451 /* AboutView.swift in Sources */,
+				EFA6484629E1EEA000A0B451 /* ViewUtilities.swift in Sources */,
 				EFA647CC29D4A78000A0B451 /* ContentView.swift in Sources */,
 				EFA6483429DF1FEA00A0B451 /* AppView.swift in Sources */,
 				EFA6482D29DF17DF00A0B451 /* Loggers.swift in Sources */,
+				EFA6484229E1EA6500A0B451 /* ClickableBackgroundView.swift in Sources */,
 				EFA647CA29D4A78000A0B451 /* The_Book_Of_YouApp.swift in Sources */,
 				EFA647D629D4A78100A0B451 /* The_Book_Of_You.xcdatamodeld in Sources */,
+				EFA6484A29E1F2EA00A0B451 /* AboutDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

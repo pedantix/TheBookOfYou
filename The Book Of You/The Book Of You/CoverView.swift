@@ -14,14 +14,10 @@ struct CoverView: View {
     // NOTES: Questions, can I easily build an evenly spaced VStack?
     var body: some View {
         ZStack {
-            GeometryReader { geometry in
-                
-                Rectangle()
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .opacity(0.001)   // <--- important
-                    .layoutPriority(-1)
+            ClickableBackgroundView {
+                navStore.path.append(Destinations.intro)
+                viewLogger.info("Turn Cover Page To Next")
             }
-            
             VStack {
                 Spacer()
                 Text("The Book of You")
@@ -34,11 +30,7 @@ struct CoverView: View {
                     .font(.subheadline)
                 Spacer()
                 
-            }
-            
-        }.onTapGesture {
-            navStore.path.append(Destinations.intro)
-            viewLogger.info("Turn Cover Page To Next")
+            }            
         }
     }
 }

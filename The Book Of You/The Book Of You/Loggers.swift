@@ -8,3 +8,4 @@
 import Logging
 
 let viewLogger = Logger(label: "View")
+let dataServiceLogger = Logger(label: "DataService")

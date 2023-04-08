@@ -8,8 +8,16 @@
 import SwiftUI
 
 struct IntroView: View {
+    @EnvironmentObject var navStore: NavStore
+    
     var body: some View {
-        Text("Intro")
+        ZStack {
+            ClickableBackgroundView {
+                viewLogger.info("Navigate To About")
+                navStore.path.append(Destinations.about)
+            }
+            Text("Intro")
+        }
     }
 }
 
