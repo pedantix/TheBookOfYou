@@ -10,5 +10,13 @@
 		<key>github</key>
 		<string>http://github.com/apple/swift-log</string>
 	</dict>
+	<dict>
+		<key>function</key>
+		<string>This repository provides a property wrapper for using synchronized swiftui property wrappers with iCloudKit. I started writing this, ran into a small issue with how to best register observers and found this library. Even though I was very close, its best to not reinvent a wheel.</string>
+		<key>title</key>
+		<string>Cloud Storage</string>
+		<key>github</key>
+		<string>https://github.com/tomlokhorst/CloudStorage</string>
+	</dict>
 </array>
 </plist>

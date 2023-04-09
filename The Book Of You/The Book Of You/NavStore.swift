@@ -11,6 +11,7 @@ enum Destinations: String, Codable {
     case cover
     case intro
     case about
+    case index
 }
 
 // NOTE: NavPath is codable so this can be used both for incoming path requests

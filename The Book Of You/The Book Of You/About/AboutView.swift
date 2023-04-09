@@ -55,7 +55,7 @@ struct AboutView: View {
         ForEach(dataService.githubData) { repo in
             VStack(alignment: .leading) {
                 Text(repo.title)
-                    .font(.title3)
+                    .font(.subheadline)
                     .padding([.bottom], .fs3)
                 Text(repo.function)
                     .padding([.bottom], .fs4)

@@ -28,6 +28,9 @@
 		EFA6484829E1F22000A0B451 /* Repositories.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFA6484729E1F22000A0B451 /* Repositories.plist */; };
 		EFA6484A29E1F2EA00A0B451 /* AboutDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6484929E1F2EA00A0B451 /* AboutDataService.swift */; };
 		EFA6484C29E1FA6C00A0B451 /* CitedWorks.plist in Resources */ = {isa = PBXBuildFile; fileRef = EFA6484B29E1FA6C00A0B451 /* CitedWorks.plist */; };
+		EFA6485029E2339C00A0B451 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6484F29E2339C00A0B451 /* UserDefaults.swift */; };
+		EFA6485429E2495400A0B451 /* CloudStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EFA6485329E2495400A0B451 /* CloudStorage */; };
+		EFA6485629E24B7B00A0B451 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6485529E24B7B00A0B451 /* IndexView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		EFA6484729E1F22000A0B451 /* Repositories.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Repositories.plist; sourceTree = "<group>"; };
 		EFA6484929E1F2EA00A0B451 /* AboutDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutDataService.swift; sourceTree = "<group>"; };
 		EFA6484B29E1FA6C00A0B451 /* CitedWorks.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = CitedWorks.plist; sourceTree = "<group>"; };
+		EFA6484F29E2339C00A0B451 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		EFA6485129E2349600A0B451 /* The Book Of You.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "The Book Of You.entitlements"; sourceTree = "<group>"; };
+		EFA6485529E24B7B00A0B451 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFA6485429E2495400A0B451 /* CloudStorage in Frameworks */,
 				EFA6483029DF180900A0B451 /* Logging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +131,7 @@
 		EFA647C829D4A78000A0B451 /* The Book Of You */ = {
 			isa = PBXGroup;
 			children = (
+				EFA6485129E2349600A0B451 /* The Book Of You.entitlements */,
 				EFA6483E29E1E6C500A0B451 /* Config.xcconfig */,
 				EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */,
 				EFA647CB29D4A78000A0B451 /* ContentView.swift */,
@@ -140,6 +148,8 @@
 				EFA6484429E1EDC200A0B451 /* About */,
 				EFA6484129E1EA6500A0B451 /* ClickableBackgroundView.swift */,
 				EFA6484529E1EEA000A0B451 /* ViewUtilities.swift */,
+				EFA6484F29E2339C00A0B451 /* UserDefaults.swift */,
+				EFA6485529E24B7B00A0B451 /* IndexView.swift */,
 			);
 			path = "The Book Of You";
 			sourceTree = "<group>";
@@ -199,6 +209,7 @@
 			name = "The Book Of You";
 			packageProductDependencies = (
 				EFA6482F29DF180900A0B451 /* Logging */,
+				EFA6485329E2495400A0B451 /* CloudStorage */,
 			);
 			productName = "The Book Of You";
 			productReference = EFA647C629D4A78000A0B451 /* The Book Of You.app */;
@@ -274,6 +285,7 @@
 			mainGroup = EFA647BD29D4A78000A0B451;
 			packageReferences = (
 				EFA6482E29DF180900A0B451 /* XCRemoteSwiftPackageReference "swift-log" */,
+				EFA6485229E2495400A0B451 /* XCRemoteSwiftPackageReference "CloudStorage" */,
 			);
 			productRefGroup = EFA647C729D4A78000A0B451 /* Products */;
 			projectDirPath = "";
@@ -353,6 +365,8 @@
 				EFA6484229E1EA6500A0B451 /* ClickableBackgroundView.swift in Sources */,
 				EFA647CA29D4A78000A0B451 /* The_Book_Of_YouApp.swift in Sources */,
 				EFA647D629D4A78100A0B451 /* The_Book_Of_You.xcdatamodeld in Sources */,
+				EFA6485029E2339C00A0B451 /* UserDefaults.swift in Sources */,
+				EFA6485629E24B7B00A0B451 /* IndexView.swift in Sources */,
 				EFA6484A29E1F2EA00A0B451 /* AboutDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "The Book Of You/The Book Of You.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"The Book Of You/Preview Content\"";
@@ -540,6 +555,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "The Book Of You/The Book Of You.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"The Book Of You/Preview Content\"";
@@ -692,6 +708,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		EFA6485229E2495400A0B451 /* XCRemoteSwiftPackageReference "CloudStorage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tomlokhorst/CloudStorage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -699,6 +723,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EFA6482E29DF180900A0B451 /* XCRemoteSwiftPackageReference "swift-log" */;
 			productName = Logging;
+		};
+		EFA6485329E2495400A0B451 /* CloudStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFA6485229E2495400A0B451 /* XCRemoteSwiftPackageReference "CloudStorage" */;
+			productName = CloudStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 
