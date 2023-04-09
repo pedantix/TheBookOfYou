@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AppView: View {
     @StateObject private var navStore = NavStore()
+    @SceneStorage("navigation") private var navStoreData: Data?
 
     var body: some View {
         NavigationStack(path: $navStore.path) {
@@ -26,7 +27,18 @@ struct AppView: View {
                     }
                 }
         }
+
         .environmentObject(navStore)
+        .task {
+            // Restore Nav Stack from Last State
+            if let navStoreData {
+                navStore.restore(from: navStoreData)
+            }
+            // Save Nav Stack to scene storage as it changes
+            for await _ in navStore.$path.values {
+                navStoreData = navStore.encode()
+            }
+        }
     }
 }
 
