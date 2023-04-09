@@ -9,7 +9,7 @@ import CoreData
 
 struct PersistenceController {
     static let shared = PersistenceController()
-
+/*
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
@@ -29,7 +29,7 @@ struct PersistenceController {
         }
         return result
     }()
-
+*/
     let container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {
