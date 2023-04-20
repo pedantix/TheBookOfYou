@@ -24,6 +24,8 @@ struct AppView: View {
                         AboutView()
                     case .index:
                         IndexView()
+                    case .chapterCreator:
+                        Text("Todo create a chapter creator")
                     }
                 }
         }

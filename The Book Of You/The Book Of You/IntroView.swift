@@ -8,6 +8,8 @@
 import CloudStorage
 import SwiftUI
 
+// TODO: Discuss Aggregate Accumulation of Incremental Change
+
 // swiftlint:disable line_length
 let introText = """
 \tI believe in the power of habit, identity, and focus. The purpose of building this app was to reassert my identity as an app developer and software engineer and create a feature to help me make habits and strengthen my identity. I believe in goals, dreams, and consistency.

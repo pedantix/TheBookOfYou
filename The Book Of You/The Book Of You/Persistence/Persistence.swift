@@ -9,27 +9,6 @@ import CoreData
 
 struct PersistenceController {
     static let shared = PersistenceController()
-/*
-    static var preview: PersistenceController = {
-        let result = PersistenceController(inMemory: true)
-        let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate.
-            // You should not use this function in a shipping application, although it may
-            // be useful during development.
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-        return result
-    }()
-*/
     let container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {
@@ -58,6 +37,48 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+}
+
+extension PersistenceController {
+    static var preview: PersistenceController = PersistenceController(inMemory: true)
+
+    static func controllerForUIPreview() -> PersistenceController {
+        return PersistenceController(inMemory: true)
+    }
+
+    var viewContext: NSManagedObjectContext {
+        return self.container.viewContext
+    }
+
+    func addChapters(_ count: Int = 5) -> [Chapter] {
+        let viewContext = self.container.viewContext
+
+        var chapters = [Chapter]()
+        for item in (1...count).reversed() {
+            let newItem = Chapter(context: viewContext)
+            newItem.title = "Title \(count)"
+            newItem.dateStarted = .date(daysAgo: count - item)
+            chapters.append(newItem)
+        }
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate.
+            // You should not use this function in a shipping application, although it may
+            // be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+        return chapters
+    }
+}
+
+extension Date {
+    static func date(daysAgo: Int) -> Date {
+        return Calendar.current.date(byAdding: .day, value: -1, to: .now)!
     }
 }

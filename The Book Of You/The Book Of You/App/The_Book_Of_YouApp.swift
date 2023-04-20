@@ -15,9 +15,7 @@ struct The_Book_Of_YouApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppView()
-            // ContentView()
-              //  .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            AppView().environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
