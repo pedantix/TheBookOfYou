@@ -14,7 +14,7 @@ struct CoverView: View {
     var body: some View {
         ZStack {
             ClickableBackgroundView {
-                navStore.path.append(Destinations.intro)
+                navStore.path.append(Destination.intro)
                 viewLogger.info("Turn Cover Page To Next")
             }
             VStack {

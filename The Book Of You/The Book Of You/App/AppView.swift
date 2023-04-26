@@ -9,12 +9,12 @@ import SwiftUI
 
 struct AppView: View {
     @StateObject private var navStore = NavStore()
-    @SceneStorage("navigation") private var navStoreData: Data?
+    @SceneStorage(.navigationKey) private var navStoreData: Data?
 
     var body: some View {
         NavigationStack(path: $navStore.path) {
             CoverView()
-                .navigationDestination(for: Destinations.self) { destination in
+                .navigationDestination(for: Destination.self) { destination in
                     switch destination {
                     case .intro:
                         IntroView()
@@ -25,7 +25,13 @@ struct AppView: View {
                     case .index:
                         IndexView()
                     case .chapterCreator:
-                        Text("Todo create a chapter creator")
+                        ChapterCreatorView()
+                    case .pageCreator:
+                        Text("Todo create a page creator")
+                    case let.chapter(objectURI: uri):
+                        Text("TODO: display \(uri) for CHAPTER")
+                    case let.page(objectURI: uri):
+                        Text("TODO: display \(uri) for PAGE")
                     }
                 }
         }

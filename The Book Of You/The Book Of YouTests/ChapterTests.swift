@@ -9,14 +9,18 @@ import XCTest
 import CoreData
 @testable import The_Book_Of_You
 
-final class ChapterTests: XCTestCase {
-    private var context: NSManagedObjectContext!
+final class ChapterTests: BackgroundContextTestCase {
     private var testChapters: [Chapter]!
 
     override func setUp() async throws {
-        context = TestCoreDataStack().persistenContainer.newBackgroundContext()
-        testChapters = [context.makeChapter(daysAgo: 0), context.makeChapter(daysAgo: 1),
-                        context.makeChapter(daysAgo: 2), context.makeChapter(daysAgo: 3)]
+        try await super.setUp()
+
+        let da3chap = context.makeChapter(daysAgo: 3)
+        let presentChapter = context.makeChapter(daysAgo: 0)
+        let da2chap = context.makeChapter(daysAgo: 2)
+        let da1chap = context.makeChapter(daysAgo: 1)
+
+        testChapters = [presentChapter, da1chap, da2chap, da3chap]
     }
 
     func testAllChaptersSorted() throws {

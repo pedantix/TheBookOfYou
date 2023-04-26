@@ -4,6 +4,14 @@
 <array>
 	<dict>
 		<key>function</key>
+		<string>The function of this repo is to provide fake data for test cases.</string>
+		<key>title</key>
+		<string>Fakery</string>
+		<key>github</key>
+		<string>https://github.com/vadymmarkov/Fakery.git</string>
+	</dict>
+	<dict>
+		<key>function</key>
 		<string>This is used for logging in the application. Any production application should have robust logging. Swift log takes a lot of the heavy lifting involved in logging and makes use of an easy to use interface `Logging`.</string>
 		<key>title</key>
 		<string>SwiftLog</string>

@@ -59,8 +59,11 @@ extension PersistenceController {
         var chapters = [Chapter]()
         for item in (1...count).reversed() {
             let newItem = Chapter(context: viewContext)
-            newItem.title = "Title \(count)"
+            newItem.title = "Title \(item)"
             newItem.dateStarted = .date(daysAgo: count - item)
+            if item != count {
+                newItem.dateEnded = .date(daysAgo: count - item - 1)
+            }
             chapters.append(newItem)
         }
         do {
@@ -79,6 +82,6 @@ extension PersistenceController {
 
 extension Date {
     static func date(daysAgo: Int) -> Date {
-        return Calendar.current.date(byAdding: .day, value: -1, to: .now)!
+        return Calendar.current.date(byAdding: .day, value: -(daysAgo), to: .now)!
     }
 }

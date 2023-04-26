@@ -1,0 +1,36 @@
+{
+  "configurations" : [
+    {
+      "id" : "71C1C9B3-56B9-4F31-BAFA-DF00B9442C14",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:The Book Of You.xcodeproj",
+      "identifier" : "EFA647C529D4A78000A0B451",
+      "name" : "The Book Of You"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:The Book Of You.xcodeproj",
+        "identifier" : "EFA647DB29D4A78100A0B451",
+        "name" : "The Book Of YouTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:The Book Of You.xcodeproj",
+        "identifier" : "EFA647E529D4A78100A0B451",
+        "name" : "The Book Of YouUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

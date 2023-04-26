@@ -7,20 +7,6 @@
 
 import SwiftUI
 
-// TODO: Extract this and make it look better for production
-struct ErrorView: View {
-    let reasons: [String]
-
-    var body: some View {
-        VStack {
-            Text("Sorry, there has been an error dispaying your view")
-            ForEach(reasons, id: \.self) {
-                Text("Reason: \($0)")
-            }
-        }
-    }
-}
-
 struct IndexView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -45,7 +31,9 @@ struct IndexView: View {
         case .zero:
             newBookView
         case 1:
-            oneChapterView
+            List {
+                currentChapterSection
+            }
         case 1...Int.max:
             multiChapterBody
         default:
@@ -55,47 +43,17 @@ struct IndexView: View {
 
     private var multiChapterBody: some View {
         List {
-            Section("<Current Chapter - Title> - From <start> - present" ) {
-
-                NavigationLink(value: Destinations.chapterCreator) {
-                    Text("Make a new chapter - Edit Goals  - TODO:")
-                }
-
-                Text("Make a new entry - Journal for the day, TODO: Edit or create - TODO:")
+            currentChapterSection
+            ForEach(pastChapters) { chapter in
+                ChapterSection(chapter: chapter)
             }
-            .listRowSeparator(.hidden)
-
-           Section("<Last Chapter - title> - From start - end" ) {
-                Text("summarize chapter, goals attributes - TODO: make this work")
-                Text("page - x - <optional title> - date - TODO")
-                Text("page - y - <optional title> - date - TODO")
-                Text("page - z - <optional title> - date - TODO")
-                Text("Button to expand or collpse more then 5 pages - TODO")
-            }
-            .listRowSeparator(.hidden)
-
-            Section("<Chapter Before Last - title> - From start - end" ) {
-                Text("summarize chapter, goals attributes - TODO: make this work")
-                Text("page - x - <optional title> - date - TODO")
-                Text("page - y - <optional title> - date - TODO")
-                Text("page - z - <optional title> - date - TODO")
-                Text("Button to expand or collpse more then 5 pages - TODO")
-            }
-            .listRowSeparator(.hidden)
         }
     }
 
     @ViewBuilder
-    private var oneChapterView: some View {
+    private var currentChapterSection: some View {
         if let firstChapter = currentChapter.first {
-            Section("\(firstChapter.formattedTitle) - From \(firstChapter.formattedDate) - present" ) {
-
-                NavigationLink(value: Destinations.chapterCreator) {
-                    Text("Make a new chapter - Edit Goals  - TODO:")
-                }
-
-                Text("Make a new entry - Journal for the day, TODO: Edit or create - TODO:")
-            }
+            ChapterSection(chapter: firstChapter)
         } else {
             ErrorView(reasons: ["First chapter not found via core data!!!"])
         }
@@ -105,10 +63,30 @@ struct IndexView: View {
         VStack(spacing: 20) {
             Text("You must write your first Chapter").font(.title2)
             Text("Decide who you want to be tommorow, be bold!").font(.subheadline)
-            NavigationLink("Create Your First Chapter", value: Destinations.chapterCreator)
+            NavigationLink("Create Your First Chapter", value: Destination.chapterCreator)
         }
     }
+}
 
+private struct ChapterSection: View {
+    let chapter: Chapter
+
+    var body: some View {
+        lazy var cvm = IndexChapterViewModel(chapter: chapter)
+        Section(header: Text(cvm.chapterHeading)) {
+            NavigationLink(value: Destination.chapterCreator) {
+                Text("Make a new chapter - Change Your Goals")
+            }
+
+            // TODO: If pages are empty make deletable/change goals and throw away empty chapter on save
+
+            NavigationLink(value: Destination.pageCreator) {
+                Text("Add or edit today's entry - TODO: work this out logicall")
+            }
+
+            Text("TODO: List page entries, no more then 3 if 5+ exist, with a collapse uncollapse button")
+        }.listRowSeparator(.hidden)
+    }
 }
 
 struct IndexView_Previews: PreviewProvider {

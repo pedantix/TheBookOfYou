@@ -58,11 +58,11 @@ struct IntroView: View {
             .padding(0).toolbar {
                 Button("About") {
                     viewLogger.info("Navigate To About")
-                    navStore.path.append(Destinations.about)
+                    navStore.path.append(Destination.about)
                 }
                 Button("Index") {
                     viewLogger.info("Navigate To Index")
-                    navStore.path.append(Destinations.index)
+                    navStore.path.append(Destination.index)
                 }
             }
     }

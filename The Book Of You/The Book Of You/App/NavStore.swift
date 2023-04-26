@@ -6,13 +6,19 @@
 //
 
 import SwiftUI
+import CoreData
 
-enum Destinations: String, Codable {
+enum Destination: Codable, Hashable {
     case cover
     case intro
     case about
     case index
     case chapterCreator
+    case pageCreator
+    // TODO: test this usage of uri/url for managed objects with unit tests
+    // https://www.cocoawithlove.com/2008/08/safely-fetching-nsmanagedobject-by-uri.html
+    case chapter(objectURI: URL)
+    case page(objectURI: URL)
 }
 
 // NOTE: NavPath is codable so this can be used both for incoming path requests

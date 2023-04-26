@@ -7,11 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF1AA27329F2B7270056293F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27229F2B7270056293F /* ErrorView.swift */; };
+		EF1AA27629F2B9640056293F /* ChapterCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27529F2B9640056293F /* ChapterCreatorView.swift */; };
+		EF1AA27829F5D4FD0056293F /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27729F5D4FD0056293F /* Goal.swift */; };
+		EF1AA27A29F5D6B80056293F /* GoalFetchRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27929F5D6B80056293F /* GoalFetchRequestTests.swift */; };
+		EF1AA27D29F5D7260056293F /* Fakery in Frameworks */ = {isa = PBXBuildFile; productRef = EF1AA27C29F5D7260056293F /* Fakery */; };
+		EF1AA28029F6A7AC0056293F /* GoalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27F29F6A7AC0056293F /* GoalViewModel.swift */; };
+		EF1AA28229F6A8360056293F /* GoalViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA28129F6A8360056293F /* GoalViewModelTests.swift */; };
+		EF1AA28429F6AEAC0056293F /* ChapterCreatorViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA28329F6AEAC0056293F /* ChapterCreatorViewModelTests.swift */; };
+		EF1AA28629F6AEC70056293F /* ChapterCreatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA28529F6AEC70056293F /* ChapterCreatorViewModel.swift */; };
+		EF1AA28829F728F40056293F /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA28729F728F40056293F /* Strings.swift */; };
 		EF4AFAE729F0612F00396FD3 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4AFAE629F0612F00396FD3 /* Chapter.swift */; };
 		EF9F3ADF29F0D7AB005CC0A0 /* TestCoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9F3ADE29F0D7AB005CC0A0 /* TestCoreDataStack.swift */; };
 		EF9F3AE129F0D8C1005CC0A0 /* ChapterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9F3AE029F0D8C1005CC0A0 /* ChapterTests.swift */; };
+		EF9F3AE329F16082005CC0A0 /* IndexChapterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9F3AE229F16082005CC0A0 /* IndexChapterViewModel.swift */; };
+		EF9F3AE529F16218005CC0A0 /* IndexChapterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9F3AE429F16218005CC0A0 /* IndexChapterViewModelTests.swift */; };
 		EFA647CA29D4A78000A0B451 /* The_Book_Of_YouApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */; };
-		EFA647CC29D4A78000A0B451 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA647CB29D4A78000A0B451 /* ContentView.swift */; };
 		EFA647CE29D4A78100A0B451 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA647CD29D4A78100A0B451 /* Assets.xcassets */; };
 		EFA647D129D4A78100A0B451 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA647D029D4A78100A0B451 /* Preview Assets.xcassets */; };
 		EFA647D329D4A78100A0B451 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA647D229D4A78100A0B451 /* Persistence.swift */; };
@@ -53,12 +64,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF1AA26F29F2B4860056293F /* The Book Of You.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "The Book Of You.xctestplan"; sourceTree = "<group>"; };
+		EF1AA27129F2B6B00056293F /* The-Book-Of-You-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "The-Book-Of-You-Info.plist"; sourceTree = SOURCE_ROOT; };
+		EF1AA27229F2B7270056293F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		EF1AA27529F2B9640056293F /* ChapterCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCreatorView.swift; sourceTree = "<group>"; };
+		EF1AA27729F5D4FD0056293F /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		EF1AA27929F5D6B80056293F /* GoalFetchRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFetchRequestTests.swift; sourceTree = "<group>"; };
+		EF1AA27F29F6A7AC0056293F /* GoalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModel.swift; sourceTree = "<group>"; };
+		EF1AA28129F6A8360056293F /* GoalViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalViewModelTests.swift; sourceTree = "<group>"; };
+		EF1AA28329F6AEAC0056293F /* ChapterCreatorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCreatorViewModelTests.swift; sourceTree = "<group>"; };
+		EF1AA28529F6AEC70056293F /* ChapterCreatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCreatorViewModel.swift; sourceTree = "<group>"; };
+		EF1AA28729F728F40056293F /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		EF4AFAE629F0612F00396FD3 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
 		EF9F3ADE29F0D7AB005CC0A0 /* TestCoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCoreDataStack.swift; sourceTree = "<group>"; };
 		EF9F3AE029F0D8C1005CC0A0 /* ChapterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterTests.swift; sourceTree = "<group>"; };
+		EF9F3AE229F16082005CC0A0 /* IndexChapterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexChapterViewModel.swift; sourceTree = "<group>"; };
+		EF9F3AE429F16218005CC0A0 /* IndexChapterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexChapterViewModelTests.swift; sourceTree = "<group>"; };
 		EFA647C629D4A78000A0B451 /* The Book Of You.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Book Of You.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Book_Of_YouApp.swift; sourceTree = "<group>"; };
-		EFA647CB29D4A78000A0B451 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EFA647CD29D4A78100A0B451 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFA647D029D4A78100A0B451 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EFA647D229D4A78100A0B451 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -73,7 +96,7 @@
 		EFA6483329DF1FEA00A0B451 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		EFA6483529DF205C00A0B451 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		EFA6483729DF270000A0B451 /* NavStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavStore.swift; sourceTree = "<group>"; };
-		EFA6483E29E1E6C500A0B451 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../Config.xcconfig; sourceTree = "<group>"; };
+		EFA6483E29E1E6C500A0B451 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		EFA6483F29E1E8D700A0B451 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		EFA6484129E1EA6500A0B451 /* ClickableBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClickableBackgroundView.swift; sourceTree = "<group>"; };
 		EFA6484529E1EEA000A0B451 /* ViewUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewUtilities.swift; sourceTree = "<group>"; };
@@ -99,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF1AA27D29F5D7260056293F /* Fakery in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,12 +136,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF1AA27029F2B4EB0056293F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EFA6484529E1EEA000A0B451 /* ViewUtilities.swift */,
+				EFA6484129E1EA6500A0B451 /* ClickableBackgroundView.swift */,
+				EFA6484F29E2339C00A0B451 /* UserDefaults.swift */,
+				EFA6482C29DF17DF00A0B451 /* Loggers.swift */,
+				EF1AA27229F2B7270056293F /* ErrorView.swift */,
+				EF1AA28729F728F40056293F /* Strings.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EF1AA27429F2B8360056293F /* IndexView */ = {
+			isa = PBXGroup;
+			children = (
+				EFA6485529E24B7B00A0B451 /* IndexView.swift */,
+				EF9F3AE229F16082005CC0A0 /* IndexChapterViewModel.swift */,
+			);
+			path = IndexView;
+			sourceTree = "<group>";
+		};
+		EF1AA27E29F6A7870056293F /* ChapterCreator */ = {
+			isa = PBXGroup;
+			children = (
+				EF1AA27529F2B9640056293F /* ChapterCreatorView.swift */,
+				EF1AA27F29F6A7AC0056293F /* GoalViewModel.swift */,
+				EF1AA28529F6AEC70056293F /* ChapterCreatorViewModel.swift */,
+			);
+			path = ChapterCreator;
+			sourceTree = "<group>";
+		};
 		EF4AFAE429EF890A00396FD3 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
 				EFA647D429D4A78100A0B451 /* The_Book_Of_You.xcdatamodeld */,
 				EFA647D229D4A78100A0B451 /* Persistence.swift */,
 				EF4AFAE629F0612F00396FD3 /* Chapter.swift */,
+				EF1AA27729F5D4FD0056293F /* Goal.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -125,6 +182,9 @@
 		EF4AFAE529EF8ADB00396FD3 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				EFA647D729D4A78100A0B451 /* Info.plist */,
+				EFA647CD29D4A78100A0B451 /* Assets.xcassets */,
+				EFA6483E29E1E6C500A0B451 /* Config.xcconfig */,
 				EFA6483329DF1FEA00A0B451 /* AppView.swift */,
 				EFA6483729DF270000A0B451 /* NavStore.swift */,
 				EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */,
@@ -135,6 +195,7 @@
 		EFA647BD29D4A78000A0B451 = {
 			isa = PBXGroup;
 			children = (
+				EF1AA26F29F2B4860056293F /* The Book Of You.xctestplan */,
 				EFA647C829D4A78000A0B451 /* The Book Of You */,
 				EFA647DF29D4A78100A0B451 /* The Book Of YouTests */,
 				EFA647E929D4A78100A0B451 /* The Book Of YouUITests */,
@@ -155,22 +216,17 @@
 		EFA647C829D4A78000A0B451 /* The Book Of You */ = {
 			isa = PBXGroup;
 			children = (
+				EF1AA27429F2B8360056293F /* IndexView */,
+				EF1AA27129F2B6B00056293F /* The-Book-Of-You-Info.plist */,
+				EFA6485129E2349600A0B451 /* The Book Of You.entitlements */,
+				EF1AA27029F2B4EB0056293F /* Utilities */,
 				EF4AFAE529EF8ADB00396FD3 /* App */,
 				EFA6484429E1EDC200A0B451 /* About */,
 				EFA647CF29D4A78100A0B451 /* Preview Content */,
 				EF4AFAE429EF890A00396FD3 /* Persistence */,
-				EFA6485129E2349600A0B451 /* The Book Of You.entitlements */,
-				EFA6483E29E1E6C500A0B451 /* Config.xcconfig */,
-				EFA647CB29D4A78000A0B451 /* ContentView.swift */,
-				EFA647CD29D4A78100A0B451 /* Assets.xcassets */,
-				EFA647D729D4A78100A0B451 /* Info.plist */,
 				EFA6482A29DF174700A0B451 /* CoverView.swift */,
-				EFA6482C29DF17DF00A0B451 /* Loggers.swift */,
 				EFA6483529DF205C00A0B451 /* IntroView.swift */,
-				EFA6484129E1EA6500A0B451 /* ClickableBackgroundView.swift */,
-				EFA6484529E1EEA000A0B451 /* ViewUtilities.swift */,
-				EFA6484F29E2339C00A0B451 /* UserDefaults.swift */,
-				EFA6485529E24B7B00A0B451 /* IndexView.swift */,
+				EF1AA27E29F6A7870056293F /* ChapterCreator */,
 			);
 			path = "The Book Of You";
 			sourceTree = "<group>";
@@ -188,6 +244,10 @@
 			children = (
 				EF9F3ADE29F0D7AB005CC0A0 /* TestCoreDataStack.swift */,
 				EF9F3AE029F0D8C1005CC0A0 /* ChapterTests.swift */,
+				EF9F3AE429F16218005CC0A0 /* IndexChapterViewModelTests.swift */,
+				EF1AA27929F5D6B80056293F /* GoalFetchRequestTests.swift */,
+				EF1AA28129F6A8360056293F /* GoalViewModelTests.swift */,
+				EF1AA28329F6AEAC0056293F /* ChapterCreatorViewModelTests.swift */,
 			);
 			path = "The Book Of YouTests";
 			sourceTree = "<group>";
@@ -251,6 +311,9 @@
 				EFA647DE29D4A78100A0B451 /* PBXTargetDependency */,
 			);
 			name = "The Book Of YouTests";
+			packageProductDependencies = (
+				EF1AA27C29F5D7260056293F /* Fakery */,
+			);
 			productName = "The Book Of YouTests";
 			productReference = EFA647DC29D4A78100A0B451 /* The Book Of YouTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -308,6 +371,7 @@
 			packageReferences = (
 				EFA6482E29DF180900A0B451 /* XCRemoteSwiftPackageReference "swift-log" */,
 				EFA6485229E2495400A0B451 /* XCRemoteSwiftPackageReference "CloudStorage" */,
+				EF1AA27B29F5D7260056293F /* XCRemoteSwiftPackageReference "Fakery" */,
 			);
 			productRefGroup = EFA647C729D4A78000A0B451 /* Products */;
 			projectDirPath = "";
@@ -375,18 +439,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9F3AE329F16082005CC0A0 /* IndexChapterViewModel.swift in Sources */,
 				EFA6483829DF270000A0B451 /* NavStore.swift in Sources */,
 				EFA647D329D4A78100A0B451 /* Persistence.swift in Sources */,
+				EF1AA27629F2B9640056293F /* ChapterCreatorView.swift in Sources */,
+				EF1AA28629F6AEC70056293F /* ChapterCreatorViewModel.swift in Sources */,
 				EFA6483629DF205C00A0B451 /* IntroView.swift in Sources */,
+				EF1AA27329F2B7270056293F /* ErrorView.swift in Sources */,
 				EFA6482B29DF174700A0B451 /* CoverView.swift in Sources */,
 				EFA6484029E1E8D700A0B451 /* AboutView.swift in Sources */,
 				EFA6484629E1EEA000A0B451 /* ViewUtilities.swift in Sources */,
-				EFA647CC29D4A78000A0B451 /* ContentView.swift in Sources */,
+				EF1AA28029F6A7AC0056293F /* GoalViewModel.swift in Sources */,
 				EFA6483429DF1FEA00A0B451 /* AppView.swift in Sources */,
+				EF1AA28829F728F40056293F /* Strings.swift in Sources */,
 				EFA6482D29DF17DF00A0B451 /* Loggers.swift in Sources */,
 				EFA6484229E1EA6500A0B451 /* ClickableBackgroundView.swift in Sources */,
 				EFA647CA29D4A78000A0B451 /* The_Book_Of_YouApp.swift in Sources */,
 				EFA647D629D4A78100A0B451 /* The_Book_Of_You.xcdatamodeld in Sources */,
+				EF1AA27829F5D4FD0056293F /* Goal.swift in Sources */,
 				EFA6485029E2339C00A0B451 /* UserDefaults.swift in Sources */,
 				EFA6485629E24B7B00A0B451 /* IndexView.swift in Sources */,
 				EFA6484A29E1F2EA00A0B451 /* AboutDataService.swift in Sources */,
@@ -398,8 +468,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9F3AE529F16218005CC0A0 /* IndexChapterViewModelTests.swift in Sources */,
+				EF1AA28429F6AEAC0056293F /* ChapterCreatorViewModelTests.swift in Sources */,
 				EF9F3AE129F0D8C1005CC0A0 /* ChapterTests.swift in Sources */,
 				EF9F3ADF29F0D7AB005CC0A0 /* TestCoreDataStack.swift in Sources */,
+				EF1AA27A29F5D6B80056293F /* GoalFetchRequestTests.swift in Sources */,
+				EF1AA28229F6A8360056293F /* GoalViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +628,7 @@
 				DEVELOPMENT_TEAM = AZ59WCD7SF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "The-Book-Of-You-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -586,6 +661,7 @@
 				DEVELOPMENT_TEAM = AZ59WCD7SF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "The-Book-Of-You-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -724,6 +800,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		EF1AA27B29F5D7260056293F /* XCRemoteSwiftPackageReference "Fakery" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vadymmarkov/Fakery.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		EFA6482E29DF180900A0B451 /* XCRemoteSwiftPackageReference "swift-log" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-log";
@@ -743,6 +827,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		EF1AA27C29F5D7260056293F /* Fakery */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF1AA27B29F5D7260056293F /* XCRemoteSwiftPackageReference "Fakery" */;
+			productName = Fakery;
+		};
 		EFA6482F29DF180900A0B451 /* Logging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EFA6482E29DF180900A0B451 /* XCRemoteSwiftPackageReference "swift-log" */;
