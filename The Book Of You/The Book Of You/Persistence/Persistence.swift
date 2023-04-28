@@ -74,7 +74,6 @@ extension NSManagedObjectContext {
 
     @discardableResult
     func addChapters(_ count: Int = 5) -> [Chapter] {
-        let viewContext = self
         var chapters = [Chapter]()
         for item in (1...count).reversed() {
             chapters.append(makeChapter(daysAgo: item))

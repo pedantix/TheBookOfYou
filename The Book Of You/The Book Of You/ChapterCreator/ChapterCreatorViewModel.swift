@@ -12,6 +12,13 @@ import CloudStorage
 // TODO: Swiftify the naming conventions
 // TODO: create a chapter based on previous chapters
 // initalize data based on previous chapters
+
+private let maxGoalsAlert = ActionAlertData(
+    title: "Not Added",
+    message: "You have already reached the specified number of goals, " +
+    "please remove one from current chapter goals with tap to add this goal with a tap.",
+    sfSymbolText: "square.3.layers.3d.down.right.slash"
+)
 class ChapterCreatorViewModel: ObservableObject {
     private let moc: NSManagedObjectContext
     init(_ context: NSManagedObjectContext = PersistenceController.shared.viewContext) {
@@ -26,6 +33,7 @@ class ChapterCreatorViewModel: ObservableObject {
     @Published var formFocus: ChapterCreatorFormFocus? = .title
     @Published var chapterGoals: [Goal] = []
     @Published var isChapterCreatable = false
+    @Published var actionAlert: ActionAlertData?
 
     var maxGoalsReached: Bool {
         return chapterGoals.count == goalsMax
@@ -64,6 +72,8 @@ class ChapterCreatorViewModel: ObservableObject {
             if chapterGoals.count < goalsMax {
                 chapterGoals.append(goal)
                 goalText = ""
+            } else {
+                actionAlert = maxGoalsAlert
             }
         } catch {
             viewModelLogger.error("\(#function) -> Error creating goal \(error.localizedDescription)")

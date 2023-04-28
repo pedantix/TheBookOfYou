@@ -8,10 +8,30 @@
 import SwiftUI
 
 struct AppView: View {
+    @StateObject private var alertMessenger = ActionAlertMessenger()
     @StateObject private var navStore = NavStore()
     @SceneStorage(.navigationKey) private var navStoreData: Data?
 
     var body: some View {
+        ZStack {
+            appView
+            ActionAlertView()
+        }
+        .environmentObject(alertMessenger)
+        .environmentObject(navStore)
+        .task {
+            // Restore Nav Stack from Last State
+            if let navStoreData {
+                navStore.restore(from: navStoreData)
+            }
+            // Save Nav Stack to scene storage as it changes
+            for await _ in navStore.$path.values {
+                navStoreData = navStore.encode()
+            }
+        }
+    }
+
+    private var appView: some View {
         NavigationStack(path: $navStore.path) {
             CoverView()
                 .navigationDestination(for: Destination.self) { destination in
@@ -34,18 +54,6 @@ struct AppView: View {
                         Text("TODO: display \(uri) for PAGE")
                     }
                 }
-        }
-
-        .environmentObject(navStore)
-        .task {
-            // Restore Nav Stack from Last State
-            if let navStoreData {
-                navStore.restore(from: navStoreData)
-            }
-            // Save Nav Stack to scene storage as it changes
-            for await _ in navStore.$path.values {
-                navStoreData = navStore.encode()
-            }
         }
     }
 }

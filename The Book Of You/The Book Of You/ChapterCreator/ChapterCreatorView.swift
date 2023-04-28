@@ -16,7 +16,10 @@ enum ChapterCreatorFormFocus {
     case title, goal
 }
 
+
+// TODO: Verify action alerter doesnt break a bunch of things
 struct ChapterCreatorView: View {
+    @EnvironmentObject private var messenger: ActionAlertMessenger
     @StateObject private var viewModel = ChapterCreatorViewModel()
     @FocusState private var formFocus: ChapterCreatorFormFocus?
     @CloudStorage(.identityGoalsKey) private var goals: Int?
@@ -42,6 +45,10 @@ struct ChapterCreatorView: View {
             formFocus = viewModel.formFocus
         }
         .navigationTitle("Chapter creator")
+        .onReceive(viewModel.$actionAlert) { actionAlert in
+            guard let actionAlert = actionAlert else { return }
+            messenger.displayNewAlert(actionAlert)
+        }
     }
 
     private var chapterGoals: some View {

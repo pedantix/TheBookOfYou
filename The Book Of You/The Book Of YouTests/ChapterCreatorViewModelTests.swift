@@ -70,10 +70,12 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
 
     func testCreateGoalsLimitDoesNotAddGoalsToListInsteadDoesNotClearAndAddsToPool() throws {
         XCTAssertEqual(ccvm.chapterGoals, [])
+        XCTAssertNil(ccvm.actionAlert)
         for goalTitle in ["happy", "sleepy", "sneezy", "doc", "block"] {
             ccvm.goalText = goalTitle
             ccvm.createGoal()
         }
+        XCTAssertNil(ccvm.actionAlert)
         let goalsCopy = ccvm.chapterGoals
         XCTAssertEqual(ccvm.chapterGoals.count, 5)
         ccvm.goalText = "Bashful"
@@ -82,11 +84,13 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
         XCTAssertEqual(goalsCopy, ccvm.chapterGoals)
         let goalsInList = try context.fetch(ccvm.goalFetchRequest)
         XCTAssertEqual(1, goalsInList.count)
+        XCTAssertNotNil(ccvm.actionAlert)
         XCTAssertEqual("Bashful", goalsInList.first?.title)
     }
 
     func testMaxGoalsReached() throws {
         XCTAssertFalse(ccvm.maxGoalsReached)
+        XCTAssertNil(ccvm.actionAlert)
         for goalTitle in ["happy", "sleepy", "sneezy", "doc"] {
             ccvm.goalText = goalTitle
             ccvm.createGoal()
