@@ -14,12 +14,12 @@ final class GoalFetchRequestTests: BackgroundContextTestCase {
     let faker = Faker(locale: "en_US")
 
     func testGoalsSortsAlphabeticallyDescending() throws {
-        let nbcGoal = try createFakeGoal(with: "nbc")
-        let zbdGoal = try createFakeGoal(with: "zbd")
-        let tviGoal = try createFakeGoal(with: "tvi")
-        let abcGoal = try createFakeGoal(with: "abc")
-        let spcaGoal = try createFakeGoal(with: "spca")
-        let cbsGoal = try createFakeGoal(with: "cbs")
+        let nbcGoal = context.addGoal("nbc")
+        let zbdGoal = context.addGoal("zbd")
+        let tviGoal = context.addGoal("tvi")
+        let abcGoal = context.addGoal("abc")
+        let spcaGoal = context.addGoal("spca")
+        let cbsGoal = context.addGoal("cbs")
 
         let goals = try context.fetch(Goal.goals(notIn: [])) as [Goal]
         XCTAssertEqual(6, goals.count)
@@ -29,14 +29,14 @@ final class GoalFetchRequestTests: BackgroundContextTestCase {
     }
 
     func testThatGoalsNotInRemovesUnwantedGoalse() throws {
-        let nbcGoal = try createFakeGoal(with: "nbc")
-        let zbdGoal = try createFakeGoal(with: "zbd")
-        let tviGoal = try createFakeGoal(with: "tvi")
-        let abcGoal = try createFakeGoal(with: "abc")
-        let spcaGoal = try createFakeGoal(with: "spca")
-        let cbsGoal = try createFakeGoal(with: "cbs")
+        let nbcGoal = context.addGoal("nbc")
+        let zbdGoal = context.addGoal("zbd")
+        let tviGoal = context.addGoal("tvi")
+        let abcGoal = context.addGoal("abc")
+        let spcaGoal = context.addGoal("spca")
+        let cbsGoal = context.addGoal("cbs")
 
-        let hobbitGoals = [try createFakeGoal(), try createFakeGoal(), try createFakeGoal()]
+        let hobbitGoals = [createFakeGoal(), createFakeGoal(), createFakeGoal()]
 
         let goals = try context.fetch(Goal.goals(notIn: hobbitGoals)) as [Goal]
         XCTAssertEqual(6, goals.count)
@@ -45,14 +45,14 @@ final class GoalFetchRequestTests: BackgroundContextTestCase {
     }
 
     func testThatGoalsNotInCanAlsoBeQueriedByString() throws {
-        let nbcGoal = try createFakeGoal(with: "nbc")
-        let zbdGoal = try createFakeGoal(with: "zbd")
-        let tviGoal = try createFakeGoal(with: "tvi")
-        let abcGoal = try createFakeGoal(with: "abc")
-        let spcaGoal = try createFakeGoal(with: "spca")
-        let cbsGoal = try createFakeGoal(with: "cbs")
+        let nbcGoal = context.addGoal("nbc")
+        let zbdGoal = context.addGoal("zbd")
+        let tviGoal = context.addGoal("tvi")
+        let abcGoal = context.addGoal("abc")
+        let spcaGoal = context.addGoal("spca")
+        let cbsGoal = context.addGoal("cbs")
 
-        let hobbitGoals = [try createFakeGoal(), try createFakeGoal(), try createFakeGoal()]
+        let hobbitGoals = [createFakeGoal(), createFakeGoal(), createFakeGoal()]
 
         let goals = try context.fetch(Goal.goals(notIn: hobbitGoals, withTitleLike: "")) as [Goal]
         XCTAssertEqual(6, goals.count)
@@ -71,11 +71,11 @@ final class GoalFetchRequestTests: BackgroundContextTestCase {
         let fetchReq = Goal.goalsThatAre(named: goalName)
 
         XCTAssertEqual(0, (try context.fetch(fetchReq)).count)
-        let pedingGoal = try createFakeGoal(with: goalName)
+        let pedingGoal = context.addGoal(goalName)
 
         XCTAssertEqual(1, (try context.fetch(fetchReq)).count)
 
-        try createFakeGoal(with: goalName + "an")
+        context.addGoal(goalName + "an")
         XCTAssertEqual(1, (try context.fetch(fetchReq)).count)
         XCTAssertEqual([pedingGoal], (try context.fetch(fetchReq)) as [Goal])
 
@@ -83,18 +83,8 @@ final class GoalFetchRequestTests: BackgroundContextTestCase {
         XCTAssertEqual([pedingGoal], (try context.fetch(fr2)) as [Goal])
     }
 
-    func createFakeGoal() throws -> Goal {
-        let goal = Goal(context: context)
-        goal.title = faker.address.country()
-        try context.save()
-        return goal
-    }
-
-    @discardableResult
-    func createFakeGoal(with name: String) throws -> Goal {
-        let goal = Goal(context: context)
-        goal.title = name
-        try context.save()
-        return goal
+    func createFakeGoal() -> Goal {
+        let goalTitle = faker.address.country()
+        return context.addGoal(goalTitle)
     }
 }

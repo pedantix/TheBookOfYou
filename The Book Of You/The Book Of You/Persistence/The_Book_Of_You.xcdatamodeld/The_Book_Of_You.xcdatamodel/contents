@@ -4,7 +4,7 @@
         <attribute name="dateEnded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateStarted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="chapterGoals" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChapterGoal" inverseName="chapter" inverseEntity="ChapterGoal"/>
+        <relationship name="chapterGoals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChapterGoal" inverseName="chapter" inverseEntity="ChapterGoal"/>
     </entity>
     <entity name="ChapterGoal" representedClassName="ChapterGoal" syncable="YES" codeGenerationType="class">
         <attribute name="orderIdx" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -13,6 +13,6 @@
     </entity>
     <entity name="Goal" representedClassName="Goal" syncable="YES" codeGenerationType="class">
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="chapterGoals" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChapterGoal" inverseName="goal" inverseEntity="ChapterGoal"/>
+        <relationship name="chapterGoals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChapterGoal" inverseName="goal" inverseEntity="ChapterGoal"/>
     </entity>
 </model>

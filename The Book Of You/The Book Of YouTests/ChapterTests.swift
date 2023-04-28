@@ -77,13 +77,3 @@ final class ChapterTests: BackgroundContextTestCase {
         XCTAssertEqual(4, allChapters.count)
     }
 }
-
-private extension NSManagedObjectContext {
-    @discardableResult
-    func makeChapter(daysAgo: Int = 5) -> Chapter {
-        let newItem = Chapter(context: self)
-        newItem.title = "A chapter from \(daysAgo) days ago"
-        newItem.dateStarted = .date(daysAgo: daysAgo)
-        return newItem
-    }
-}

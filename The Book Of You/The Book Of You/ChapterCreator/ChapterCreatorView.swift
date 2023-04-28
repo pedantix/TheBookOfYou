@@ -9,27 +9,11 @@ import SwiftUI
 import CoreData
 import CloudStorage
 
-// TODO: The logical structure of this view should be that it creates or replaces an empty chapter, on creation if a past chapter has pages it will add an end date to it and save it
+// TODO: The logical structure of this view should be that it creates or replaces an
+// empty chapter, on creation if a past chapter has pages it will add an end date to
+// it and save it
 enum ChapterCreatorFormFocus {
     case title, goal
-}
-
-// TODO: Make this more generic friendly in the future when needed
-struct FilteredFetchRequest<T: NSManagedObject, Content: View>: View {
-    @FetchRequest var fetchRequest: FetchedResults<T>
-
-    let content: (T) -> Content
-
-    var body: some View {
-        ForEach(fetchRequest, id: \.self) { managedObject in
-            content(managedObject)
-        }
-    }
-
-    init(fetchRequest: NSFetchRequest<T>, @ViewBuilder content: @escaping (T) -> Content) {
-        _fetchRequest = FetchRequest(fetchRequest: fetchRequest)
-        self.content = content
-    }
 }
 
 struct ChapterCreatorView: View {
@@ -65,7 +49,7 @@ struct ChapterCreatorView: View {
                 Section("Chapter Goals") {
                     if viewModel.chapterGoals.count > 0 {
                         ForEach(viewModel.chapterGoals) { goal in
-                            Text("\(goal.title ?? "NO TITLE, BAD GOAL!!!!")")
+                            GoalSearchRow(goal: goal)
                         }
                     } else {
                         Text("No goals selected yet, you need \(goals ?? 1) based on the settings" +
@@ -85,7 +69,7 @@ struct ChapterCreatorView: View {
                     viewModel.formFocus = .none
                 }.padding(.fs6)
                 FilteredFetchRequest(fetchRequest: viewModel.goalFetchRequest) { goal in
-                    Text("\(goal.title ?? "really bad extract")")
+                    GoalSearchRow(goal: goal)
                 }
             }
         }

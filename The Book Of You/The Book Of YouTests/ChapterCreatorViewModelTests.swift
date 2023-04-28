@@ -10,10 +10,15 @@ import Fakery
 @testable import The_Book_Of_You
 
 final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
-    let faker = Faker()
+    private let faker = Faker()
+    private var ccvm: ChapterCreatorViewModel!
+
+    override func setUp() async throws {
+        try await super.setUp()
+        ccvm = await ChapterCreatorViewModel(context)
+    }
 
     func testCreateGoalIsCreatable() throws {
-        let ccvm = ChapterCreatorViewModel(context)
         XCTAssertFalse(ccvm.isGoalCreatable)
 
         ccvm.goalText = " "
@@ -29,7 +34,6 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
     }
 
     func testCreateGoal() throws {
-        let ccvm = ChapterCreatorViewModel(context)
         let aVeryDesiredName = "a Very Desired name"
         let untrimmed = " \(aVeryDesiredName) "
         let req = Goal.goalsThatAre(named: aVeryDesiredName)
@@ -50,7 +54,6 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
     }
 
     func testCreateGoalThatIsDuplicate() throws {
-        let ccvm = ChapterCreatorViewModel(context)
         let aVeryDesiredName = "a Very Desired name"
         let untrimmed = " \(aVeryDesiredName) "
         let req = Goal.goalsThatAre(named: aVeryDesiredName)
@@ -66,8 +69,6 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
     }
 
     func testCreateGoalsLimitDoesNotAddGoalsToListInsteadDoesNotClearAndAddsToPool() throws {
-        let ccvm = ChapterCreatorViewModel(context)
-
         XCTAssertEqual(ccvm.chapterGoals, [])
         for goalTitle in ["happy", "sleepy", "sneezy", "doc", "block"] {
             ccvm.goalText = goalTitle
@@ -84,4 +85,27 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
         XCTAssertEqual("Bashful", goalsInList.first?.title)
     }
 
+    func testMaxGoalsReached() throws {
+        XCTAssertFalse(ccvm.maxGoalsReached)
+        for goalTitle in ["happy", "sleepy", "sneezy", "doc"] {
+            ccvm.goalText = goalTitle
+            ccvm.createGoal()
+        }
+        XCTAssertFalse(ccvm.maxGoalsReached)
+        ccvm.goalText = "Blintzy"
+        ccvm.createGoal()
+        XCTAssertTrue(ccvm.maxGoalsReached)
+    }
+
+    func testGoalsToGo() throws {
+        XCTAssertEqual(5, ccvm.goalsToGo)
+        for (idx, goalTitle) in ["happy", "sleepy", "sneezy", "doc"].enumerated() {
+            ccvm.goalText = goalTitle
+            ccvm.createGoal()
+            XCTAssertEqual(4 - idx, ccvm.goalsToGo)
+        }
+        ccvm.goalText = "Blintzy"
+        ccvm.createGoal()
+        XCTAssertEqual(0, ccvm.goalsToGo)
+    }
 }

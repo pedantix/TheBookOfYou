@@ -103,7 +103,7 @@ struct IndexView_Previews: PreviewProvider {
 struct IndexViewWithOneChapter_Previews: PreviewProvider {
     static let preview: PersistenceController = {
         let controller = PersistenceController.controllerForUIPreview()
-        _ = controller.addChapters(1)
+        _ = controller.viewContext.addChapters(1)
         return controller
     }()
 
@@ -118,7 +118,7 @@ struct IndexViewWithOneChapter_Previews: PreviewProvider {
 struct IndexViewWithTwoChapter_Previews: PreviewProvider {
     static let preview: PersistenceController = {
         let controller = PersistenceController.controllerForUIPreview()
-        _ = controller.addChapters(2)
+        _ = controller.viewContext.addChapters(2)
         return controller
     }()
 
@@ -133,7 +133,7 @@ struct IndexViewWithTwoChapter_Previews: PreviewProvider {
 struct IndexViewWithFiveChapter_Previews: PreviewProvider {
     static let preview: PersistenceController = {
         let controller = PersistenceController.controllerForUIPreview()
-        _ = controller.addChapters(5)
+        _ = controller.viewContext.addChapters(5)
         return controller
     }()
 

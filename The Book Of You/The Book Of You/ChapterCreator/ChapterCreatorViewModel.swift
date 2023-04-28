@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 import CloudStorage
 // TODO: Test the whole thing!
-
+// TODO: Swiftify the naming conventions
 // TODO: create a chapter based on previous chapters
 // initalize data based on previous chapters
 class ChapterCreatorViewModel: ObservableObject {
@@ -27,6 +27,14 @@ class ChapterCreatorViewModel: ObservableObject {
     @Published var chapterGoals: [Goal] = []
     @Published var isChapterCreatable = false
 
+    var maxGoalsReached: Bool {
+        return chapterGoals.count == goalsMax
+    }
+
+    var goalsToGo: Int {
+        return goalsMax - chapterGoals.count
+    }
+
     func createChapter() {
         guard isChapterCreatable else { return viewLogger.info("Attempted to create invalid goal") }
         // TODO: Test Me
@@ -38,7 +46,7 @@ class ChapterCreatorViewModel: ObservableObject {
     // MARK: -
     // MARK: - Goals Section
     var goalFetchRequest: NSFetchRequest<Goal> {
-        return Goal.goals(notIn: chapterGoals,  withTitleLike: goalText)
+        return Goal.goals(notIn: chapterGoals, withTitleLike: goalText)
     }
     @Published var goalText = ""
     var isGoalCreatable: Bool {
@@ -49,7 +57,7 @@ class ChapterCreatorViewModel: ObservableObject {
     func createGoal() {
         guard isGoalCreatable else { return viewLogger.info("Attempted to create invalid goal") }
         let goal = Goal(context: moc)
-        goal.title = goalText.trimmingCharacters(in: .whitespacesAndNewlines)
+        goal.title = goalText.trimmed
 
         do {
             try moc.save()

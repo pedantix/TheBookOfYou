@@ -12,7 +12,7 @@ extension Goal {
         let fetchReq = Goal.fetchRequest() as NSFetchRequest<Goal>
         var predicateArray = [NSPredicate(format: "NOT (SELF IN %@)", goals)]
         if !withTitleLike.isBlank {
-            let trimmed = withTitleLike.trimmingCharacters(in: .whitespacesAndNewlines)
+            let trimmed = withTitleLike.trimmed
             let text = "*\(trimmed)*"
             predicateArray.append(NSPredicate(format: "title LIKE %@", text))
         }
