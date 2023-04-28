@@ -11,8 +11,8 @@ struct GoalSearchRow: View {
     @ObservedObject private var goalViewModel: GoalViewModel
     @FocusState private var focused: Bool
 
-    init(goal: Goal) {
-        goalViewModel = .init(goal: goal)
+    init(goal: Goal, alertMessenger: ActionAlertMessenger) {
+        goalViewModel = .init(goal: goal, alertMessenger: alertMessenger)
     }
 
     var body: some View {
@@ -44,7 +44,13 @@ struct GoalSearchRow: View {
     }
 
     private var displayBody: some View {
-        Text(goalViewModel.title)
+        ZStack {
+            TapableBackgroundView()
+            HStack {
+                Text(goalViewModel.title)
+                Spacer()
+            }
+        }.padding()
             .swipeActions {
                 if goalViewModel.isDeletable {
                     Button("Delete") {
@@ -63,6 +69,7 @@ struct GoalSearchRow: View {
 
 struct GoalRow_Previews: PreviewProvider {
     private static let persistenceController = PersistenceController.preview
+    private static let messenger = ActionAlertMessenger()
 
     static var previews: some View {
         let goal = persistenceController.viewContext.addGoal()
@@ -70,7 +77,7 @@ struct GoalRow_Previews: PreviewProvider {
         let nonDeletableGoal = persistenceController.viewContext.addGoal("Another Worhty Goal", with: chapter)
         List {
             ForEach([goal, nonDeletableGoal]) {
-                GoalSearchRow(goal: $0)
+                GoalSearchRow(goal: $0, alertMessenger: messenger)
             }
         }
         .environment(\.managedObjectContext, persistenceController.viewContext)

@@ -31,7 +31,7 @@ class ChapterCreatorViewModel: ObservableObject {
     // MARK: - Chapter Section
     @Published var title = ""
     @Published var formFocus: ChapterCreatorFormFocus? = .title
-    @Published var chapterGoals: [Goal] = []
+    @Published private(set) var chapterGoals: [Goal] = []
     @Published var isChapterCreatable = false
     @Published var actionAlert: ActionAlertData?
 
@@ -69,14 +69,25 @@ class ChapterCreatorViewModel: ObservableObject {
 
         do {
             try moc.save()
-            if chapterGoals.count < goalsMax {
-                chapterGoals.append(goal)
-                goalText = ""
-            } else {
-                actionAlert = maxGoalsAlert
-            }
+            addToChapterGoals(goal)
         } catch {
             viewModelLogger.error("\(#function) -> Error creating goal \(error.localizedDescription)")
         }
+    }
+
+    @discardableResult
+    func addToChapterGoals(_ goal: Goal) -> Bool {
+        if chapterGoals.count < goalsMax {
+            chapterGoals.append(goal)
+            goalText = ""
+            return true
+        } else {
+            actionAlert = maxGoalsAlert
+            return false
+        }
+    }
+
+    func removeChapterGoal(_ goal: Goal) {
+        chapterGoals.removeObject(goal)
     }
 }

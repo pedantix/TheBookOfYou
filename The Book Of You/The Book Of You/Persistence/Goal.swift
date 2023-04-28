@@ -23,7 +23,7 @@ extension Goal {
 
     class func goalsThatAre(named name: String) -> NSFetchRequest<Goal> {
         let fetchReq = Goal.fetchRequest() as NSFetchRequest<Goal>
-        fetchReq.predicate = NSPredicate(format: "title = %@", name.trimmingCharacters(in: .whitespacesAndNewlines))
+        fetchReq.predicate = NSPredicate(format: "title = %@", name.trimmed)
         return fetchReq
     }
 }

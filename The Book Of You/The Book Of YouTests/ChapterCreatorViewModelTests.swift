@@ -112,4 +112,35 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
         ccvm.createGoal()
         XCTAssertEqual(0, ccvm.goalsToGo)
     }
+
+    func testAddToChapterGoals() throws {
+        XCTAssertEqual(5, ccvm.goalsToGo)
+        for (idx, goalTitle) in ["happy", "sleepy", "sneezy", "doc", "slops"].enumerated() {
+            let newGoal = context.addGoal(goalTitle)
+            XCTAssertTrue(ccvm.addToChapterGoals(newGoal))
+            XCTAssertEqual(4 - idx, ccvm.goalsToGo)
+        }
+        let lastGoal = context.addGoal("docs")
+        XCTAssertNil(ccvm.actionAlert)
+        XCTAssertFalse(ccvm.addToChapterGoals(lastGoal))
+        XCTAssertNotNil(ccvm.actionAlert)
+        XCTAssertEqual(0, ccvm.goalsToGo)
+    }
+
+    func testRemoveChapterGoals() throws {
+        let goals = ["happy", "sleepy", "sneezy", "doc", "slops"].map {
+            context.addGoal($0)
+        }
+
+        for (idx, goal) in goals.enumerated() {
+            XCTAssertTrue(ccvm.addToChapterGoals(goal))
+            XCTAssertEqual(4 - idx, ccvm.goalsToGo)
+        }
+
+        for (idx, goal) in goals.enumerated() {
+            XCTAssertEqual(idx, ccvm.goalsToGo)
+            ccvm.removeChapterGoal(goal)
+        }
+        XCTAssertEqual(5, ccvm.goalsToGo)
+    }
 }

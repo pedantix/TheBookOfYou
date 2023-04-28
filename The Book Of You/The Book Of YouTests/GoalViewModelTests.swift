@@ -15,7 +15,7 @@ final class GoalViewModelTests: BackgroundContextTestCase {
     override func setUp() async throws {
         try await super.setUp()
         goal = context.addGoal("a goal")
-        gvm = GoalViewModel(goal: goal, context: context)
+        gvm = GoalViewModel(goal: goal, alertMessenger: FakeAlertMessenger(), context: context)
     }
 
     func testTitle() throws {
@@ -91,7 +91,7 @@ final class GoalViewModelTests: BackgroundContextTestCase {
 
     func testDeleteForNonDeletable() throws {
         let goalWithChap = context.addGoal(with: context.makeChapter())
-        gvm = GoalViewModel(goal: goalWithChap, context: context)
+        gvm = GoalViewModel(goal: goalWithChap, alertMessenger: FakeAlertMessenger(), context: context)
         XCTAssertFalse(gvm.isDeletable)
         gvm.delete()
         XCTAssertEqual(2, try context.count(for: Goal.fetchRequest()))
@@ -102,5 +102,11 @@ final class GoalViewModelTests: BackgroundContextTestCase {
         XCTAssertTrue(gvm.isEditing)
         gvm.cancelEdit()
         XCTAssertFalse(gvm.isEditing)
+    }
+}
+
+struct FakeAlertMessenger: AlertMessenger {
+    func displayNewAlert(_ data: ActionAlertData) {
+        /* noop */
     }
 }

@@ -12,7 +12,6 @@ extension String {
         return trimmed.isEmpty
     }
 
-    // TODO: remove this from every where in the code
     var trimmed: String {
         self.trimmingCharacters(in: .whitespacesAndNewlines)
     }

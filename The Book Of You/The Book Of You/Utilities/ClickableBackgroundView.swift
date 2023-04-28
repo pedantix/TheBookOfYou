@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+struct TapableBackgroundView: View {
+    var body: some View {
+        GeometryReader { geometry in
+            Rectangle()
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .opacity(0.001)
+                .layoutPriority(-1)
+        }
+    }
+}
+
 struct ClickableBackgroundView: View {
     let action: () -> Void
 

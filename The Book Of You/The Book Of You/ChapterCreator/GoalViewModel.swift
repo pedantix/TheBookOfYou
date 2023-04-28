@@ -21,12 +21,18 @@ class GoalViewModel: ObservableObject {
     }
 
     private let moc: NSManagedObjectContext
+    private let alertMessenger: AlertMessenger
 
     let goal: Goal
 
-    init(goal: Goal, context: NSManagedObjectContext = PersistenceController.shared.viewContext) {
+    init(
+        goal: Goal,
+        alertMessenger: AlertMessenger,
+        context: NSManagedObjectContext = PersistenceController.shared.viewContext
+    ) {
         self.goal = goal
         self.moc = context
+        self.alertMessenger = alertMessenger
     }
 
     var title: String {
@@ -50,8 +56,9 @@ class GoalViewModel: ObservableObject {
             try moc.save()
             isEditing = false
         } catch let err as  NSError {
-            // TODO: before shippng turn this into an app wide error collection system
-            fatalError("Error saving context for goal \(err) \(err.localizedDescription) \(err.userInfo)")
+            let alert = ActionAlertData.persistenceAlert(err)
+            alertMessenger.displayNewAlert(alert)
+            viewModelLogger.contextError(err)
         }
     }
 
@@ -64,8 +71,9 @@ class GoalViewModel: ObservableObject {
             try moc.save()
             isEditing = false
         } catch let err as  NSError {
-            // TODO: before shippng turn this into an app wide error collection system
-            fatalError("Error saving context for goal \(err) \(err.localizedDescription) \(err.userInfo)")
+            let alert = ActionAlertData.persistenceAlert(err)
+            alertMessenger.displayNewAlert(alert)
+            viewModelLogger.contextError(err)
         }
     }
 }

@@ -16,8 +16,6 @@ enum ChapterCreatorFormFocus {
     case title, goal
 }
 
-
-// TODO: Verify action alerter doesnt break a bunch of things
 struct ChapterCreatorView: View {
     @EnvironmentObject private var messenger: ActionAlertMessenger
     @StateObject private var viewModel = ChapterCreatorViewModel()
@@ -56,7 +54,10 @@ struct ChapterCreatorView: View {
                 Section("Chapter Goals") {
                     if viewModel.chapterGoals.count > 0 {
                         ForEach(viewModel.chapterGoals) { goal in
-                            GoalSearchRow(goal: goal)
+                            GoalSearchRow(goal: goal, alertMessenger: messenger)
+                                .onTapGesture {
+                                    viewModel.removeChapterGoal(goal)
+                                }
                         }
                     } else {
                         Text("No goals selected yet, you need \(goals ?? 1) based on the settings" +
@@ -71,12 +72,15 @@ struct ChapterCreatorView: View {
                 )
                 .submitLabel(.done)
                 .focused($formFocus, equals: .goal)
+
                 .onSubmit {
                     viewModel.createGoal()
                     viewModel.formFocus = .none
                 }.padding(.fs6)
                 FilteredFetchRequest(fetchRequest: viewModel.goalFetchRequest) { goal in
-                    GoalSearchRow(goal: goal)
+                    GoalSearchRow(goal: goal, alertMessenger: messenger).onTapGesture {
+                        viewModel.addToChapterGoals(goal)
+                    }
                 }
             }
         }

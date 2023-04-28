@@ -13,7 +13,11 @@ private extension TimeInterval {
     static let displayTime: TimeInterval = 2
 }
 
-class ActionAlertMessenger: ObservableObject {
+protocol AlertMessenger {
+    func displayNewAlert(_ data: ActionAlertData)
+}
+
+class ActionAlertMessenger: ObservableObject, AlertMessenger {
     @Published fileprivate var alertData: ActionAlertData?
     @Published fileprivate var visible = false {
         didSet {
@@ -21,7 +25,9 @@ class ActionAlertMessenger: ObservableObject {
                 hideTask?.cancel()
                 hideTask = Task {
                     try await Task.sleep(for: .seconds(.easeOutTime))
-                    alertData = nil
+                    await MainActor.run {
+                        alertData = nil
+                    }
                 }
             }
         }
@@ -35,7 +41,9 @@ class ActionAlertMessenger: ObservableObject {
 
         hideTask = Task {
             try await Task.sleep(for: .seconds(.displayTime))
-            visible = false
+            await MainActor.run {
+                visible = false
+            }
         }
     }
 }
