@@ -48,13 +48,13 @@ class GoalViewModel: ObservableObject {
     }
 
     func saveEdit() {
+        defer { isEditing = false }
         guard isSavable else {
             return viewModelLogger.info("Attempted to save an edit that was blank")
         }
         goal.title = editableTitle.trimmed
         do {
             try moc.save()
-            isEditing = false
         } catch let err as  NSError {
             let alert = ActionAlertData.persistenceAlert(err)
             alertMessenger.displayNewAlert(alert)
@@ -63,13 +63,13 @@ class GoalViewModel: ObservableObject {
     }
 
     func delete() {
+        defer { isEditing = false }
         guard isDeletable else {
             return viewModelLogger.info("Attempted to dleete non deletable goal")
         }
         do {
             moc.delete(goal)
             try moc.save()
-            isEditing = false
         } catch let err as  NSError {
             let alert = ActionAlertData.persistenceAlert(err)
             alertMessenger.displayNewAlert(alert)

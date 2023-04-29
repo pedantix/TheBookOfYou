@@ -10,6 +10,7 @@ import Fakery
 @testable import The_Book_Of_You
 
 final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
+    private let goalTexts = ["happy", "sleepy", "sneezy", "doc", "slops"]
     private let faker = Faker()
     private var ccvm: ChapterCreatorViewModel!
 
@@ -18,6 +19,7 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
         ccvm = await ChapterCreatorViewModel(context)
     }
 
+    // MARK: - GOALS
     func testCreateGoalIsCreatable() throws {
         XCTAssertFalse(ccvm.isGoalCreatable)
 
@@ -71,7 +73,7 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
     func testCreateGoalsLimitDoesNotAddGoalsToListInsteadDoesNotClearAndAddsToPool() throws {
         XCTAssertEqual(ccvm.chapterGoals, [])
         XCTAssertNil(ccvm.actionAlert)
-        for goalTitle in ["happy", "sleepy", "sneezy", "doc", "block"] {
+        for goalTitle in goalTexts {
             ccvm.goalText = goalTitle
             ccvm.createGoal()
         }
@@ -91,7 +93,7 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
     func testMaxGoalsReached() throws {
         XCTAssertFalse(ccvm.maxGoalsReached)
         XCTAssertNil(ccvm.actionAlert)
-        for goalTitle in ["happy", "sleepy", "sneezy", "doc"] {
+        for goalTitle in goalTexts[...3] {
             ccvm.goalText = goalTitle
             ccvm.createGoal()
         }
@@ -103,7 +105,7 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
 
     func testGoalsToGo() throws {
         XCTAssertEqual(5, ccvm.goalsToGo)
-        for (idx, goalTitle) in ["happy", "sleepy", "sneezy", "doc"].enumerated() {
+        for (idx, goalTitle) in goalTexts[...3].enumerated() {
             ccvm.goalText = goalTitle
             ccvm.createGoal()
             XCTAssertEqual(4 - idx, ccvm.goalsToGo)
@@ -115,7 +117,7 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
 
     func testAddToChapterGoals() throws {
         XCTAssertEqual(5, ccvm.goalsToGo)
-        for (idx, goalTitle) in ["happy", "sleepy", "sneezy", "doc", "slops"].enumerated() {
+        for (idx, goalTitle) in goalTexts.enumerated() {
             let newGoal = context.addGoal(goalTitle)
             XCTAssertTrue(ccvm.addToChapterGoals(newGoal))
             XCTAssertEqual(4 - idx, ccvm.goalsToGo)
@@ -128,7 +130,7 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
     }
 
     func testRemoveChapterGoals() throws {
-        let goals = ["happy", "sleepy", "sneezy", "doc", "slops"].map {
+        let goals = goalTexts.map {
             context.addGoal($0)
         }
 
@@ -142,5 +144,68 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
             ccvm.removeChapterGoal(goal)
         }
         XCTAssertEqual(5, ccvm.goalsToGo)
+    }
+
+    // MARK: - Chapter Itself
+    func testIsCreatable() {
+        XCTAssertFalse(ccvm.isChapterCreatable)
+        for goalText in goalTexts {
+            ccvm.goalText = goalText
+            ccvm.createGoal()
+        }
+        XCTAssertFalse(ccvm.isChapterCreatable)
+        ccvm.title = "  \n \t "
+        XCTAssertFalse(ccvm.isChapterCreatable)
+        ccvm.title = " some text "
+        XCTAssertTrue(ccvm.isChapterCreatable)
+    }
+
+    func testIsCreatableTitleFirst() {
+        XCTAssertFalse(ccvm.isChapterCreatable)
+        ccvm.title = "  \n \t "
+        XCTAssertFalse(ccvm.isChapterCreatable)
+        ccvm.title = " some text "
+        XCTAssertFalse(ccvm.isChapterCreatable)
+        for goalText in goalTexts {
+            ccvm.goalText = goalText
+            ccvm.createGoal()
+        }
+        XCTAssertTrue(ccvm.isChapterCreatable)
+    }
+
+    func testCreateNewChapter() throws {
+        let chapterText = "Expected Text's"
+        ccvm.title = " \(chapterText) "
+        for goalText in goalTexts {
+            ccvm.goalText = goalText
+            ccvm.createGoal()
+        }
+        XCTAssertTrue(ccvm.isChapterCreatable)
+        ccvm.createChapter()
+
+        guard let chapterFromPersistence = try context.fetch(Chapter.fetchRequest()).first
+        else { return XCTFail("chapter should have been saved") }
+
+        XCTAssertEqual(chapterFromPersistence.title, chapterText)
+        let sortedChapGoals = chapterFromPersistence.chapterGoals?
+            .compactMap { $0 as? ChapterGoal }
+            .sorted { goalA, goalB in goalA.orderIdx < goalB.orderIdx } ?? []
+
+        for (idx, goalText) in goalTexts.enumerated() {
+            let chapGoal = sortedChapGoals[idx]
+
+            XCTAssertEqual(Int(chapGoal.orderIdx), idx)
+            XCTAssertEqual(chapGoal.goal?.title, goalText)
+        }
+
+        // TODO: TEST navigates too index
+    }
+
+    func testCreatingAChapterFromOldChapterWithoutPages() throws {
+          // TODO: SHOW that a new chapter populates its data from an old chapter, with no pages and on save purges the old chapter
+    }
+
+    func testCreatingAChapterFromOldChapterWithPages() throws {
+        // TODO: logic of chapter creation
     }
 }

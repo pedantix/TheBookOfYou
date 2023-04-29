@@ -33,9 +33,6 @@ struct GoalSearchRow: View {
             .onReceive(goalViewModel.$isEditing) { val in
                 focused = val
             }
-            .cancelableKeyboard {
-                focused = false
-            }
     }
 
     private var displayBody: some View {

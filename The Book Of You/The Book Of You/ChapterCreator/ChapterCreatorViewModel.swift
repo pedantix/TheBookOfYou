@@ -19,6 +19,7 @@ private let maxGoalsAlert = ActionAlertData(
     "please remove one from current chapter goals with tap to add this goal with a tap.",
     sfSymbolText: "square.3.layers.3d.down.right.slash"
 )
+// TODO: on deinit make sure to clean context
 class ChapterCreatorViewModel: ObservableObject {
     private let moc: NSManagedObjectContext
     init(_ context: NSManagedObjectContext = PersistenceController.shared.viewContext) {
@@ -32,9 +33,11 @@ class ChapterCreatorViewModel: ObservableObject {
     @Published var title = ""
     @Published var formFocus: ChapterCreatorFormFocus? = .title
     @Published private(set) var chapterGoals: [Goal] = []
-    @Published var isChapterCreatable = false
     @Published var actionAlert: ActionAlertData?
 
+    var isChapterCreatable: Bool {
+        return goalsToGo == 0 && !title.isBlank
+    }
     var maxGoalsReached: Bool {
         return chapterGoals.count == goalsMax
     }
@@ -45,7 +48,20 @@ class ChapterCreatorViewModel: ObservableObject {
 
     func createChapter() {
         guard isChapterCreatable else { return viewLogger.info("Attempted to create invalid goal") }
-        // TODO: Test Me
+        do {
+            let newChapter = Chapter(context: moc)
+            newChapter.title = title.trimmed
+            for (idx, goal) in chapterGoals.enumerated() {
+                let chapterGoal = ChapterGoal(context: moc)
+                chapterGoal.orderIdx = Int64(idx)
+                chapterGoal.chapter = newChapter
+                chapterGoal.goal = goal
+            }
+            try moc.save()
+        } catch let err as NSError {
+            actionAlert = .persistenceAlert(err)
+            viewModelLogger.contextError(err)
+        }
     }
 
     // NOTE: the sections are broken up now, perhaps they will be refactored
