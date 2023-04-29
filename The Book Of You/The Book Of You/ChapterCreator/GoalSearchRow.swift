@@ -33,13 +33,8 @@ struct GoalSearchRow: View {
             .onReceive(goalViewModel.$isEditing) { val in
                 focused = val
             }
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button(role: .cancel, action: goalViewModel.cancelEdit) {
-                        Text("Cancel")
-                    }
-                }
+            .cancelableKeyboard {
+                focused = false
             }
     }
 

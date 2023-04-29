@@ -13,7 +13,7 @@ import CloudStorage
 // empty chapter, on creation if a past chapter has pages it will add an end date to
 // it and save it
 enum ChapterCreatorFormFocus {
-    case title, goal
+    case title, goalSearch
 }
 
 struct ChapterCreatorView: View {
@@ -36,7 +36,7 @@ struct ChapterCreatorView: View {
             chapterGoals
 
         }
-        .onChange(of: viewModel.formFocus) { vmFocus in
+        .onReceive(viewModel.$formFocus) { vmFocus in
             formFocus = vmFocus
         }
         .onAppear {
@@ -71,8 +71,7 @@ struct ChapterCreatorView: View {
                     text: $viewModel.goalText
                 )
                 .submitLabel(.done)
-                .focused($formFocus, equals: .goal)
-
+                .focused($formFocus, equals: .goalSearch)
                 .onSubmit {
                     viewModel.createGoal()
                     viewModel.formFocus = .none
