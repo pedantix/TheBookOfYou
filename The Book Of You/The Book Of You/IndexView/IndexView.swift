@@ -77,13 +77,9 @@ private struct ChapterSection: View {
             NavigationLink(value: Destination.chapterCreator) {
                 Text("Make a new chapter - Change Your Goals")
             }
-
-            // TODO: If pages are empty make deletable/change goals and throw away empty chapter on save
-
             NavigationLink(value: Destination.pageCreator) {
                 Text("Add or edit today's entry - TODO: work this out logicall")
             }
-
             Text("TODO: List page entries, no more then 3 if 5+ exist, with a collapse uncollapse button")
         }.listRowSeparator(.hidden)
     }

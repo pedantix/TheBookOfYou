@@ -22,6 +22,7 @@ enum Destination: Codable, Hashable {
 
 protocol AppNavigator: AnyObject {
     func navigate(to destination: Destination)
+    func popBack()
 }
 
 // NOTE: NavPath is codable so this can be used both for incoming path requests
@@ -49,5 +50,9 @@ protocol AppNavigator: AnyObject {
 extension NavStore: AppNavigator {
     func navigate(to destination: Destination) {
         path.append(destination)
+    }
+
+    func popBack() {
+        path.removeLast()
     }
 }

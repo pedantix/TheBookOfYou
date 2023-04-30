@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 import CloudStorage
 
-// TODO: navigation needs work... navigating directly to the destination creates a funky path
 enum ChapterCreatorFormFocus {
     case title, goalSearch
 }
@@ -46,9 +45,9 @@ struct ChapterCreatorView: View {
             guard let actionAlert = actionAlert else { return }
             messenger.displayNewAlert(actionAlert)
         }
-        .onReceive(viewModel.$destination) { destination in
-            guard let destination = destination else { return }
-            navStore.navigate(to: destination)
+        .onReceive(viewModel.$createdChapter) { created in
+            guard created else { return }
+            navStore.popBack()
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

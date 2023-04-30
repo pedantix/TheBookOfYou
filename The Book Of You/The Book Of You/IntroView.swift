@@ -73,7 +73,7 @@ struct IntroView: View {
             }
             Button("Index") {
                 viewLogger.info("Navigate To Index")
-                navStore.navigate(to: .about)
+                navStore.navigate(to: .index)
             }
         }
     }

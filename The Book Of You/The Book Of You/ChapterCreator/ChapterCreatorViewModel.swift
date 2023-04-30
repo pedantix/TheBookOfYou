@@ -40,7 +40,7 @@ class ChapterCreatorViewModel: ObservableObject {
     @Published var formFocus: ChapterCreatorFormFocus? = .title
     @Published private(set) var chapterGoals: [Goal] = []
     @Published var actionAlert: AppAlert?
-    @Published var destination: Destination?
+    @Published var createdChapter: Bool = false
     private var previousChapter: Chapter?
 
     var isChapterCreatable: Bool {
@@ -79,7 +79,7 @@ class ChapterCreatorViewModel: ObservableObject {
                 previousChapter?.dateEnded = Date.now
             }
             try moc.save()
-            destination = .index
+            createdChapter = true
         } catch let err as NSError {
             actionAlert = .persistenceAlert(err)
             viewModelLogger.contextError(err)

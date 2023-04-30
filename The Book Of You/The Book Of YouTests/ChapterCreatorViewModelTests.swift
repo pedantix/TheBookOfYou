@@ -181,6 +181,7 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
             ccvm.createGoal()
         }
         XCTAssertTrue(ccvm.isChapterCreatable)
+        XCTAssertFalse(ccvm.createdChapter)
         ccvm.createChapter()
 
         guard let chapterFromPersistence = try context.fetch(Chapter.fetchRequest()).first
@@ -198,7 +199,7 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
             XCTAssertEqual(chapGoal.goal?.title, goalText)
         }
 
-        XCTAssertEqual(ccvm.destination, .index)
+        XCTAssertTrue(ccvm.createdChapter)
     }
 }
 
