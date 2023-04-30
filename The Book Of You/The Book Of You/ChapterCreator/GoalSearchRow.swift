@@ -11,7 +11,7 @@ struct GoalSearchRow: View {
     @ObservedObject private var goalViewModel: GoalViewModel
     @FocusState private var focused: Bool
 
-    init(goal: Goal, alertMessenger: ActionAlertMessenger) {
+    init(goal: Goal, alertMessenger: AppAlertMessenger) {
         goalViewModel = .init(goal: goal, alertMessenger: alertMessenger)
     }
 
@@ -61,7 +61,7 @@ struct GoalSearchRow: View {
 
 struct GoalRow_Previews: PreviewProvider {
     private static let persistenceController = PersistenceController.preview
-    private static let messenger = ActionAlertMessenger()
+    private static let messenger = AppAlertMessenger()
 
     static var previews: some View {
         let goal = persistenceController.viewContext.addGoal()

@@ -9,15 +9,14 @@ import SwiftUI
 import CoreData
 import CloudStorage
 
-// TODO: The logical structure of this view should be that it creates or replaces an
-// empty chapter, on creation if a past chapter has pages it will add an end date to
-// it and save it
+// TODO: navigation needs work... navigating directly to the destination creates a funky path
 enum ChapterCreatorFormFocus {
     case title, goalSearch
 }
 
 struct ChapterCreatorView: View {
-    @EnvironmentObject private var messenger: ActionAlertMessenger
+    @EnvironmentObject private var navStore: NavStore
+    @EnvironmentObject private var messenger: AppAlertMessenger
     @StateObject private var viewModel = ChapterCreatorViewModel()
     @FocusState private var formFocus: ChapterCreatorFormFocus?
     @CloudStorage(.identityGoalsKey) private var goals: Int?
@@ -47,6 +46,18 @@ struct ChapterCreatorView: View {
             guard let actionAlert = actionAlert else { return }
             messenger.displayNewAlert(actionAlert)
         }
+        .onReceive(viewModel.$destination) { destination in
+            guard let destination = destination else { return }
+            navStore.navigate(to: destination)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Save") {
+                    viewModel.createChapter()
+                }
+                .disabled(!viewModel.isChapterCreatable)
+            }
+        }
     }
 
     private var chapterGoals: some View {
@@ -56,7 +67,7 @@ struct ChapterCreatorView: View {
                         ForEach(viewModel.chapterGoals) { goal in
                             GoalSearchRow(goal: goal, alertMessenger: messenger)
                                 .onTapGesture {
-                                    viewModel.removeChapterGoal(goal)
+                                    viewModel.remove(goal: goal)
                                 }
                         }
                     } else {
@@ -78,7 +89,7 @@ struct ChapterCreatorView: View {
                 }.padding(.fs6)
                 FilteredFetchRequest(fetchRequest: viewModel.goalFetchRequest) { goal in
                     GoalSearchRow(goal: goal, alertMessenger: messenger).onTapGesture {
-                        viewModel.addToChapterGoals(goal)
+                        viewModel.add(goal: goal)
                     }
                 }
             }

@@ -7,14 +7,8 @@
 
 import SwiftUI
 
-struct ActionAlertData {
-    let title: String
-    let message: String
-    let sfSymbolText: String
-}
-
-struct ActionAlertDisplayView: View {
-    let data: ActionAlertData
+struct AppAlertDisplayView: View {
+    let data: AppAlert
 
     var body: some View {
         ZStack {
@@ -40,11 +34,21 @@ struct ActionAlertDisplayView: View {
 }
 
 struct ActionAlertDisplayView_Previews: PreviewProvider {
+    private static let examples: [(String, AppAlert)] = [
+        ("Duplicate Chapter Alert", .duplicateChapterAlert),
+        ("Max Goals Alert", .maxGoalsAlert)
+    ]
+
     static var previews: some View {
-        ActionAlertDisplayView(data: .init(
-            title: "Not Added",
-            message: "The list was already full, please remove an object from the list form in order to add",
-            sfSymbolText: "square.3.layers.3d.down.right.slash")
-        )
+        Group {
+            ForEach(examples, id: \.0) {
+                AppAlertDisplayView(data: $0.1)
+                    .environment(\.colorScheme, .dark)
+                    .previewDisplayName("\($0.0) - Dark")
+                AppAlertDisplayView(data: $0.1)
+                    .environment(\.colorScheme, .light)
+                    .previewDisplayName("\($0.0) - Light")
+            }
+        }
     }
 }

@@ -77,3 +77,56 @@ final class ChapterTests: BackgroundContextTestCase {
         XCTAssertEqual(4, allChapters.count)
     }
 }
+
+// MARK: - Comparison tests
+extension ChapterTests {
+    func testComparison() throws {
+        let chapter1 = Chapter(context: context)
+        let chapter2 = Chapter(context: context)
+
+        XCTAssertTrue(chapter1.compare(with: chapter2))
+
+        let title = "a title"
+        chapter1.title = title
+        chapter2.title = "nope"
+
+        XCTAssertFalse(chapter1.compare(with: chapter2))
+        chapter2.title = title
+        XCTAssertTrue(chapter1.compare(with: chapter2))
+
+        let goal1 = Goal(context: context)
+        goal1.title = "a title"
+        let goal2 = Goal(context: context)
+        goal2.title = "other title"
+
+        for (idx, goal) in [goal1, goal2].enumerated() {
+            let chapGoal = ChapterGoal(context: context)
+            chapGoal.chapter = chapter1
+            chapGoal.orderIdx = Int64(idx)
+            chapGoal.goal = goal
+        }
+        try context.save()
+
+        XCTAssertFalse(chapter1.compare(with: chapter2))
+
+        for (idx, goal) in [goal1, goal2].enumerated() {
+            let chapGoal = ChapterGoal(context: context)
+            chapGoal.chapter = chapter2
+            chapGoal.orderIdx = Int64(idx)
+            chapGoal.goal = goal
+        }
+        try context.save()
+
+        XCTAssertTrue(chapter1.compare(with: chapter2))
+    }
+
+    func testPageCount() throws {
+        let chapter = Chapter(context: context)
+        XCTAssertEqual(0, chapter.pageCount)
+
+        let page = Page(context: context)
+        page.chapter = chapter
+        try context.save()
+        XCTAssertEqual(1, chapter.pageCount)
+    }
+}

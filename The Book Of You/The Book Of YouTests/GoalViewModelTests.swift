@@ -104,9 +104,3 @@ final class GoalViewModelTests: BackgroundContextTestCase {
         XCTAssertFalse(gvm.isEditing)
     }
 }
-
-struct FakeAlertMessenger: AlertMessenger {
-    func displayNewAlert(_ data: ActionAlertData) {
-        /* noop */
-    }
-}

@@ -119,12 +119,12 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
         XCTAssertEqual(5, ccvm.goalsToGo)
         for (idx, goalTitle) in goalTexts.enumerated() {
             let newGoal = context.addGoal(goalTitle)
-            XCTAssertTrue(ccvm.addToChapterGoals(newGoal))
+            XCTAssertTrue(ccvm.add(goal: newGoal))
             XCTAssertEqual(4 - idx, ccvm.goalsToGo)
         }
         let lastGoal = context.addGoal("docs")
         XCTAssertNil(ccvm.actionAlert)
-        XCTAssertFalse(ccvm.addToChapterGoals(lastGoal))
+        XCTAssertFalse(ccvm.add(goal: lastGoal))
         XCTAssertNotNil(ccvm.actionAlert)
         XCTAssertEqual(0, ccvm.goalsToGo)
     }
@@ -135,13 +135,13 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
         }
 
         for (idx, goal) in goals.enumerated() {
-            XCTAssertTrue(ccvm.addToChapterGoals(goal))
+            XCTAssertTrue(ccvm.add(goal: goal))
             XCTAssertEqual(4 - idx, ccvm.goalsToGo)
         }
 
         for (idx, goal) in goals.enumerated() {
             XCTAssertEqual(idx, ccvm.goalsToGo)
-            ccvm.removeChapterGoal(goal)
+            ccvm.remove(goal: goal)
         }
         XCTAssertEqual(5, ccvm.goalsToGo)
     }
@@ -198,14 +198,117 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
             XCTAssertEqual(chapGoal.goal?.title, goalText)
         }
 
-        // TODO: TEST navigates too index
+        XCTAssertEqual(ccvm.destination, .index)
+    }
+}
+
+// MARK: - Chapter creation assertions
+extension ChapterCreatorViewModelTests {
+    func testCreatingAChapterMustChangeAttributesTitle() throws {
+        let testTitle = "A Title"
+        ccvm.title = testTitle
+        for goalTxt in goalTexts {
+            ccvm.goalText = goalTxt
+            ccvm.createGoal()
+        }
+        ccvm.createChapter()
+        XCTAssertEqual(1, try context.count(for: Chapter.fetchRequest()))
+        guard let firstChapter = try context.fetch(Chapter.fetchRequest()).first else {
+            return XCTFail("there should be one chapter at least")
+        }
+        XCTAssertNotNil(firstChapter.dateStarted)
+
+        // Show attributes must change to create new chapters
+        let ccvm2 = ChapterCreatorViewModel(context)
+        XCTAssertEqual(testTitle, ccvm2.title)
+        XCTAssertEqual(ccvm2.chapterGoals.count, goalTexts.count)
+        for (idx, goal) in ccvm2.chapterGoals.enumerated() {
+            let goalText = goalTexts[idx]
+            XCTAssertEqual(goal.title, goalText)
+        }
+
+        ccvm2.createChapter()
+        XCTAssertEqual(1, try context.count(for: Chapter.fetchRequest()))
+        XCTAssertEqual(ccvm2.actionAlert, .duplicateChapterAlert)
+        ccvm2.actionAlert = nil
+
+        let updatedTitle = "Updated Title"
+        ccvm2.title = "Updated Title"
+        ccvm2.createChapter()
+
+        let persistedChapters = try context.fetch(Chapter.fetchRequest())
+        XCTAssertEqual(1, persistedChapters.count)
+        XCTAssertEqual(updatedTitle, persistedChapters.first?.title)
     }
 
-    func testCreatingAChapterFromOldChapterWithoutPages() throws {
-          // TODO: SHOW that a new chapter populates its data from an old chapter, with no pages and on save purges the old chapter
+    func testCreatingAChapterMustChangeAttributesGoals() throws {
+        let testTitle = "A Title"
+        ccvm.title = testTitle
+        for goalTxt in goalTexts {
+            ccvm.goalText = goalTxt
+            ccvm.createGoal()
+        }
+        ccvm.createChapter()
+        XCTAssertEqual(1, try context.count(for: Chapter.fetchRequest()))
+        guard let firstChapter = try context.fetch(Chapter.fetchRequest()).first else {
+            return XCTFail("there should be one chapter at least")
+        }
+        XCTAssertNotNil(firstChapter.dateStarted)
+
+        let ccvm3 = ChapterCreatorViewModel(context)
+        XCTAssertEqual(testTitle, ccvm3.title)
+        XCTAssertEqual(ccvm3.chapterGoals.count, goalTexts.count)
+        for (idx, goal) in ccvm3 .chapterGoals.enumerated() {
+            let goalText = goalTexts[idx]
+            XCTAssertEqual(goal.title, goalText)
+        }
+
+        guard let firstGoal = ccvm3.chapterGoals.first else {
+            return XCTFail("There should be a goal in the newly created ccvm automatically")
+        }
+        firstGoal.title = "new goal title"
+        try context.save()
+        ccvm3.createChapter()
+        XCTAssertEqual(ccvm3.actionAlert, .duplicateChapterAlert)
+
+        let aRealNewGoal = context.addGoal("new new new")
+        ccvm3.remove(goal: firstGoal)
+        ccvm3.add(goal: aRealNewGoal)
+        ccvm3.createChapter()
+
+        let persistedChapters = try context.fetch(Chapter.fetchRequest())
+        XCTAssertEqual(1, persistedChapters.count)
+        XCTAssertEqual(testTitle, persistedChapters.first?.title)
+        let goals = persistedChapters.first?.chapterGoals?
+            .compactMap { $0 as? ChapterGoal }
+            .compactMap { $0.goal }
+
+        XCTAssertTrue(goals?.contains([aRealNewGoal]) ?? false, "the newly created chapter should have the new goal")
     }
 
     func testCreatingAChapterFromOldChapterWithPages() throws {
-        // TODO: logic of chapter creation
+        ccvm.title = "A Title"
+        for goalTxt in goalTexts {
+            ccvm.goalText = goalTxt
+            ccvm.createGoal()
+        }
+        ccvm.createChapter()
+        XCTAssertEqual(1, try context.count(for: Chapter.fetchRequest()))
+
+        guard let firstChapter = (try context.fetch(Chapter.fetchRequest())).first else {
+            return XCTFail("There should be a chapter")
+        }
+        let page = Page(context: context)
+        page.chapter = firstChapter
+        try context.save()
+
+        XCTAssertNil(firstChapter.dateEnded)
+        // Demostrate old chapter does not get destroyed and end date is populated
+        let ccvm2 = ChapterCreatorViewModel(context)
+        ccvm2.title = "A slightly different title to make this valid"
+        ccvm2.createChapter()
+
+        XCTAssertEqual(2, try context.count(for: Chapter.fetchRequest()))
+        XCTAssertNotNil(firstChapter.dateEnded)
     }
 }

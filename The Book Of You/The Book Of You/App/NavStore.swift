@@ -20,6 +20,10 @@ enum Destination: Codable, Hashable {
     case page(objectURI: URL)
 }
 
+protocol AppNavigator: AnyObject {
+    func navigate(to destination: Destination)
+}
+
 // NOTE: NavPath is codable so this can be used both for incoming path requests
 // as well as storage in scene store for restoration in other words the flexibility of path storgage
 @MainActor final class NavStore: ObservableObject {
@@ -39,5 +43,11 @@ enum Destination: Codable, Hashable {
         } catch {
             path = NavigationPath()
         }
+    }
+}
+
+extension NavStore: AppNavigator {
+    func navigate(to destination: Destination) {
+        path.append(destination)
     }
 }

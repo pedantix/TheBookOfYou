@@ -8,22 +8,28 @@
 import SwiftUI
 import CoreData
 import CloudStorage
-// TODO: Test the whole thing!
-// TODO: Swiftify the naming conventions
-// TODO: create a chapter based on previous chapters
-// initalize data based on previous chapters
 
-private let maxGoalsAlert = ActionAlertData(
-    title: "Not Added",
-    message: "You have already reached the specified number of goals, " +
-    "please remove one from current chapter goals with tap to add this goal with a tap.",
-    sfSymbolText: "square.3.layers.3d.down.right.slash"
-)
-// TODO: on deinit make sure to clean context
 class ChapterCreatorViewModel: ObservableObject {
     private let moc: NSManagedObjectContext
+    deinit {
+        viewModelLogger.info("Leaving chapter creator rolling back any chapters")
+        moc.rollback()
+    }
+
     init(_ context: NSManagedObjectContext = PersistenceController.shared.viewContext) {
         moc = context
+        guard let previousChapter = try? moc.fetch(Chapter.currentChapter()).first else { return }
+        self.previousChapter = previousChapter
+        title = previousChapter.title ?? ""
+        let goals = previousChapter.chapterGoals?
+            .compactMap { $0 as? ChapterGoal }
+            .sorted(using: SortDescriptor(\ChapterGoal.orderIdx))
+            .compactMap { $0.goal } ?? []
+
+        for goal in goals {
+            guard !maxGoalsReached else { return }
+            chapterGoals.append(goal)
+        }
     }
 
     @CloudStorage(.identityGoalsKey) var goalsMax = 5
@@ -33,7 +39,9 @@ class ChapterCreatorViewModel: ObservableObject {
     @Published var title = ""
     @Published var formFocus: ChapterCreatorFormFocus? = .title
     @Published private(set) var chapterGoals: [Goal] = []
-    @Published var actionAlert: ActionAlertData?
+    @Published var actionAlert: AppAlert?
+    @Published var destination: Destination?
+    private var previousChapter: Chapter?
 
     var isChapterCreatable: Bool {
         return goalsToGo == 0 && !title.isBlank
@@ -51,13 +59,27 @@ class ChapterCreatorViewModel: ObservableObject {
         do {
             let newChapter = Chapter(context: moc)
             newChapter.title = title.trimmed
+            newChapter.dateStarted = .now
             for (idx, goal) in chapterGoals.enumerated() {
                 let chapterGoal = ChapterGoal(context: moc)
                 chapterGoal.orderIdx = Int64(idx)
                 chapterGoal.chapter = newChapter
                 chapterGoal.goal = goal
             }
+            // check if previous chapter attributes were similar
+            guard !newChapter.compare(with: previousChapter) else {
+                moc.rollback()
+                actionAlert = .duplicateChapterAlert
+                return
+            }
+
+            if let previousChapter = previousChapter, previousChapter.pageCount == 0 {
+                moc.delete(previousChapter)
+            } else {
+                previousChapter?.dateEnded = Date.now
+            }
             try moc.save()
+            destination = .index
         } catch let err as NSError {
             actionAlert = .persistenceAlert(err)
             viewModelLogger.contextError(err)
@@ -85,25 +107,25 @@ class ChapterCreatorViewModel: ObservableObject {
 
         do {
             try moc.save()
-            addToChapterGoals(goal)
+            add(goal: goal)
         } catch {
             viewModelLogger.error("\(#function) -> Error creating goal \(error.localizedDescription)")
         }
     }
 
     @discardableResult
-    func addToChapterGoals(_ goal: Goal) -> Bool {
+    func add(goal: Goal) -> Bool {
         if chapterGoals.count < goalsMax {
             chapterGoals.append(goal)
             goalText = ""
             return true
         } else {
-            actionAlert = maxGoalsAlert
+            actionAlert = .maxGoalsAlert
             return false
         }
     }
 
-    func removeChapterGoal(_ goal: Goal) {
+    func remove(goal: Goal) {
         chapterGoals.removeObject(goal)
     }
 }

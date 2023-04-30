@@ -56,7 +56,7 @@ class GoalViewModel: ObservableObject {
         do {
             try moc.save()
         } catch let err as  NSError {
-            let alert = ActionAlertData.persistenceAlert(err)
+            let alert = AppAlert.persistenceAlert(err)
             alertMessenger.displayNewAlert(alert)
             viewModelLogger.contextError(err)
         }
@@ -71,7 +71,7 @@ class GoalViewModel: ObservableObject {
             moc.delete(goal)
             try moc.save()
         } catch let err as  NSError {
-            let alert = ActionAlertData.persistenceAlert(err)
+            let alert = AppAlert.persistenceAlert(err)
             alertMessenger.displayNewAlert(alert)
             viewModelLogger.contextError(err)
         }

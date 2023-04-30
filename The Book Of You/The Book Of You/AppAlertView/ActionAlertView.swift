@@ -14,11 +14,11 @@ private extension TimeInterval {
 }
 
 protocol AlertMessenger {
-    func displayNewAlert(_ data: ActionAlertData)
+    func displayNewAlert(_ data: AppAlert)
 }
 
-class ActionAlertMessenger: ObservableObject, AlertMessenger {
-    @Published fileprivate var alertData: ActionAlertData?
+class AppAlertMessenger: ObservableObject, AlertMessenger {
+    @Published fileprivate var alertData: AppAlert?
     @Published fileprivate var visible = false {
         didSet {
             if !visible {
@@ -34,7 +34,7 @@ class ActionAlertMessenger: ObservableObject, AlertMessenger {
     }
     private var hideTask: Task<Void, Error>?
 
-    func displayNewAlert(_ data: ActionAlertData) {
+    func displayNewAlert(_ data: AppAlert) {
         hideTask?.cancel()
         alertData = data
         visible = true
@@ -48,9 +48,9 @@ class ActionAlertMessenger: ObservableObject, AlertMessenger {
     }
 }
 
-struct ActionAlertView: View {
-    @EnvironmentObject var messenger: ActionAlertMessenger
-    @State private var data: ActionAlertData?
+struct AppAlertView: View {
+    @EnvironmentObject var messenger: AppAlertMessenger
+    @State private var data: AppAlert?
     @State private var visiblity: CGFloat = 0
 
     var body: some View {
@@ -72,7 +72,7 @@ struct ActionAlertView: View {
     @ViewBuilder
     private var display: some View {
         if let data = messenger.alertData {
-            ActionAlertDisplayView(data: data)
+            AppAlertDisplayView(data: data)
                 .onTapGesture {
                     messenger.visible = false
                 }
@@ -84,16 +84,16 @@ struct ActionAlertView: View {
 
 struct ActionAlertView_Previews: PreviewProvider {
     static var previews: some View {
-        let data = ActionAlertData(
+        let data = AppAlert(
             title: "Not Added",
             message: "The list was already full, please remove an object from the list form in order to add",
             sfSymbolText: "square.3.layers.3d.down.right.slash")
-        let messenger = ActionAlertMessenger()
+        let messenger = AppAlertMessenger()
         ZStack {
             Button("Show") {
                 messenger.displayNewAlert(data)
             }
-            ActionAlertView()
+            AppAlertView()
         }
         .environmentObject(messenger)
     }

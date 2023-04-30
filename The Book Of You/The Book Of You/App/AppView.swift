@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AppView: View {
-    @StateObject private var alertMessenger = ActionAlertMessenger()
+    @StateObject private var alertMessenger = AppAlertMessenger()
     @StateObject private var navStore = NavStore()
     @SceneStorage(.navigationKey) private var navStoreData: Data?
 
     var body: some View {
         ZStack {
             appView
-            ActionAlertView()
+            AppAlertView()
         }
         .environmentObject(alertMessenger)
         .environmentObject(navStore)
