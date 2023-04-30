@@ -8,8 +8,6 @@
 import CloudStorage
 import SwiftUI
 
-// TODO: Discuss Aggregate Accumulation of Incremental Change
-
 // swiftlint:disable line_length
 let introText = """
 \tI believe in the power of habit, identity, and focus. The purpose of building this app was to reassert my identity as an app developer and software engineer and create a feature to help me make habits and strengthen my identity. I believe in goals, dreams, and consistency.
@@ -17,6 +15,11 @@ let introText = """
 \tGood habits are a reflection of one's identity. We are who we are because of all our actions yesterday, and today is tomorrow's yesterday. Today is the day we can get just 1% better than yesterday.
 
 \tTo that end, I built this journal to help me chronicle and build my habits. I hope it helps you too.
+"""
+
+let processImprovement = """
+\tThe importance of aggregating incremental change is a topic heavily emphasized in James Clear's book and on his along with other websites. He speaks of the story of the British cycling team having a coach with a talented team that did not win. The coach's approach to fixing this was finding minor optimizations in everything the team did. These optimizations included equipment, nutrition, training regimens, and apparel. These small changes led to victory after victory because their effects stacked up.
+\tBuilding habits is the same way. At first, they are small changes, some with noticeable positive effects and others with more difficult-to-see merit. But over time, these things add up. I invite you to join me in embracing a lifestyle of continued improvement via an aggregate change to become what you desire to see in the mirror. It will not happen overnight.
 """
 
 let reflectionText = """
@@ -40,6 +43,7 @@ let identityText = """
 
 struct IntroView: View {
     @EnvironmentObject var navStore: NavStore
+    @CloudStorage(.identityGoalsKey) private var goals = 5
 
     var body: some View {
         List {
@@ -48,67 +52,54 @@ struct IntroView: View {
 
                 }
                 VStack {
-                    introView
-                    reflectionView
-                    identityGoalsView
-                    vacationModeView
-                }.listRowSeparator(.hidden)
-            }.padding(0)
-        }.listStyle(.plain)
-            .padding(0).toolbar {
-                Button("About") {
-                    viewLogger.info("Navigate To About")
-                    navStore.navigate(to: .about)
+                    IntroEntryView(title: "Introduction", bodyText: introText)
+                    IntroEntryView(title: "Aggregate Change", bodyText: processImprovement)
+                    IntroEntryView(title: "Daily Reflection", bodyText: reflectionText)
+                    IntroEntryView(title: "Goals & Identity", bodyText: identityText) {
+                        Stepper("Identity Goals: \(goals)", value: $goals, in: 1...1000)
+                    }
+                    IntroEntryView(title: "Vacation Mode", bodyText: vacationModeText)
                 }
-                Button("Index") {
-                    viewLogger.info("Navigate To Index")
-                    navStore.navigate(to: .about)
-                }
+                .listRowSeparator(.hidden)
             }
+            .padding(0)
+        }
+        .listStyle(.plain)
+        .padding(0)
+        .toolbar {
+            Button("About") {
+                viewLogger.info("Navigate To About")
+                navStore.navigate(to: .about)
+            }
+            Button("Index") {
+                viewLogger.info("Navigate To Index")
+                navStore.navigate(to: .about)
+            }
+        }
+    }
+}
+
+private let defaultFooterContent: () -> EmptyView = { EmptyView() }
+private struct IntroEntryView<ContentView: View>: View {
+    typealias Content = () -> ContentView
+    let title: String
+    let bodyText: String
+    let footerContent: Content
+
+    init(title: String, bodyText: String, footer: @escaping Content = defaultFooterContent) {
+        self.title = title
+        self.bodyText = bodyText
+        self.footerContent = footer
     }
 
-    @ViewBuilder
-    private var introView: some View {
-        Text("Introduction")
+    var body: some View {
+        Text(title)
             .font(.title)
             .padding(.fs6)
-        Text(introText)
+        Text(bodyText)
             .font(.body)
             .padding(.fs5)
-    }
-
-    @ViewBuilder
-    private var reflectionView: some View {
-        Text("Daily Reflection")
-            .font(.title)
-            .padding(.fs6)
-        Text(reflectionText)
-            .font(.body)
-            .padding(.fs5)
-    }
-
-    @ViewBuilder
-    private var vacationModeView: some View {
-        Text("Vacation Mode")
-            .font(.title)
-            .padding(.fs6)
-        Text(vacationModeText)
-            .font(.body)
-            .padding(.fs5)
-    }
-
-    @CloudStorage(.identityGoalsKey) private var goals = 5
-
-    @ViewBuilder
-    private var identityGoalsView: some View {
-        Text("Goals & Identity")
-            .font(.title)
-            .padding(.fs6)
-        Text(identityText)
-            .font(.body)
-            .padding(.fs5)
-
-        Stepper("Identity Goals: \(goals)", value: $goals, in: 1...1000)
+        footerContent()
     }
 }
 
