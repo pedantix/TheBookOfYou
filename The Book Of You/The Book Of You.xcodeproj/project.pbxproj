@@ -41,7 +41,6 @@
 		EFA647D129D4A78100A0B451 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA647D029D4A78100A0B451 /* Preview Assets.xcassets */; };
 		EFA647D329D4A78100A0B451 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA647D229D4A78100A0B451 /* Persistence.swift */; };
 		EFA647D629D4A78100A0B451 /* The_Book_Of_You.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EFA647D429D4A78100A0B451 /* The_Book_Of_You.xcdatamodeld */; };
-		EFA647EB29D4A78100A0B451 /* The_Book_Of_YouUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA647EA29D4A78100A0B451 /* The_Book_Of_YouUITests.swift */; };
 		EFA647ED29D4A78100A0B451 /* The_Book_Of_YouUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA647EC29D4A78100A0B451 /* The_Book_Of_YouUITestsLaunchTests.swift */; };
 		EFA6482B29DF174700A0B451 /* CoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6482A29DF174700A0B451 /* CoverView.swift */; };
 		EFA6482D29DF17DF00A0B451 /* Loggers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6482C29DF17DF00A0B451 /* Loggers.swift */; };
@@ -117,7 +116,6 @@
 		EFA647D729D4A78100A0B451 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFA647DC29D4A78100A0B451 /* The Book Of YouTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Book Of YouTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA647E629D4A78100A0B451 /* The Book Of YouUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The Book Of YouUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EFA647EA29D4A78100A0B451 /* The_Book_Of_YouUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Book_Of_YouUITests.swift; sourceTree = "<group>"; };
 		EFA647EC29D4A78100A0B451 /* The_Book_Of_YouUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Book_Of_YouUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EFA6482A29DF174700A0B451 /* CoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverView.swift; sourceTree = "<group>"; };
 		EFA6482C29DF17DF00A0B451 /* Loggers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggers.swift; sourceTree = "<group>"; };
@@ -320,7 +318,6 @@
 		EFA647E929D4A78100A0B451 /* The Book Of YouUITests */ = {
 			isa = PBXGroup;
 			children = (
-				EFA647EA29D4A78100A0B451 /* The_Book_Of_YouUITests.swift */,
 				EFA647EC29D4A78100A0B451 /* The_Book_Of_YouUITestsLaunchTests.swift */,
 				EF49B50929FF3FCE00F7B62C /* AboutUITests.swift */,
 			);
@@ -561,7 +558,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFA647ED29D4A78100A0B451 /* The_Book_Of_YouUITestsLaunchTests.swift in Sources */,
-				EFA647EB29D4A78100A0B451 /* The_Book_Of_YouUITests.swift in Sources */,
 				EF49B50A29FF3FCE00F7B62C /* AboutUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
