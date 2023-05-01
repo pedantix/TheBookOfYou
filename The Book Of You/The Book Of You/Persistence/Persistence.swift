@@ -8,7 +8,14 @@
 import CoreData
 
 struct PersistenceController {
-    static let shared = PersistenceController()
+    static let shared: PersistenceController = {
+        switch LaunchScenario.current {
+        case .application:
+            return PersistenceController()
+        case .blankSlate:
+            return PersistenceController(inMemory: true)
+        }
+    }()
     let container: NSPersistentCloudKitContainer
 
     init(inMemory: Bool = false) {

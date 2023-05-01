@@ -13,7 +13,6 @@ class GithubData: Codable, Identifiable {
     let function: String
 }
 
-// TODO: Make sure this is in a UI test before going to production
 class AboutDataService: ObservableObject {
     @Published var githubData: [GithubData] = []
     @Published var citations: [String] = []

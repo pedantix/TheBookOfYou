@@ -69,6 +69,9 @@ struct ChapterCreatorView: View {
                                     viewModel.remove(goal: goal)
                                 }
                         }
+                        .onMove { anIndexSet, anInt in
+                            viewModel.moveChapterGoals(from: anIndexSet, to: anInt)
+                        }
                     } else {
                         Text("No goals selected yet, you need \(goals ?? 1) based on the settings" +
                              " in the intro section to create a chapter," +

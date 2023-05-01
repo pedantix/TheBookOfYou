@@ -203,6 +203,25 @@ final class ChapterCreatorViewModelTests: BackgroundContextTestCase {
     }
 }
 
+// MARK: - Drag and drop to reorder chapter goals support
+extension ChapterCreatorViewModelTests {
+    func testGoalsMoveHandler() throws {
+        let goal1 = context.addGoal("some text")
+        let goal2 = context.addGoal("some text 2")
+        let goal3 = context.addGoal("some text 3")
+
+        ccvm.add(goal: goal1)
+        ccvm.add(goal: goal2)
+        ccvm.add(goal: goal3)
+
+        XCTAssertEqual([goal1, goal2, goal3], ccvm.chapterGoals)
+        ccvm.moveChapterGoals(from: .init(integer: 0), to: 3)
+        XCTAssertEqual([goal2, goal3, goal1], ccvm.chapterGoals)
+        ccvm.moveChapterGoals(from: .init(integer: 0), to: 2)
+        XCTAssertEqual([goal3, goal2, goal1], ccvm.chapterGoals)
+    }
+}
+
 // MARK: - Chapter creation assertions
 extension ChapterCreatorViewModelTests {
     func testCreatingAChapterMustChangeAttributesTitle() throws {

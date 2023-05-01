@@ -128,4 +128,8 @@ class ChapterCreatorViewModel: ObservableObject {
     func remove(goal: Goal) {
         chapterGoals.removeObject(goal)
     }
+
+    func moveChapterGoals(from source: IndexSet, to destintation: Int) {
+        chapterGoals.move(fromOffsets: source, toOffset: destintation)
+    }
 }

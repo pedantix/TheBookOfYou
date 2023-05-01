@@ -17,8 +17,20 @@
         <relationship name="chapterGoals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChapterGoal" inverseName="goal" inverseEntity="ChapterGoal"/>
     </entity>
     <entity name="Page" representedClassName="Page" syncable="YES" codeGenerationType="class">
+        <attribute name="journalEntry" optional="YES" attributeType="String"/>
         <attribute name="lastModifiedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="startedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="vacationDay" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chapter" inverseName="pages" inverseEntity="Chapter"/>
+        <relationship name="pageEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PageEntry" inverseName="page" inverseEntity="PageEntry"/>
+    </entity>
+    <entity name="PageEntry" representedClassName="PageEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="entryOrder" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="page" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Page" inverseName="pageEntries" inverseEntity="Page"/>
+        <relationship name="textEntry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TextEntry" inverseName="pageEntry" inverseEntity="TextEntry"/>
+    </entity>
+    <entity name="TextEntry" representedClassName="TextEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="pageEntry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PageEntry" inverseName="textEntry" inverseEntity="PageEntry"/>
     </entity>
 </model>
