@@ -63,19 +63,19 @@ extension PersistenceController {
 #if DEBUG
 extension NSManagedObjectContext {
     @discardableResult
-    func makeChapter(daysAgo: Int = 5) -> Chapter {
+    func addChapter(daysAgo: Int = 5, goals: Int = 0) -> Chapter {
         let newItem = Chapter(context: self)
         newItem.title = "A chapter from \(daysAgo) days ago"
         newItem.dateStarted = .date(daysAgo: daysAgo)
         if daysAgo != 1 {
             newItem.dateEnded = .date(daysAgo: daysAgo)
         }
+        saveContext()
 
-        do {
-            try self.save()
-        } catch let err as NSError {
-            fatalError("Unresolved error \(err), \(err.userInfo)")
+        for idx in 0..<goals {
+            addGoal("Chapter Goal \(idx)", with: newItem)
         }
+
         return newItem
     }
 
@@ -83,9 +83,22 @@ extension NSManagedObjectContext {
     func addChapters(_ count: Int = 5) -> [Chapter] {
         var chapters = [Chapter]()
         for item in (1...count).reversed() {
-            chapters.append(makeChapter(daysAgo: item))
+            chapters.append(addChapter(daysAgo: item))
         }
         return chapters
+    }
+
+    @discardableResult
+    func addVacationChapter(daysAgo: Int = 5) -> Chapter {
+        let newItem = Chapter(context: self)
+        newItem.title = "A Vacation chapter from \(daysAgo) days ago"
+        newItem.dateStarted = .date(daysAgo: daysAgo)
+        newItem.isVacation = true
+        if daysAgo != 1 {
+            newItem.dateEnded = .date(daysAgo: daysAgo)
+        }
+        saveContext()
+        return newItem
     }
 
     @discardableResult
@@ -95,16 +108,53 @@ extension NSManagedObjectContext {
         goal.title = title
         if let chapter = chapter {
             let chapGoal = ChapterGoal(context: viewContext)
+            let idxOrder: Int64
+            if chapter.chapterGoals?.count == 0 {
+                idxOrder = 0
+            } else {
+                let maxIdx = chapter.chapterGoals?
+                    .compactMap { $0 as? ChapterGoal }
+                    .compactMap { $0.orderIdx }.max() ?? 0
+                idxOrder = maxIdx + 1
+            }
+
             chapGoal.chapter = chapter
             chapGoal.goal = goal
+            chapGoal.orderIdx = idxOrder
         }
 
+        saveContext()
+        return goal
+    }
+
+    @discardableResult
+    func addVacationPage() -> Page {
+        let vacationChapter = addVacationChapter()
+        let creator = PageCreatorService(viewContext: self)
         do {
-            try viewContext.save()
+            return try creator.createPage(for: vacationChapter)
         } catch let err as NSError {
             fatalError("Unresolved error \(err), \(err.userInfo)")
         }
-        return goal
+    }
+
+    @discardableResult
+    func addPage(goals: Int = 1) -> Page {
+        let chapter = addChapter(goals: goals)
+        let creator = PageCreatorService(viewContext: self)
+        do {
+            return try creator.createPage(for: chapter)
+        } catch let err as NSError {
+            fatalError("Unresolved error \(err), \(err.userInfo)")
+        }
+    }
+
+    private func saveContext() {
+        do {
+            try save()
+        } catch let err as NSError {
+            fatalError("Unresolved error \(err), \(err.userInfo)")
+        }
     }
 }
 #endif

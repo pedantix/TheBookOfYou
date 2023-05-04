@@ -13,7 +13,7 @@ struct CoverView: View {
     // NOTES: Questions, can I easily build an evenly spaced VStack?
     var body: some View {
         ZStack {
-            ClickableBackgroundView {
+            ClickableBackgroundView("Click to turn the page") {
                 navStore.navigate(to: .intro)
                 viewLogger.info("Turn Cover Page To Next")
             }

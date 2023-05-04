@@ -76,6 +76,7 @@ class ChapterCreatorViewModel: ObservableObject {
             if let previousChapter = previousChapter, previousChapter.pageCount == 0 {
                 moc.delete(previousChapter)
             } else {
+                previousChapter?.pages?.forEach { ($0 as? Page)?.isDraft = false }
                 previousChapter?.dateEnded = Date.now
             }
             try moc.save()

@@ -28,3 +28,43 @@ struct FakeAlertMessenger: AlertMessenger {
         /* noop */
     }
 }
+
+class FakeValidatorGraph: ValidatorGraph {
+    lazy var fakePageValidator = MockPageValidator(pageEntriesValidator)
+    lazy var fakePageEntriesValidator = MockPageEntriesValidator(textEntryValidator)
+    var fakeTextEntryValidator = MockTextEntriesValidator()
+
+    var pageValidator: PageValidator {
+        return fakePageValidator
+    }
+    var pageEntriesValidator: PageEntriesValidator {
+        return fakePageEntriesValidator
+    }
+    var textEntryValidator: TextEntryValidator {
+        return fakeTextEntryValidator
+    }
+}
+
+class MockPageValidator: PageValidator {
+    var mockResult: Result<Bool, PageValidationError> = .success(true)
+
+    override func validate(_ page: Page) -> Result<Bool, PageValidationError> {
+        return mockResult
+    }
+}
+
+class MockTextEntriesValidator: TextEntryValidator {
+    var mockResult: Result<Bool, TextValidationError> = .success(true)
+
+    override func validate(_ textEntry: TextEntry) -> Result<Bool, TextValidationError> {
+        return mockResult
+    }
+}
+
+class MockPageEntriesValidator: PageEntriesValidator {
+    var mockResult: Result<Bool, PageEntriesValidationError> = .success(true)
+
+    override func validate(_ pageEntriesSet: NSSet) -> Result<Bool, PageEntriesValidationError> {
+        return mockResult
+    }
+}

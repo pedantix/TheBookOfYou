@@ -3,6 +3,7 @@
     <entity name="Chapter" representedClassName="Chapter" syncable="YES" codeGenerationType="class">
         <attribute name="dateEnded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="dateStarted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isVacation" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="chapterGoals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChapterGoal" inverseName="chapter" inverseEntity="ChapterGoal"/>
         <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Page" inverseName="chapter" inverseEntity="Page"/>
@@ -17,9 +18,10 @@
         <relationship name="chapterGoals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChapterGoal" inverseName="goal" inverseEntity="ChapterGoal"/>
     </entity>
     <entity name="Page" representedClassName="Page" syncable="YES" codeGenerationType="class">
+        <attribute name="entryDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isDraft" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="journalEntry" optional="YES" attributeType="String"/>
         <attribute name="lastModifiedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="startedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="vacationDay" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="chapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chapter" inverseName="pages" inverseEntity="Chapter"/>
         <relationship name="pageEntries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PageEntry" inverseName="page" inverseEntity="PageEntry"/>

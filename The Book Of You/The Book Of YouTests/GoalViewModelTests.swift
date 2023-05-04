@@ -90,7 +90,7 @@ final class GoalViewModelTests: BackgroundContextTestCase {
     }
 
     func testDeleteForNonDeletable() throws {
-        let goalWithChap = context.addGoal(with: context.makeChapter())
+        let goalWithChap = context.addGoal(with: context.addChapter())
         gvm = GoalViewModel(goal: goalWithChap, alertMessenger: FakeAlertMessenger(), context: context)
         XCTAssertFalse(gvm.isDeletable)
         gvm.delete()

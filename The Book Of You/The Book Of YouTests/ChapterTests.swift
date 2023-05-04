@@ -15,10 +15,10 @@ final class ChapterTests: BackgroundContextTestCase {
     override func setUp() async throws {
         try await super.setUp()
 
-        let da3chap = context.makeChapter(daysAgo: 3)
-        let presentChapter = context.makeChapter(daysAgo: 0)
-        let da2chap = context.makeChapter(daysAgo: 2)
-        let da1chap = context.makeChapter(daysAgo: 1)
+        let da3chap = context.addChapter(daysAgo: 3)
+        let presentChapter = context.addChapter(daysAgo: 0)
+        let da2chap = context.addChapter(daysAgo: 2)
+        let da1chap = context.addChapter(daysAgo: 1)
 
         testChapters = [presentChapter, da1chap, da2chap, da3chap]
     }

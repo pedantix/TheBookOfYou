@@ -29,17 +29,9 @@ final class AboutUITests: XCTestCase {
         app.launchEnvironment = ["Scenario": "blankSlate"]
         app.launch()
 
-        app.windows
-            .children(matching: .other).element
-            .children(matching: .other).element
-            .children(matching: .other).element
-            .children(matching: .other).element
-            .children(matching: .other).element
-            .children(matching: .other).element
-            .children(matching: .other).element
-            .children(matching: .other).element
-            .tap()
-        let aboutButton = app.navigationBars["_TtGC7SwiftUI32NavigationStackHosting"].buttons["About"]
+        // Accessibility button for cover page.
+        app.buttons["Click to turn the page"].tap()
+        let aboutButton = app.navigationBars.buttons["About"]
         XCTAssert(aboutButton.exists)
         aboutButton.tap()
         XCTAssertTrue(app.staticTexts["About"].exists)

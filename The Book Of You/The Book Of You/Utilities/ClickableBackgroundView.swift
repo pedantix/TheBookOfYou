@@ -7,29 +7,37 @@
 
 import SwiftUI
 
-struct TapableBackgroundView: View {
+struct ClickableBackgroundView: View {
+    // NOTE: Added this here to force testability, may need to evolve over time
+
+    typealias Action = () -> Void
+    private let accessibilityText: String
+    private let action: Action?
+
+    init(_ accessibilityText: String, action: Action? = nil) {
+        self.accessibilityText = accessibilityText
+        self.action = action
+    }
+
     var body: some View {
-        GeometryReader { geometry in
-            Rectangle()
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .opacity(0.001)
-                .layoutPriority(-1)
+        if action == nil {
+            actionableBackground
+        } else {
+            actionableBackground
+                .onTapGesture {
+                    action?()
+                }
         }
     }
-}
 
-struct ClickableBackgroundView: View {
-    let action: () -> Void
-
-    var body: some View {
+    var actionableBackground: some View {
         GeometryReader { geometry in
             Rectangle()
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .opacity(0.001)
                 .layoutPriority(-1)
-                .onTapGesture {
-                    action()
-                }
+                .accessibilityAddTraits(.isButton)
+                .accessibilityLabel(Text(accessibilityText))
         }
     }
 }
@@ -39,7 +47,7 @@ private struct TestView: View {
 
     var body: some View {
         ZStack {
-            ClickableBackgroundView {
+            ClickableBackgroundView("Click Me!") {
                 viewLogger.info("Clicked!")
                 counter += 1
             }

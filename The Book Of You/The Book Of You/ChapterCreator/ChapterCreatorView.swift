@@ -13,6 +13,7 @@ enum ChapterCreatorFormFocus {
     case title, goalSearch
 }
 
+// TODO: Create vacatin mode toggle
 struct ChapterCreatorView: View {
     @EnvironmentObject private var navStore: NavStore
     @EnvironmentObject private var messenger: AppAlertMessenger

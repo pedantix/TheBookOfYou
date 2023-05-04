@@ -48,9 +48,6 @@ struct IntroView: View {
     var body: some View {
         List {
             ZStack {
-                ClickableBackgroundView {
-
-                }
                 VStack {
                     IntroEntryView(title: "Introduction", bodyText: introText)
                     IntroEntryView(title: "Aggregate Change", bodyText: processImprovement)

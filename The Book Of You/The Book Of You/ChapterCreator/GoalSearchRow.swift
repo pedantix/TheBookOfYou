@@ -37,7 +37,7 @@ struct GoalSearchRow: View {
 
     private var displayBody: some View {
         ZStack {
-            TapableBackgroundView()
+            ClickableBackgroundView("Goal Row: \(goalViewModel.title)")
             HStack {
                 Text(goalViewModel.title)
                 Spacer()

@@ -306,7 +306,7 @@ extension ChapterCreatorViewModelTests {
         XCTAssertTrue(goals?.contains([aRealNewGoal]) ?? false, "the newly created chapter should have the new goal")
     }
 
-    func testCreatingAChapterFromOldChapterWithPages() throws {
+    func testCreatingAChapterFromOldChapterWithPagesThatWereNotDraft() throws {
         ccvm.title = "A Title"
         for goalTxt in goalTexts {
             ccvm.goalText = goalTxt
@@ -320,6 +320,7 @@ extension ChapterCreatorViewModelTests {
         }
         let page = Page(context: context)
         page.chapter = firstChapter
+        page.isDraft = false
         try context.save()
 
         XCTAssertNil(firstChapter.dateEnded)
@@ -330,5 +331,34 @@ extension ChapterCreatorViewModelTests {
 
         XCTAssertEqual(2, try context.count(for: Chapter.fetchRequest()))
         XCTAssertNotNil(firstChapter.dateEnded)
+        XCTAssertFalse(try context.fetch(Page.fetchRequest()).first?.isDraft ?? true)
+    }
+
+    func testCreatingAChapterFromOldChapterWithPagesThatHadADraftPage() throws {
+        ccvm.title = "A Title"
+        for goalTxt in goalTexts {
+            ccvm.goalText = goalTxt
+            ccvm.createGoal()
+        }
+        ccvm.createChapter()
+        XCTAssertEqual(1, try context.count(for: Chapter.fetchRequest()))
+
+        guard let firstChapter = (try context.fetch(Chapter.fetchRequest())).first else {
+            return XCTFail("There should be a chapter")
+        }
+        let page = Page(context: context)
+        page.chapter = firstChapter
+        page.isDraft = true
+        try context.save()
+
+        XCTAssertNil(firstChapter.dateEnded)
+        // Demostrate old chapter does not get destroyed and end date is populated
+        let ccvm2 = ChapterCreatorViewModel(context)
+        ccvm2.title = "A slightly different title to make this valid"
+        ccvm2.createChapter()
+
+        XCTAssertEqual(2, try context.count(for: Chapter.fetchRequest()))
+        XCTAssertNotNil(firstChapter.dateEnded)
+        XCTAssertFalse(try context.fetch(Page.fetchRequest()).first?.isDraft ?? true)
     }
 }
