@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF113FE72A049C1000CBAC0F /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF113FE62A049C1000CBAC0F /* TextEditorView.swift */; };
+		EF113FE92A049C2300CBAC0F /* TextEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF113FE82A049C2300CBAC0F /* TextEditorViewModel.swift */; };
+		EF113FEB2A049CF700CBAC0F /* TextEditorViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF113FEA2A049CF700CBAC0F /* TextEditorViewModelTests.swift */; };
 		EF1AA27329F2B7270056293F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27229F2B7270056293F /* ErrorView.swift */; };
 		EF1AA27629F2B9640056293F /* ChapterCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27529F2B9640056293F /* ChapterCreatorView.swift */; };
 		EF1AA27829F5D4FD0056293F /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27729F5D4FD0056293F /* Goal.swift */; };
@@ -88,6 +91,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF113FE62A049C1000CBAC0F /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
+		EF113FE82A049C2300CBAC0F /* TextEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorViewModel.swift; sourceTree = "<group>"; };
+		EF113FEA2A049CF700CBAC0F /* TextEditorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorViewModelTests.swift; sourceTree = "<group>"; };
 		EF1AA26F29F2B4860056293F /* The Book Of You.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "The Book Of You.xctestplan"; sourceTree = "<group>"; };
 		EF1AA27129F2B6B00056293F /* The-Book-Of-You-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "The-Book-Of-You-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EF1AA27229F2B7270056293F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -184,6 +190,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF113FE52A049BE500CBAC0F /* TextEditor */ = {
+			isa = PBXGroup;
+			children = (
+				EF113FE62A049C1000CBAC0F /* TextEditorView.swift */,
+				EF113FE82A049C2300CBAC0F /* TextEditorViewModel.swift */,
+			);
+			path = TextEditor;
+			sourceTree = "<group>";
+		};
 		EF1AA27029F2B4EB0056293F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +239,7 @@
 		EF49B50629FEDDF800F7B62C /* PageEditor */ = {
 			isa = PBXGroup;
 			children = (
+				EF113FE52A049BE500CBAC0F /* TextEditor */,
 				EF49B50429FEDDE600F7B62C /* PageEditorView.swift */,
 				EF49B50729FEDE1800F7B62C /* PageEditorViewModel.swift */,
 				EF91E17D2A02F22700B071A3 /* PageCreatorService.swift */,
@@ -352,6 +368,7 @@
 				EF6423C929FC6DE6009F60FF /* RangeReplaceableCollectionTest.swift */,
 				EF9F3ADE29F0D7AB005CC0A0 /* TestCoreDataStack.swift */,
 				EF49B5112A00135500F7B62C /* TextEntryValidatorTest.swift */,
+				EF113FEA2A049CF700CBAC0F /* TextEditorViewModelTests.swift */,
 			);
 			path = "The Book Of YouTests";
 			sourceTree = "<group>";
@@ -547,6 +564,7 @@
 				EF6423C829FC6DBE009F60FF /* RangeReplaceableCollections.swift in Sources */,
 				EF91E1802A03405D00B071A3 /* DependencyInjection.swift in Sources */,
 				EF5FD05429F8ABB1003D768C /* GoalSearchRow.swift in Sources */,
+				EF113FE92A049C2300CBAC0F /* TextEditorViewModel.swift in Sources */,
 				EF6423CE29FC87DB009F60FF /* View.swift in Sources */,
 				EF6423C629FC245E009F60FF /* ActionAlertView.swift in Sources */,
 				EF49B50529FEDDE600F7B62C /* PageEditorView.swift in Sources */,
@@ -581,6 +599,7 @@
 				EFA6485029E2339C00A0B451 /* UserDefaults.swift in Sources */,
 				EFA6485629E24B7B00A0B451 /* IndexView.swift in Sources */,
 				EFA6484A29E1F2EA00A0B451 /* AboutDataService.swift in Sources */,
+				EF113FE72A049C1000CBAC0F /* TextEditorView.swift in Sources */,
 				EF4AFAE729F0612F00396FD3 /* Chapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,6 +614,7 @@
 				EF6423CA29FC6DE6009F60FF /* RangeReplaceableCollectionTest.swift in Sources */,
 				EF49B50E29FFFC6400F7B62C /* PageEditorViewModelTests.swift in Sources */,
 				EF1AA28429F6AEAC0056293F /* ChapterCreatorViewModelTests.swift in Sources */,
+				EF113FEB2A049CF700CBAC0F /* TextEditorViewModelTests.swift in Sources */,
 				EF6423D029FD5D81009F60FF /* Doubles.swift in Sources */,
 				EF9F3AE129F0D8C1005CC0A0 /* ChapterTests.swift in Sources */,
 				EF9F3ADF29F0D7AB005CC0A0 /* TestCoreDataStack.swift in Sources */,

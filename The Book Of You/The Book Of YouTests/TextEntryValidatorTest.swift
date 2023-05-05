@@ -62,5 +62,12 @@ final class TextEntryValidatorTest: BackgroundContextTestCase {
         textEntry.text = " some text  ".trimmed
 
         XCTAssertNoThrow(validator.validate(textEntry))
+
+        switch validator.validate(textEntry) {
+        case .success:
+            break
+        case .failure:
+            XCTFail("Failure is unexpected")
+        }
     }
 }
