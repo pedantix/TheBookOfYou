@@ -46,4 +46,8 @@ extension IndexChapterViewModel {
             return "present"
         }
     }
+
+    var dateBlock: String {
+        return "\(startDate) - \(endDate)"
+    }
 }

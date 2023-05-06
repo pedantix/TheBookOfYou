@@ -10,6 +10,7 @@
 		EF113FE72A049C1000CBAC0F /* TextEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF113FE62A049C1000CBAC0F /* TextEditorView.swift */; };
 		EF113FE92A049C2300CBAC0F /* TextEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF113FE82A049C2300CBAC0F /* TextEditorViewModel.swift */; };
 		EF113FEB2A049CF700CBAC0F /* TextEditorViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF113FEA2A049CF700CBAC0F /* TextEditorViewModelTests.swift */; };
+		EF113FED2A05A4A500CBAC0F /* ChapterSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF113FEC2A05A4A500CBAC0F /* ChapterSectionView.swift */; };
 		EF1AA27329F2B7270056293F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27229F2B7270056293F /* ErrorView.swift */; };
 		EF1AA27629F2B9640056293F /* ChapterCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27529F2B9640056293F /* ChapterCreatorView.swift */; };
 		EF1AA27829F5D4FD0056293F /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AA27729F5D4FD0056293F /* Goal.swift */; };
@@ -94,6 +95,7 @@
 		EF113FE62A049C1000CBAC0F /* TextEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorView.swift; sourceTree = "<group>"; };
 		EF113FE82A049C2300CBAC0F /* TextEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorViewModel.swift; sourceTree = "<group>"; };
 		EF113FEA2A049CF700CBAC0F /* TextEditorViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditorViewModelTests.swift; sourceTree = "<group>"; };
+		EF113FEC2A05A4A500CBAC0F /* ChapterSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterSectionView.swift; sourceTree = "<group>"; };
 		EF1AA26F29F2B4860056293F /* The Book Of You.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "The Book Of You.xctestplan"; sourceTree = "<group>"; };
 		EF1AA27129F2B6B00056293F /* The-Book-Of-You-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "The-Book-Of-You-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EF1AA27229F2B7270056293F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -219,8 +221,10 @@
 		EF1AA27429F2B8360056293F /* IndexView */ = {
 			isa = PBXGroup;
 			children = (
+				EF91E17D2A02F22700B071A3 /* PageCreatorService.swift */,
 				EFA6485529E24B7B00A0B451 /* IndexView.swift */,
 				EF9F3AE229F16082005CC0A0 /* IndexChapterViewModel.swift */,
+				EF113FEC2A05A4A500CBAC0F /* ChapterSectionView.swift */,
 			);
 			path = IndexView;
 			sourceTree = "<group>";
@@ -242,7 +246,6 @@
 				EF113FE52A049BE500CBAC0F /* TextEditor */,
 				EF49B50429FEDDE600F7B62C /* PageEditorView.swift */,
 				EF49B50729FEDE1800F7B62C /* PageEditorViewModel.swift */,
-				EF91E17D2A02F22700B071A3 /* PageCreatorService.swift */,
 			);
 			path = PageEditor;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				EFA6485629E24B7B00A0B451 /* IndexView.swift in Sources */,
 				EFA6484A29E1F2EA00A0B451 /* AboutDataService.swift in Sources */,
 				EF113FE72A049C1000CBAC0F /* TextEditorView.swift in Sources */,
+				EF113FED2A05A4A500CBAC0F /* ChapterSectionView.swift in Sources */,
 				EF4AFAE729F0612F00396FD3 /* Chapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

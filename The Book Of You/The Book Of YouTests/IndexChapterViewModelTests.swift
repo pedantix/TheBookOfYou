@@ -56,4 +56,20 @@ final class IndexChapterViewModelTests: BackgroundContextTestCase {
         chapter.dateEnded = endDate
         XCTAssertEqual(cvm.chapterHeading, "dog - Jan 2, 2001 - Jan 3, 2001")
     }
+
+    func testDateBlockFromToPresent() {
+        let date = Date(timeIntervalSinceReferenceDate: 118800)
+        chapter.title = "dog"
+        chapter.dateStarted = date
+        XCTAssertEqual(cvm.dateBlock, "Jan 2, 2001 - present")
+    }
+
+    func testDateBlockFromToEndDate() {
+        let date = Date(timeIntervalSinceReferenceDate: 118800)
+        let endDate = Calendar.current.date(byAdding: .day, value: 1, to: date)
+        chapter.title = "dog"
+        chapter.dateStarted = date
+        chapter.dateEnded = endDate
+        XCTAssertEqual(cvm.dateBlock, "Jan 2, 2001 - Jan 3, 2001")
+    }
 }
