@@ -11,7 +11,7 @@ import XCTest
 final class PageValidatorTestCase: BackgroundContextTestCase {
     private var page: Page!
     private var validator: PageValidator!
-    private var pageEntriesValidator: MockPageEntriesValidator!
+    private var pageEntriesValidator: FakePageEntriesValidator!
 
     override func setUp() async throws {
         try await super.setUp()

@@ -130,3 +130,43 @@ extension ChapterTests {
         XCTAssertEqual(1, chapter.pageCount)
     }
 }
+
+// MARK: - Page Related Filters
+extension ChapterTests {
+    func testDraftPageForChapterWithoutADraft() {
+        let chapter = context.addChapter()
+        context.addPage(to: chapter, isDraft: false)
+        XCTAssertNil(chapter.draftPage)
+    }
+
+    func testDraftPageForChapterWithADraft() {
+        let chapter = context.addChapter()
+        context.addPage(to: chapter, isDraft: false)
+        let page = context.addPage(to: chapter, isDraft: true)
+        XCTAssertEqual(chapter.draftPage, page)
+    }
+
+    func testEmptyPublishedPages() {
+        let chapter = context.addChapter()
+        context.addPage(to: chapter, isDraft: true)
+        XCTAssertEqual(chapter.publishedPages, [])
+    }
+
+    func testPublishedPagesForChapterWithoutADraft() {
+        let chapter = context.addChapter()
+        let pageFiveDaysAgo = context.addPage(to: chapter, daysAgo: 5)
+        let pagefourDaysAgo = context.addPage(to: chapter, daysAgo: 4)
+        let pageOneDayAgo = context.addPage(to: chapter, daysAgo: 1)
+        let todayPage = context.addPage(to: chapter, daysAgo: 0)
+        XCTAssertEqual(chapter.publishedPages, [todayPage, pageOneDayAgo, pagefourDaysAgo, pageFiveDaysAgo])
+    }
+
+    func testPublishedPagesForChapterWithADraft() {
+        let chapter = context.addChapter()
+        let pageFiveDaysAgo = context.addPage(to: chapter, daysAgo: 5)
+        let pagefourDaysAgo = context.addPage(to: chapter, daysAgo: 4)
+        let pageOneDayAgo = context.addPage(to: chapter, daysAgo: 1)
+        let todayPage = context.addPage(to: chapter, isDraft: true, daysAgo: 0)
+        XCTAssertEqual(chapter.publishedPages, [pageOneDayAgo, pagefourDaysAgo, pageFiveDaysAgo])
+    }
+}

@@ -11,7 +11,7 @@ import XCTest
 final class PageEditorViewModelTests: BackgroundContextTestCase {
     private var vacationPage: Page!
     private var pageWithTwoEntries: Page!
-    private var validatorGraph: FakeValidatorGraph!
+    private var validatorGraph: StubValidatorGraph!
 
     override func setUp() async throws {
         try await super.setUp()

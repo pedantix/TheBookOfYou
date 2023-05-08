@@ -23,16 +23,16 @@ import Foundation
 //
 // https://swiftpackageindex.com/MakeAWishFoundation/SwiftyMocky
 
-struct FakeAlertMessenger: AlertMessenger {
+struct DummyAlertMessenger: AlertMessenger {
     func displayNewAlert(_ data: AppAlert) {
         /* noop */
     }
 }
 
-class FakeValidatorGraph: ValidatorGraph {
-    lazy var fakePageValidator = MockPageValidator(pageEntriesValidator)
-    lazy var fakePageEntriesValidator = MockPageEntriesValidator(textEntryValidator)
-    var fakeTextEntryValidator = MockTextEntriesValidator()
+class StubValidatorGraph: ValidatorGraph {
+    lazy var fakePageValidator = FakePageValidator(pageEntriesValidator)
+    lazy var fakePageEntriesValidator = FakePageEntriesValidator(textEntryValidator)
+    var fakeTextEntryValidator = FakeTextEntriesValidator()
 
     var pageValidator: PageValidator {
         return fakePageValidator
@@ -45,7 +45,7 @@ class FakeValidatorGraph: ValidatorGraph {
     }
 }
 
-class MockPageValidator: PageValidator {
+class FakePageValidator: PageValidator {
     var mockResult: Result<Bool, PageValidationError> = .success(true)
 
     override func validate(_ page: Page) -> Result<Bool, PageValidationError> {
@@ -53,7 +53,7 @@ class MockPageValidator: PageValidator {
     }
 }
 
-class MockTextEntriesValidator: TextEntryValidator {
+class FakeTextEntriesValidator: TextEntryValidator {
     var mockResult: Result<Bool, TextValidationError> = .success(true)
 
     override func validate(_ textEntry: TextEntry) -> Result<Bool, TextValidationError> {
@@ -61,7 +61,7 @@ class MockTextEntriesValidator: TextEntryValidator {
     }
 }
 
-class MockPageEntriesValidator: PageEntriesValidator {
+class FakePageEntriesValidator: PageEntriesValidator {
     var mockResult: Result<Bool, PageEntriesValidationError> = .success(true)
 
     override func validate(_ pageEntriesSet: NSSet) -> Result<Bool, PageEntriesValidationError> {

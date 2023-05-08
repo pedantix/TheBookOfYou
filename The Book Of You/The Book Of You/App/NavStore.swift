@@ -15,6 +15,7 @@ enum Destination: Codable, Hashable {
     case index
     case chapterCreator
     case pageCreator
+    case pageEditor(objectURI: URL)
     // https://www.cocoawithlove.com/2008/08/safely-fetching-nsmanagedobject-by-uri.html
     case chapter(objectURI: URL)
     case page(objectURI: URL)

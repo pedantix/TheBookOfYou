@@ -139,14 +139,34 @@ extension NSManagedObjectContext {
     }
 
     @discardableResult
-    func addPage(goals: Int = 1) -> Page {
+    func addPage(goals: Int = 1, isDraft: Bool = true, daysAgo: Int = 0) -> Page {
         let chapter = addChapter(goals: goals)
+        return addPage(to: chapter, isDraft: isDraft, daysAgo: daysAgo)
+    }
+
+    @discardableResult
+    func addPage(to chapter: Chapter, isDraft: Bool = false, daysAgo: Int = 0) -> Page {
         let creator = PageCreatorService(viewContext: self)
         do {
-            return try creator.createPage(for: chapter)
+            let page = try creator.createPage(for: chapter)
+            page.isDraft = isDraft
+            page.entryDate = .date(daysAgo: daysAgo)
+            try save()
+            return page
         } catch let err as NSError {
             fatalError("Unresolved error \(err), \(err.userInfo)")
         }
+    }
+
+    @discardableResult
+    func addPages(to chapter: Chapter, count: Int = 5, includeDraft: Bool = false) -> [Page] {
+        var pages = [Page]()
+        for idx in 0..<count {
+            let isDraft = includeDraft && idx == 0
+            pages.append(addPage(to: chapter, isDraft: isDraft, daysAgo: idx))
+        }
+
+        return pages
     }
 
     private func saveContext() {

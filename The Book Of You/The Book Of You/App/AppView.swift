@@ -48,6 +48,8 @@ struct AppView: View {
                         ChapterCreatorView()
                     case .pageCreator:
                         Text("Todo create a page creator")
+                    case let.pageEditor(objectURI: uri):
+                        Text("TODO: page editor hookup \(uri)")
                     case let.chapter(objectURI: uri):
                         Text("TODO: display \(uri) for CHAPTER")
                     case let.page(objectURI: uri):

@@ -11,6 +11,7 @@ import SwiftUI
 // - Display Pages In Order, draft at top
 // - Display create IF chapter is not ended and there is not a draft
 // - Link to page view
+// - Show a work icon/vacation icon for vacay days
 
 struct ChapterSectionView: View {
     let chapter: Chapter
@@ -25,13 +26,24 @@ struct ChapterSectionView: View {
     var body: some View {
         lazy var cvm = IndexChapterViewModel(chapter: chapter)
         Section(header: chapterChapterSectionHeader) {
-            NavigationLink(value: Destination.chapterCreator) {
-                Text("Make a new chapter - Change Your Goals")
+            if let draftPage = chapter.draftPage {
+                NavigationLink(value: Destination.pageEditor(objectURI: draftPage.objectID.uriRepresentation())) {
+                    Text("Edit draft entry - TODO: make this work functionally")
+                }
+            } else {
+                NavigationLink(value: Destination.pageCreator) {
+                    Text("Create draft entry - TODO: make this work functionally")
+                }
             }
-            NavigationLink(value: Destination.pageCreator) {
-                Text("Add or edit today's entry - TODO: work this out logicall")
+            ForEach(Array(chapter.publishedPages.enumerated()), id: \.element) { offset, page in
+                NavigationLink(value: Destination.page(objectURI: page.objectID.uriRepresentation())) {
+                    HStack {
+                        Text("TODO: make this nicey nicey \(page.entryDate?.description ?? "no date")")
+                        Spacer()
+                        Text("\(offset)")
+                    }
+                }
             }
-            Text("TODO: List page entries, no more then 3 if 5+ exist, with a collapse uncollapse button")
         }.listRowSeparator(.hidden)
     }
 
@@ -60,11 +72,16 @@ struct ChapterSectionView: View {
 struct ChapterSectionView_Previews: PreviewProvider {
     static let controller = PersistenceController.controllerForUIPreview()
 
-    static var previews: some View {
+    static let chapters: [Chapter] = {
         let chapFromPast = controller.viewContext.addChapters().first!
         let chapFromPresent = controller.viewContext.addChapters().last!
+        controller.viewContext.addPages(to: chapFromPast, includeDraft: true)
+        return [chapFromPast, chapFromPresent]
+    }()
+
+    static var previews: some View {
         Group {
-            ForEach([chapFromPast, chapFromPresent]) { chap in
+            ForEach(chapters) { chap in
                 List {
                     ChapterSectionView(chapter: chap)
                 }

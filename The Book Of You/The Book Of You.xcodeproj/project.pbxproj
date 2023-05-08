@@ -201,6 +201,46 @@
 			path = TextEditor;
 			sourceTree = "<group>";
 		};
+		EF113FEE2A067CB600CBAC0F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EF113FEA2A049CF700CBAC0F /* TextEditorViewModelTests.swift */,
+				EF49B50D29FFFC6400F7B62C /* PageEditorViewModelTests.swift */,
+				EF1AA28129F6A8360056293F /* GoalViewModelTests.swift */,
+				EF9F3AE429F16218005CC0A0 /* IndexChapterViewModelTests.swift */,
+				EF1AA28329F6AEAC0056293F /* ChapterCreatorViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EF113FEF2A067CD500CBAC0F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF4AFAE629F0612F00396FD3 /* Chapter.swift */,
+				EF1AA27729F5D4FD0056293F /* Goal.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EF113FF02A06816200CBAC0F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EF1AA27929F5D6B80056293F /* GoalFetchRequestTests.swift */,
+				EF9F3AE029F0D8C1005CC0A0 /* ChapterTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EF113FF12A0681D400CBAC0F /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				EF91E1792A002ACE00B071A3 /* PageValidatorTestCase.swift */,
+				EF49B5112A00135500F7B62C /* TextEntryValidatorTest.swift */,
+				EF91E1722A0017D900B071A3 /* PageEntriesValidatorTests.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
 		EF1AA27029F2B4EB0056293F /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,8 +295,7 @@
 			children = (
 				EFA647D429D4A78100A0B451 /* The_Book_Of_You.xcdatamodeld */,
 				EFA647D229D4A78100A0B451 /* Persistence.swift */,
-				EF4AFAE629F0612F00396FD3 /* Chapter.swift */,
-				EF1AA27729F5D4FD0056293F /* Goal.swift */,
+				EF113FEF2A067CD500CBAC0F /* Models */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -358,20 +397,13 @@
 		EFA647DF29D4A78100A0B451 /* The Book Of YouTests */ = {
 			isa = PBXGroup;
 			children = (
-				EF1AA28329F6AEAC0056293F /* ChapterCreatorViewModelTests.swift */,
-				EF9F3AE029F0D8C1005CC0A0 /* ChapterTests.swift */,
-				EF6423CF29FD5D81009F60FF /* Doubles.swift */,
-				EF1AA27929F5D6B80056293F /* GoalFetchRequestTests.swift */,
-				EF1AA28129F6A8360056293F /* GoalViewModelTests.swift */,
-				EF9F3AE429F16218005CC0A0 /* IndexChapterViewModelTests.swift */,
-				EF91E17B2A02F20C00B071A3 /* PageCreatorServiceTests.swift */,
-				EF49B50D29FFFC6400F7B62C /* PageEditorViewModelTests.swift */,
-				EF91E1722A0017D900B071A3 /* PageEntriesValidatorTests.swift */,
-				EF91E1792A002ACE00B071A3 /* PageValidatorTestCase.swift */,
+				EF113FF02A06816200CBAC0F /* Models */,
+				EF113FEE2A067CB600CBAC0F /* ViewModels */,
+				EF113FF12A0681D400CBAC0F /* Validators */,
 				EF6423C929FC6DE6009F60FF /* RangeReplaceableCollectionTest.swift */,
+				EF91E17B2A02F20C00B071A3 /* PageCreatorServiceTests.swift */,
+				EF6423CF29FD5D81009F60FF /* Doubles.swift */,
 				EF9F3ADE29F0D7AB005CC0A0 /* TestCoreDataStack.swift */,
-				EF49B5112A00135500F7B62C /* TextEntryValidatorTest.swift */,
-				EF113FEA2A049CF700CBAC0F /* TextEditorViewModelTests.swift */,
 			);
 			path = "The Book Of YouTests";
 			sourceTree = "<group>";
@@ -781,7 +813,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Book-Of-You-Info.plist";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -814,7 +846,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "The-Book-Of-You-Info.plist";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
