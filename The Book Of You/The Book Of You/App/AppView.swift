@@ -31,6 +31,7 @@ struct AppView: View {
         }
     }
 
+    // TODO: Implement all app views
     private var appView: some View {
         NavigationStack(path: $navStore.path) {
             CoverView()
@@ -46,12 +47,8 @@ struct AppView: View {
                         IndexView()
                     case .chapterCreator:
                         ChapterCreatorView()
-                    case .pageCreator:
-                        Text("Todo create a page creator")
-                    case let.pageEditor(objectURI: uri):
-                        Text("TODO: page editor hookup \(uri)")
-                    case let.chapter(objectURI: uri):
-                        Text("TODO: display \(uri) for CHAPTER")
+                    case let.pageCreator(chapterURI: uri):
+                        Text("TODO: Create page for chapter of URI\(uri)")
                     case let.page(objectURI: uri):
                         Text("TODO: display \(uri) for PAGE")
                     }

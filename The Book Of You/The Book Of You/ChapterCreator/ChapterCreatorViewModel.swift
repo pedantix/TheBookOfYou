@@ -16,7 +16,9 @@ class ChapterCreatorViewModel: ObservableObject {
         moc.rollback()
     }
 
-    init(_ context: NSManagedObjectContext = PersistenceController.shared.viewContext) {
+    init(
+        _ context: NSManagedObjectContext = PersistenceController.shared.viewContext
+    ) {
         moc = context
         guard let previousChapter = try? moc.fetch(Chapter.currentChapter()).first else { return }
         self.previousChapter = previousChapter

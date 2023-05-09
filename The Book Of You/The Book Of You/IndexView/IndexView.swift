@@ -23,39 +23,23 @@ struct IndexView: View {
         bodyContent
         .listStyle(.plain)
         .navigationTitle("Index")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink("New", value: Destination.chapterCreator)
+            }
+        }
     }
 
     @ViewBuilder
     private var bodyContent: some View {
-        switch chapters.count {
-        case .zero:
-            newBookView
-        case 1:
+        if chapters.count > 0 {
             List {
-                currentChapterSection
+                ForEach(chapters) { chapter in
+                    ChapterSectionView(chapter: chapter)
+                }
             }
-        case 1...Int.max:
-            multiChapterBody
-        default:
-            Text("Sad Panda negative chapters somehow")
-        }
-    }
-
-    private var multiChapterBody: some View {
-        List {
-            currentChapterSection
-            ForEach(pastChapters) { chapter in
-                ChapterSection(chapter: chapter)
-            }
-        }
-    }
-
-    @ViewBuilder
-    private var currentChapterSection: some View {
-        if let firstChapter = currentChapter.first {
-            ChapterSection(chapter: firstChapter)
         } else {
-            ErrorView(reasons: ["First chapter not found via core data!!!"])
+            newBookView
         }
     }
 
@@ -65,23 +49,6 @@ struct IndexView: View {
             Text("Decide who you want to be tommorow, be bold!").font(.subheadline)
             NavigationLink("Create Your First Chapter", value: Destination.chapterCreator)
         }
-    }
-}
-
-private struct ChapterSection: View {
-    let chapter: Chapter
-
-    var body: some View {
-        lazy var cvm = IndexChapterViewModel(chapter: chapter)
-        Section(header: Text(cvm.chapterHeading)) {
-            NavigationLink(value: Destination.chapterCreator) {
-                Text("Make a new chapter - Change Your Goals")
-            }
-            NavigationLink(value: Destination.pageCreator) {
-                Text("Add or edit today's entry - TODO: work this out logicall")
-            }
-            Text("TODO: List page entries, no more then 3 if 5+ exist, with a collapse uncollapse button")
-        }.listRowSeparator(.hidden)
     }
 }
 

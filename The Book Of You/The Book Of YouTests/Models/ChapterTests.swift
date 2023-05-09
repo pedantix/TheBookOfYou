@@ -166,7 +166,7 @@ extension ChapterTests {
         let pageFiveDaysAgo = context.addPage(to: chapter, daysAgo: 5)
         let pagefourDaysAgo = context.addPage(to: chapter, daysAgo: 4)
         let pageOneDayAgo = context.addPage(to: chapter, daysAgo: 1)
-        let todayPage = context.addPage(to: chapter, isDraft: true, daysAgo: 0)
+        context.addPage(to: chapter, isDraft: true, daysAgo: 0)
         XCTAssertEqual(chapter.publishedPages, [pageOneDayAgo, pagefourDaysAgo, pageFiveDaysAgo])
     }
 }

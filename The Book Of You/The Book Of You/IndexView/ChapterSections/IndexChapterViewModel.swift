@@ -50,4 +50,8 @@ extension IndexChapterViewModel {
     var dateBlock: String {
         return "\(startDate) - \(endDate)"
     }
+
+    var chapterIsEnded: Bool {
+        return chapter.dateEnded != nil
+    }
 }

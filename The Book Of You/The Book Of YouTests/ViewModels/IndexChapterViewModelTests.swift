@@ -72,4 +72,10 @@ final class IndexChapterViewModelTests: BackgroundContextTestCase {
         chapter.dateEnded = endDate
         XCTAssertEqual(cvm.dateBlock, "Jan 2, 2001 - Jan 3, 2001")
     }
+
+    func testChapterIsEnded() {
+        XCTAssertFalse(cvm.chapterIsEnded)
+        chapter.dateEnded = .now
+        XCTAssertTrue(cvm.chapterIsEnded)
+    }
 }

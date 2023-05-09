@@ -7,40 +7,49 @@
 
 import SwiftUI
 
-// TODO: Finsih the following tasks to complete the chapter section
-// - Display Pages In Order, draft at top
-// - Display create IF chapter is not ended and there is not a draft
-// - Link to page view
-// - Show a work icon/vacation icon for vacay days
+struct Dummy {
+    let asdf: Int
+}
 
 struct ChapterSectionView: View {
-    let chapter: Chapter
+    @ObservedObject private(set) var chapter: Chapter
     @State private var viewModel: IndexChapterViewModel
     @State private var isEditingChapter = false
+    @Environment(\.managedObjectContext) private var viewContext
 
     init(chapter: Chapter) {
         self.chapter = chapter
-        self.viewModel = IndexChapterViewModel(chapter: chapter)
+        self.viewModel = IndexChapterViewModel(
+            chapter: chapter
+        )
     }
 
     var body: some View {
-        lazy var cvm = IndexChapterViewModel(chapter: chapter)
         Section(header: chapterChapterSectionHeader) {
             if let draftPage = chapter.draftPage {
-                NavigationLink(value: Destination.pageEditor(objectURI: draftPage.objectID.uriRepresentation())) {
-                    Text("Edit draft entry - TODO: make this work functionally")
+                let pageViewModel = PageRowViewModel(page: draftPage)
+                NavigationLink(value: Destination.page(objectURI: pageViewModel.pageUrl)) {
+                    Text("Edit draft from \(pageViewModel.entryDate)")
                 }
-            } else {
-                NavigationLink(value: Destination.pageCreator) {
-                    Text("Create draft entry - TODO: make this work functionally")
+            } else if !viewModel.chapterIsEnded {
+                NavigationLink(value: Destination.pageCreator(chapterURI: chapter.objectID.uriRepresentation())) {
+                    Text("Create a New Page!")
                 }
             }
             ForEach(Array(chapter.publishedPages.enumerated()), id: \.element) { offset, page in
-                NavigationLink(value: Destination.page(objectURI: page.objectID.uriRepresentation())) {
+                let pageVM = PageRowViewModel(page: page)
+                NavigationLink(value: Destination.page(objectURI: pageVM.pageUrl)) {
                     HStack {
-                        Text("TODO: make this nicey nicey \(page.entryDate?.description ?? "no date")")
+                        if pageVM.isVacation {
+                            Image(systemName: "laurel.leading")
+                        }
+                        Text(pageVM.entryDate)
+                        if pageVM.isVacation {
+                            Image(systemName: "laurel.trailing")
+                        }
                         Spacer()
-                        Text("\(offset)")
+                        Text("\(offset + 1)")
+                            .underline()
                     }
                 }
             }
@@ -63,8 +72,9 @@ struct ChapterSectionView: View {
             }
         }
         .sheet(isPresented: $isEditingChapter) {
-            // TODO: the following
-            Text("TODO: Create Chapter Editor and replace here")
+            NavigationStack {
+                ChapterEditorView(chapter, $isEditingChapter, moc: viewContext)
+            }
         }
     }
 }
@@ -76,6 +86,7 @@ struct ChapterSectionView_Previews: PreviewProvider {
         let chapFromPast = controller.viewContext.addChapters().first!
         let chapFromPresent = controller.viewContext.addChapters().last!
         controller.viewContext.addPages(to: chapFromPast, includeDraft: true)
+        controller.viewContext.addPage(to: chapFromPast, daysAgo: 7, isVacation: true)
         return [chapFromPast, chapFromPresent]
     }()
 
@@ -88,5 +99,7 @@ struct ChapterSectionView_Previews: PreviewProvider {
                 .listStyle(.plain)
             }
         }
+        .environmentObject(AppAlertMessenger())
+        .environment(\.managedObjectContext, controller.viewContext)
     }
 }

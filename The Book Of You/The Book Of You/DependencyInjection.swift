@@ -5,7 +5,7 @@
 //  Created by Shaun Hubbard on 5/3/23.
 //
 
-import Foundation
+import SwiftUI
 
 protocol DependencyGraph: ObservableObject {
     var validatorGraph: ValidatorGraph { get }
@@ -20,11 +20,10 @@ protocol ValidatorGraph {
     var pageValidator: PageValidator { get }
     var pageEntriesValidator: PageEntriesValidator { get }
     var textEntryValidator: TextEntryValidator { get }
+    var chapterValidator: ChapterValidator { get }
 }
 
-extension The_Book_Of_YouApp {
-    static let prodGraph: any DependencyGraph = ProdDependencyGraph()
-}
+// MARK: - Prod graph
 
 private class ProdDependencyGraph: DependencyGraph {
     var validatorGraph: ValidatorGraph = ProdValidatorGraph()
@@ -39,6 +38,24 @@ private class ProdModelServiceGraph: ModelServiceGraph {
 
 private class ProdValidatorGraph: ValidatorGraph {
     var textEntryValidator: TextEntryValidator = TextEntryValidator()
+    var chapterValidator: ChapterValidator = ChapterValidator()
     lazy var pageEntriesValidator: PageEntriesValidator = PageEntriesValidator(textEntryValidator)
     lazy var pageValidator: PageValidator = PageValidator(pageEntriesValidator)
+}
+
+// MARK: - Singleton
+extension The_Book_Of_YouApp {
+    static let prodGraph: any DependencyGraph = ProdDependencyGraph()
+}
+
+// MARK: - Add to SwiftUI Environment
+private struct DependencyInjectionKey: EnvironmentKey {
+    static let defaultValue: any DependencyGraph = The_Book_Of_YouApp.prodGraph
+}
+
+extension EnvironmentValues {
+    var dependencyGraph: any DependencyGraph {
+        get { self[DependencyInjectionKey.self] }
+        set { self[DependencyInjectionKey.self] = newValue}
+    }
 }

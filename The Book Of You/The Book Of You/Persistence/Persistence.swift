@@ -128,8 +128,8 @@ extension NSManagedObjectContext {
     }
 
     @discardableResult
-    func addVacationPage() -> Page {
-        let vacationChapter = addVacationChapter()
+    func addVacationPage(chapter: Chapter? = nil) -> Page {
+        let vacationChapter = chapter ?? addVacationChapter()
         let creator = PageCreatorService(viewContext: self)
         do {
             return try creator.createPage(for: vacationChapter)
@@ -139,17 +139,18 @@ extension NSManagedObjectContext {
     }
 
     @discardableResult
-    func addPage(goals: Int = 1, isDraft: Bool = true, daysAgo: Int = 0) -> Page {
+    func addPage(goals: Int = 1, isDraft: Bool = true, daysAgo: Int = 0, isVacation: Bool = false) -> Page {
         let chapter = addChapter(goals: goals)
-        return addPage(to: chapter, isDraft: isDraft, daysAgo: daysAgo)
+        return addPage(to: chapter, isDraft: isDraft, daysAgo: daysAgo, isVacation: isVacation)
     }
 
     @discardableResult
-    func addPage(to chapter: Chapter, isDraft: Bool = false, daysAgo: Int = 0) -> Page {
+    func addPage(to chapter: Chapter, isDraft: Bool = false, daysAgo: Int = 0, isVacation: Bool = false) -> Page {
         let creator = PageCreatorService(viewContext: self)
         do {
             let page = try creator.createPage(for: chapter)
             page.isDraft = isDraft
+            page.vacationDay = isVacation
             page.entryDate = .date(daysAgo: daysAgo)
             try save()
             return page

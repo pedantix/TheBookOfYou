@@ -30,6 +30,8 @@ struct DummyAlertMessenger: AlertMessenger {
 }
 
 class StubValidatorGraph: ValidatorGraph {
+   var chapterValidator: ChapterValidator = ChapterValidator()
+
     lazy var fakePageValidator = FakePageValidator(pageEntriesValidator)
     lazy var fakePageEntriesValidator = FakePageEntriesValidator(textEntryValidator)
     var fakeTextEntryValidator = FakeTextEntriesValidator()
@@ -42,6 +44,25 @@ class StubValidatorGraph: ValidatorGraph {
     }
     var textEntryValidator: TextEntryValidator {
         return fakeTextEntryValidator
+    }
+}
+
+class StubModelServices: ModelServiceGraph {
+    var pageCreatorService: PageCreatorService = FakePageCreatorService(
+        viewContext: PersistenceController(inMemory: true).viewContext
+    )
+}
+
+class FakePageCreatorService: PageCreatorService {
+    var pageResult: Result<Page, Error> = .failure(NSError(domain: "No error", code: 101))
+
+    override func createPage(for chapter: Chapter) throws -> Page {
+        switch pageResult {
+        case .success(let page):
+            return page
+        case .failure(let err):
+            throw err
+        }
     }
 }
 

@@ -38,4 +38,10 @@ extension AppAlert {
         " Or change your goal count in the Intro section.",
         sfSymbolText: "square.3.layers.3d.down.right.slash"
     )
+
+    static let blankChapterTitleAlert: AppAlert = AppAlert(
+        title: "Blank Chapter Title",
+        message: "The title of a chapter cannot be blank. Please describe the idea of this chapter of your life.",
+        sfSymbolText: "eraser.line.dashed"
+    )
 }
