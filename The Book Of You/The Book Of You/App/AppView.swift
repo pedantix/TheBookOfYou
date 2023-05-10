@@ -48,8 +48,8 @@ struct AppView: View {
                     case .chapterCreator:
                         ChapterCreatorView()
                     case let.pageCreator(chapterURI: uri):
-                        Text("TODO: Create page for chapter of URI\(uri)")
-                    case let.page(objectURI: uri):
+                        CreatePageView(chapterURL: uri)
+                    case let.page(pageURI: uri):
                         Text("TODO: display \(uri) for PAGE")
                     }
                 }

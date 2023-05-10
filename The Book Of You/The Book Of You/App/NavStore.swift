@@ -16,7 +16,7 @@ enum Destination: Codable, Hashable {
     case chapterCreator
     case pageCreator(chapterURI: URL)
     // https://www.cocoawithlove.com/2008/08/safely-fetching-nsmanagedobject-by-uri.html
-    case page(objectURI: URL)
+    case page(pageURI: URL)
 }
 
 protocol AppNavigator: AnyObject {
@@ -53,5 +53,10 @@ extension NavStore: AppNavigator {
 
     func popBack() {
         path.removeLast()
+    }
+
+    func popAndNavigate(to destintation: Destination) {
+        path.removeLast()
+        path.append(destintation)
     }
 }

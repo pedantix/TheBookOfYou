@@ -59,6 +59,10 @@ extension PersistenceController {
     var viewContext: NSManagedObjectContext {
         return self.container.viewContext
     }
+
+    var persistentStoreCoordinator: NSPersistentStoreCoordinator {
+        return self.container.persistentStoreCoordinator
+    }
 }
 #if DEBUG
 extension NSManagedObjectContext {

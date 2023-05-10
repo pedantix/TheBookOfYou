@@ -51,6 +51,27 @@ class StubModelServices: ModelServiceGraph {
     var pageCreatorService: PageCreatorService = FakePageCreatorService(
         viewContext: PersistenceController(inMemory: true).viewContext
     )
+
+    var modelRepo: ModelRepo = StubModelRepo()
+}
+
+enum StubError: Error {
+case methodNotStubbed
+}
+
+class StubModelRepo: ModelRepo {
+    var mockPage: Page?
+    var mockChapter: Chapter?
+
+    func fetchPage(by url: URL) throws -> Page {
+        guard let page = mockPage else { throw StubError.methodNotStubbed }
+        return page
+    }
+
+    func fetchChapter(by url: URL) throws -> Chapter {
+        guard let chap = mockChapter else { throw StubError.methodNotStubbed }
+        return chap
+    }
 }
 
 class FakePageCreatorService: PageCreatorService {

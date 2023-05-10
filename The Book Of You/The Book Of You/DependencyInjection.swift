@@ -6,16 +6,40 @@
 //
 
 import SwiftUI
+import CoreData
 
 protocol DependencyGraph: ObservableObject {
     var validatorGraph: ValidatorGraph { get }
-    var modelServiceGraph: ModelServiceGraph { get }
+    var modelServiceGraph: ViewModelServiceGraph { get }
 }
 
+// MARK: - Model Graph
+@MainActor
+protocol ViewModelServiceGraph: ModelServiceGraph { }
+
+// NOTE this should be used in an actor bound way for background model interaction usage
 protocol ModelServiceGraph {
     var pageCreatorService: PageCreatorService { get }
+    var modelRepo: ModelRepo { get }
 }
 
+private class ProdModelServiceGraph: ViewModelServiceGraph {
+    let context: NSManagedObjectContext
+    private let coordinator: NSPersistentStoreCoordinator
+
+    init(_ context: NSManagedObjectContext, _ coordinator: NSPersistentStoreCoordinator) {
+        self.context = context
+        self.coordinator = coordinator
+    }
+
+    lazy var pageCreatorService: PageCreatorService = PageCreatorService(
+        viewContext: context
+    )
+
+    lazy var modelRepo: ModelRepo = ModelRepository(context, coordinator)
+}
+
+// MARK: - Validator Graph
 protocol ValidatorGraph {
     var pageValidator: PageValidator { get }
     var pageEntriesValidator: PageEntriesValidator { get }
@@ -27,13 +51,10 @@ protocol ValidatorGraph {
 
 private class ProdDependencyGraph: DependencyGraph {
     var validatorGraph: ValidatorGraph = ProdValidatorGraph()
-    var modelServiceGraph: ModelServiceGraph = ProdModelServiceGraph()
-}
-
-private class ProdModelServiceGraph: ModelServiceGraph {
-    var pageCreatorService: PageCreatorService = PageCreatorService(
-        viewContext: PersistenceController.shared.viewContext
-    )
+    @MainActor var modelServiceGraph: ViewModelServiceGraph = {
+            let persistentStore = PersistenceController.shared
+            return  ProdModelServiceGraph(persistentStore.viewContext, persistentStore.persistentStoreCoordinator)
+    }()
 }
 
 private class ProdValidatorGraph: ValidatorGraph {

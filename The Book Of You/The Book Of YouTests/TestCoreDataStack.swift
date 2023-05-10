@@ -12,11 +12,13 @@ import XCTest
 // The following is a convience class for removing boilerplate
 class BackgroundContextTestCase: XCTestCase {
     private(set) var context: NSManagedObjectContext!
+    private(set) var persistentStoreCoordinator: NSPersistentStoreCoordinator!
     private(set) var testStack: TestCoreDataStack!
     override func setUp() async throws {
         try await super.setUp()
         testStack = TestCoreDataStack()
         context = testStack.persistenContainer.newBackgroundContext()
+        persistentStoreCoordinator = testStack.persistenContainer.persistentStoreCoordinator
     }
 }
 

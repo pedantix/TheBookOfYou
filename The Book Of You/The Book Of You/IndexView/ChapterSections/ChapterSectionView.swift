@@ -28,7 +28,7 @@ struct ChapterSectionView: View {
         Section(header: chapterChapterSectionHeader) {
             if let draftPage = chapter.draftPage {
                 let pageViewModel = PageRowViewModel(page: draftPage)
-                NavigationLink(value: Destination.page(objectURI: pageViewModel.pageUrl)) {
+                NavigationLink(value: Destination.page(pageURI: pageViewModel.pageUrl)) {
                     Text("Edit draft from \(pageViewModel.entryDate)")
                 }
             } else if !viewModel.chapterIsEnded {
@@ -38,7 +38,7 @@ struct ChapterSectionView: View {
             }
             ForEach(Array(chapter.publishedPages.enumerated()), id: \.element) { offset, page in
                 let pageVM = PageRowViewModel(page: page)
-                NavigationLink(value: Destination.page(objectURI: pageVM.pageUrl)) {
+                NavigationLink(value: Destination.page(pageURI: pageVM.pageUrl)) {
                     HStack {
                         if pageVM.isVacation {
                             Image(systemName: "laurel.leading")
