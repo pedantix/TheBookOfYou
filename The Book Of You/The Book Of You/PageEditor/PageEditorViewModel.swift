@@ -8,7 +8,16 @@
 import CoreData
 
 class PageEditorViewModel: ObservableObject {
-    enum Entry: Equatable {
+    enum Entry: Equatable, Identifiable {
+        var id: URL {
+            switch self {
+            case .freeText(let page, _):
+                return page.objectID.uriRepresentation()
+            case .text(let goal, _, _):
+                return goal.objectID.uriRepresentation()
+            }
+        }
+
         case text(Goal, TextEntry, [PageEntryValidationError])
         case freeText(Page, [PageValidationFieldError])
     }

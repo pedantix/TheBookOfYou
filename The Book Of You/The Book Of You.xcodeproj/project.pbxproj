@@ -62,6 +62,8 @@
 		EF9F3AE329F16082005CC0A0 /* IndexChapterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9F3AE229F16082005CC0A0 /* IndexChapterViewModel.swift */; };
 		EF9F3AE529F16218005CC0A0 /* IndexChapterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9F3AE429F16218005CC0A0 /* IndexChapterViewModelTests.swift */; };
 		EFA0DB0B2A0C09A8002D0173 /* NavStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB0A2A0C09A8002D0173 /* NavStoreTests.swift */; };
+		EFA0DB0D2A0C4F19002D0173 /* DateEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB0C2A0C4F19002D0173 /* DateEntryView.swift */; };
+		EFA0DB0F2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB0E2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift */; };
 		EFA647CA29D4A78000A0B451 /* The_Book_Of_YouApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */; };
 		EFA647CE29D4A78100A0B451 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA647CD29D4A78100A0B451 /* Assets.xcassets */; };
 		EFA647D129D4A78100A0B451 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA647D029D4A78100A0B451 /* Preview Assets.xcassets */; };
@@ -159,6 +161,8 @@
 		EF9F3AE229F16082005CC0A0 /* IndexChapterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexChapterViewModel.swift; sourceTree = "<group>"; };
 		EF9F3AE429F16218005CC0A0 /* IndexChapterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexChapterViewModelTests.swift; sourceTree = "<group>"; };
 		EFA0DB0A2A0C09A8002D0173 /* NavStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavStoreTests.swift; sourceTree = "<group>"; };
+		EFA0DB0C2A0C4F19002D0173 /* DateEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEntryView.swift; sourceTree = "<group>"; };
+		EFA0DB0E2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEntryViewViewModelTests.swift; sourceTree = "<group>"; };
 		EFA647C629D4A78000A0B451 /* The Book Of You.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Book Of You.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Book_Of_YouApp.swift; sourceTree = "<group>"; };
 		EFA647CD29D4A78100A0B451 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 				EF1AA28329F6AEAC0056293F /* ChapterCreatorViewModelTests.swift */,
 				EF113FF42A095D6700CBAC0F /* PageRowViewModelTests.swift */,
 				EF56AA962A0A7A040020537E /* ChapterEditorViewModelTests.swift */,
+				EFA0DB0E2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 				EF49B50429FEDDE600F7B62C /* PageEditorView.swift */,
 				EF49B50729FEDE1800F7B62C /* PageEditorViewModel.swift */,
 				EF56AA982A0B265B0020537E /* CreatePageView.swift */,
+				EFA0DB0C2A0C4F19002D0173 /* DateEntryView.swift */,
 			);
 			path = PageEditor;
 			sourceTree = "<group>";
@@ -646,6 +652,7 @@
 				EF6423C629FC245E009F60FF /* ActionAlertView.swift in Sources */,
 				EF49B50529FEDDE600F7B62C /* PageEditorView.swift in Sources */,
 				EF9F3AE329F16082005CC0A0 /* IndexChapterViewModel.swift in Sources */,
+				EFA0DB0D2A0C4F19002D0173 /* DateEntryView.swift in Sources */,
 				EFA6483829DF270000A0B451 /* NavStore.swift in Sources */,
 				EFA647D329D4A78100A0B451 /* Persistence.swift in Sources */,
 				EF91E17E2A02F22700B071A3 /* PageCreatorService.swift in Sources */,
@@ -705,6 +712,7 @@
 				EF6423D029FD5D81009F60FF /* Doubles.swift in Sources */,
 				EF9F3AE129F0D8C1005CC0A0 /* ChapterTests.swift in Sources */,
 				EF9F3ADF29F0D7AB005CC0A0 /* TestCoreDataStack.swift in Sources */,
+				EFA0DB0F2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift in Sources */,
 				EF91E17C2A02F20C00B071A3 /* PageCreatorServiceTests.swift in Sources */,
 				EF1AA27A29F5D6B80056293F /* GoalFetchRequestTests.swift in Sources */,
 				EF1AA28229F6A8360056293F /* GoalViewModelTests.swift in Sources */,

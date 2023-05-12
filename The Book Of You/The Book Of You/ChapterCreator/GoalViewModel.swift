@@ -15,24 +15,22 @@ class GoalViewModel: ObservableObject {
         }
     }
     @Published var editableTitle = ""
+    @Published var appAlert: AppAlert?
     var isSavable: Bool {
         return editableTitle != goal.title &&
         !editableTitle.isBlank
     }
 
     private let moc: NSManagedObjectContext
-    private let alertMessenger: AlertMessenger
 
     let goal: Goal
 
     init(
         goal: Goal,
-        alertMessenger: AlertMessenger,
         context: NSManagedObjectContext = PersistenceController.shared.viewContext
     ) {
         self.goal = goal
         self.moc = context
-        self.alertMessenger = alertMessenger
     }
 
     var title: String {
@@ -56,8 +54,7 @@ class GoalViewModel: ObservableObject {
         do {
             try moc.save()
         } catch let err as  NSError {
-            let alert = AppAlert.persistenceAlert(err)
-            alertMessenger.displayNewAlert(alert)
+            appAlert = AppAlert.persistenceAlert(err)
             viewModelLogger.contextError(err)
         }
     }
@@ -71,8 +68,7 @@ class GoalViewModel: ObservableObject {
             moc.delete(goal)
             try moc.save()
         } catch let err as  NSError {
-            let alert = AppAlert.persistenceAlert(err)
-            alertMessenger.displayNewAlert(alert)
+            appAlert = AppAlert.persistenceAlert(err)
             viewModelLogger.contextError(err)
         }
     }

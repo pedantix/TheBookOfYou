@@ -64,6 +64,23 @@ private class ProdValidatorGraph: ValidatorGraph {
     lazy var pageValidator: PageValidator = PageValidator(pageEntriesValidator)
 }
 
+// MARK: - UI TEST GRAPH
+
+#if DEBUG
+class PreviewDependencyGraph: DependencyGraph {
+    private let controller: PersistenceController
+    init(_ controller: PersistenceController) {
+        self.controller = controller
+    }
+
+    var validatorGraph: ValidatorGraph = ProdValidatorGraph()
+    @MainActor
+    lazy var modelServiceGraph: ViewModelServiceGraph = {
+        return  ProdModelServiceGraph(controller.viewContext, controller.persistentStoreCoordinator)
+    }()
+}
+#endif
+
 // MARK: - Singleton
 extension The_Book_Of_YouApp {
     static let prodGraph: any DependencyGraph = ProdDependencyGraph()

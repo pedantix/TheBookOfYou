@@ -49,7 +49,7 @@ class AppAlertMessenger: ObservableObject, AlertMessenger {
 }
 
 struct AppAlertView: View {
-    @EnvironmentObject var messenger: AppAlertMessenger
+    @EnvironmentObject private var messenger: AppAlertMessenger
     @State private var data: AppAlert?
     @State private var visiblity: CGFloat = 0
 
@@ -82,19 +82,55 @@ struct AppAlertView: View {
     }
 }
 
-struct ActionAlertView_Previews: PreviewProvider {
-    static var previews: some View {
-        let data = AppAlert(
+struct AppAlertable: ViewModifier {
+    @EnvironmentObject private var appAlerter: AppAlertMessenger
+    private let alertPublisher: Published<AppAlert?>.Publisher
+
+    init(_ publisher: Published<AppAlert?>.Publisher) {
+        alertPublisher = publisher
+    }
+
+    func body(content: Content) -> some View {
+        content
+            .onReceive(alertPublisher) { maybeAlert in
+                guard let alert = maybeAlert else { return }
+                appAlerter.displayNewAlert(alert)
+            }
+    }
+}
+
+// MARK: - Examppe usage
+private class TestViewModel: ObservableObject {
+    @Published var appAlert: AppAlert?
+
+    func showAlert() {
+        appAlert = AppAlert(
             title: "Not Added",
             message: "The list was already full, please remove an object from the list form in order to add",
             sfSymbolText: "square.3.layers.3d.down.right.slash")
-        let messenger = AppAlertMessenger()
+    }
+}
+
+private struct TestView: View {
+    @EnvironmentObject var alertMessenger: AppAlertMessenger
+    @ObservedObject private var viewModel = TestViewModel()
+
+    var body: some View {
         ZStack {
             Button("Show") {
-                messenger.displayNewAlert(data)
+                viewModel.showAlert()
             }
+            .modifier(AppAlertable(viewModel.$appAlert))
+        }
+    }
+}
+
+struct ActionAlertView_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            TestView()
             AppAlertView()
         }
-        .environmentObject(messenger)
+        .environmentObject(AppAlertMessenger())
     }
 }

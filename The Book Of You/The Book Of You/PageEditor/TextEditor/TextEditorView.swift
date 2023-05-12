@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TextEditorView: View {
+    let title: String
     @ObservedObject private var viewModel: TextEditorViewModel
-    private let title: String
 
-    init(_ title: String, _ text: String, errorText: String = "", textCommitAction: @escaping (String) -> Void) {
-        viewModel = .init(text: text, errorText: errorText, textCommitAction: textCommitAction)
+    init(_ title: String, _ viewModel: TextEditorViewModel) {
+        self.viewModel = viewModel
         self.title = title
     }
 
@@ -61,6 +61,8 @@ struct TextEditorView: View {
                 }
             }
         }
+        .modifier(AppAlertable(viewModel.$appAlert))
+        .listRowSeparator(.hidden)
     }
 }
 
@@ -73,14 +75,13 @@ struct TextEditorView_Previews: PreviewProvider {
     static var previews: some View {
         List {
             ForEach(sampleData, id: \.0) {
-                TextEditorView($0.0, $0.1, errorText: $0.2) { _ in
-                    // noop
-                }
-                .listRowSeparator(.hidden)
+                let viewModel = TextEditorViewModel(text: $0.1, errorText: $0.1)
+                TextEditorView($0.0, viewModel)
             }
 
         }
         .listStyle(.plain)
+        .environmentObject(AppAlertMessenger())
     }
 }
 #endif

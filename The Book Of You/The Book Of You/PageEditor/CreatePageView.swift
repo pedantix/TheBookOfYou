@@ -43,6 +43,7 @@ struct CreatePageView: View {
         .toolbar(.hidden, for: .navigationBar)
     }
 
+    @MainActor
     func createAPageAndNavThere() {
         do {
             let chapter = try modelRepo.fetchChapter(by: chapterURL)

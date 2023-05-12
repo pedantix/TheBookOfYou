@@ -31,7 +31,6 @@ struct AppView: View {
         }
     }
 
-    // TODO: Implement all app views
     private var appView: some View {
         NavigationStack(path: $navStore.path) {
             CoverView()
@@ -50,7 +49,7 @@ struct AppView: View {
                     case let.pageCreator(chapterURI: uri):
                         CreatePageView(chapterURL: uri)
                     case let.page(pageURI: uri):
-                        Text("TODO: display \(uri) for PAGE")
+                        PageEditorView(pageURI: uri)
                     }
                 }
         }

@@ -16,7 +16,6 @@ enum ChapterCreatorFormFocus {
 // TODO: Create vacatin mode toggle
 struct ChapterCreatorView: View {
     @EnvironmentObject private var navStore: NavStore
-    @EnvironmentObject private var messenger: AppAlertMessenger
     @StateObject private var viewModel = ChapterCreatorViewModel()
     @FocusState private var formFocus: ChapterCreatorFormFocus?
     @CloudStorage(.identityGoalsKey) private var goals: Int?
@@ -42,10 +41,7 @@ struct ChapterCreatorView: View {
             formFocus = viewModel.formFocus
         }
         .navigationTitle("Chapter creator")
-        .onReceive(viewModel.$actionAlert) { actionAlert in
-            guard let actionAlert = actionAlert else { return }
-            messenger.displayNewAlert(actionAlert)
-        }
+        .modifier(AppAlertable(viewModel.$actionAlert))
         .onReceive(viewModel.$createdChapter) { created in
             guard created else { return }
             navStore.popBack()
@@ -65,7 +61,7 @@ struct ChapterCreatorView: View {
                 Section("Chapter Goals") {
                     if viewModel.chapterGoals.count > 0 {
                         ForEach(viewModel.chapterGoals) { goal in
-                            GoalSearchRow(goal: goal, alertMessenger: messenger)
+                            GoalSearchRow(goal: goal)
                                 .onTapGesture {
                                     viewModel.remove(goal: goal)
                                 }
@@ -91,7 +87,7 @@ struct ChapterCreatorView: View {
                     viewModel.formFocus = .none
                 }.padding(.fs6)
                 FilteredFetchRequest(fetchRequest: viewModel.goalFetchRequest) { goal in
-                    GoalSearchRow(goal: goal, alertMessenger: messenger).onTapGesture {
+                    GoalSearchRow(goal: goal).onTapGesture {
                         viewModel.add(goal: goal)
                     }
                 }

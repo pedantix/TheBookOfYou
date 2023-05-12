@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 
 struct ChapterEditorView: View {
-    @EnvironmentObject var appAlertMessener: AppAlertMessenger
     @Binding private var isDisplayed: Bool
     @ObservedObject private var viewModel: ChapterEditorViewModel
     @FocusState private var isFocused: Bool
@@ -33,7 +32,7 @@ struct ChapterEditorView: View {
             .padding()
             if !viewModel.isVacation {
                 List(viewModel.goals) {
-                    GoalSearchRow(goal: $0, alertMessenger: appAlertMessener)
+                    GoalSearchRow(goal: $0)
                 }
                 .listStyle(.plain)
             } else {

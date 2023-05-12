@@ -11,15 +11,17 @@ struct GoalSearchRow: View {
     @ObservedObject private var goalViewModel: GoalViewModel
     @FocusState private var focused: Bool
 
-    init(goal: Goal, alertMessenger: AppAlertMessenger) {
-        goalViewModel = .init(goal: goal, alertMessenger: alertMessenger)
+    init(goal: Goal) {
+        goalViewModel = .init(goal: goal)
     }
 
     var body: some View {
         if goalViewModel.isEditing {
             editingBody
+                .modifier(AppAlertable(goalViewModel.$appAlert))
         } else {
             displayBody
+                .modifier(AppAlertable(goalViewModel.$appAlert))
         }
     }
 
@@ -69,10 +71,11 @@ struct GoalRow_Previews: PreviewProvider {
         let nonDeletableGoal = persistenceController.viewContext.addGoal("Another Worhty Goal", with: chapter)
         List {
             ForEach([goal, nonDeletableGoal]) {
-                GoalSearchRow(goal: $0, alertMessenger: messenger)
+                GoalSearchRow(goal: $0)
             }
         }
         .environment(\.managedObjectContext, persistenceController.viewContext)
         .listStyle(.plain)
+        .environmentObject(messenger)
     }
 }
