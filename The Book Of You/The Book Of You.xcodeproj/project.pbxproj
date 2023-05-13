@@ -64,6 +64,7 @@
 		EFA0DB0B2A0C09A8002D0173 /* NavStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB0A2A0C09A8002D0173 /* NavStoreTests.swift */; };
 		EFA0DB0D2A0C4F19002D0173 /* DateEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB0C2A0C4F19002D0173 /* DateEntryView.swift */; };
 		EFA0DB0F2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB0E2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift */; };
+		EFA0DB112A0F4325002D0173 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB102A0F4325002D0173 /* StringTests.swift */; };
 		EFA647CA29D4A78000A0B451 /* The_Book_Of_YouApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */; };
 		EFA647CE29D4A78100A0B451 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA647CD29D4A78100A0B451 /* Assets.xcassets */; };
 		EFA647D129D4A78100A0B451 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA647D029D4A78100A0B451 /* Preview Assets.xcassets */; };
@@ -163,6 +164,7 @@
 		EFA0DB0A2A0C09A8002D0173 /* NavStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavStoreTests.swift; sourceTree = "<group>"; };
 		EFA0DB0C2A0C4F19002D0173 /* DateEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEntryView.swift; sourceTree = "<group>"; };
 		EFA0DB0E2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEntryViewViewModelTests.swift; sourceTree = "<group>"; };
+		EFA0DB102A0F4325002D0173 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		EFA647C629D4A78000A0B451 /* The Book Of You.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Book Of You.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Book_Of_YouApp.swift; sourceTree = "<group>"; };
 		EFA647CD29D4A78100A0B451 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				EF6423CF29FD5D81009F60FF /* Doubles.swift */,
 				EF9F3ADE29F0D7AB005CC0A0 /* TestCoreDataStack.swift */,
 				EFA0DB0A2A0C09A8002D0173 /* NavStoreTests.swift */,
+				EFA0DB102A0F4325002D0173 /* StringTests.swift */,
 			);
 			path = "The Book Of YouTests";
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				EF56AA972A0A7A040020537E /* ChapterEditorViewModelTests.swift in Sources */,
 				EF56AA922A09DE590020537E /* ChapterValidatorTests.swift in Sources */,
 				EF113FF52A095D6700CBAC0F /* PageRowViewModelTests.swift in Sources */,
+				EFA0DB112A0F4325002D0173 /* StringTests.swift in Sources */,
 				EF113FEB2A049CF700CBAC0F /* TextEditorViewModelTests.swift in Sources */,
 				EF6423D029FD5D81009F60FF /* Doubles.swift in Sources */,
 				EF9F3AE129F0D8C1005CC0A0 /* ChapterTests.swift in Sources */,

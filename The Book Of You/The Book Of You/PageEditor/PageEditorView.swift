@@ -76,7 +76,6 @@ private struct PageEntryView: View {
         switch entry {
         case .text(let goal, let textEntry, let errors):
             let goalViewModel = GoalTextEditorViewModel(goal, textEntry, errors, moc)
-            // TODO: nice up this
             TextEditorView(goal.title ?? "NO TITLE, contact developer", goalViewModel)
         case .freeText(let page, let errors):
             let viewModel = PageFreeTextEditorViewModel(page, errors, moc)
