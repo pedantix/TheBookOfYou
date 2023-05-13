@@ -9,7 +9,6 @@ import CoreData
 import SwiftUI
 import Combine
 
-// TODO: handle the case of the chapter is a vacation chapter, dont showgoals
 class PageEditorViewModel: ObservableObject {
     enum Entry: Equatable, Identifiable {
         var id: URL {
@@ -59,7 +58,7 @@ class PageEditorViewModel: ObservableObject {
     @MainActor
     private func setupEntries() {
         viewModelLogger.info("Setting up entries")
-        guard !page.vacationDay else {
+        guard !page.vacationDay && !(page.chapter?.isVacation ?? false) else {
             viewModelLogger.info("updating entries")
             entries = [.freeText(page, [])]
             return

@@ -10,12 +10,17 @@ import XCTest
 
 final class PageEditorViewModelTests: BackgroundContextTestCase {
     private var vacationPage: Page!
+    private var vacationChapterPage: Page!
     private var pageWithTwoEntries: Page!
     private var validatorGraph: StubValidatorGraph!
 
     override func setUp() async throws {
         try await super.setUp()
-        vacationPage = context.addVacationPage()
+        let normalChapter = context.addChapter()
+        vacationPage = context.addVacationPage(chapter: normalChapter)
+        let vacayChapter = context.addVacationChapter()
+        context.addGoal("some bizare thing", with: vacayChapter)
+        vacationChapterPage = context.addPage(to: vacayChapter)
         pageWithTwoEntries = context.addPage(goals: 2)
         validatorGraph = .init()
     }
@@ -24,6 +29,11 @@ final class PageEditorViewModelTests: BackgroundContextTestCase {
 // MARK: - Presentation of Page
 extension PageEditorViewModelTests {
     func testPresentationOfVacationChapter() {
+        let viewModel = PageEditorViewModel(vacationChapterPage, validatorGraph)
+        XCTAssertEqual(viewModel.entries, [.freeText(vacationChapterPage, [])])
+    }
+
+    func testPresentationOfVacationPage() {
         let viewModel = PageEditorViewModel(vacationPage, validatorGraph)
         XCTAssertEqual(viewModel.entries, [.freeText(vacationPage, [])])
     }
