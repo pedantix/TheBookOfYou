@@ -6,6 +6,8 @@
 //
 
 import CoreData
+import SwiftUI
+import Combine
 
 class PageEditorViewModel: ObservableObject {
     enum Entry: Equatable, Identifiable {
@@ -22,6 +24,15 @@ class PageEditorViewModel: ObservableObject {
         case freeText(Page, [PageValidationFieldError])
     }
 
+    private let moc: NSManagedObjectContext
+    private let pageValidator: PageValidator
+    private var vacationDaySubscription: AnyCancellable?
+
+    @ObservedObject private var page: Page
+    @Published var entries: [Entry] = []
+    @Published var isPageUpdateToNonDraftForm = false
+    @Published var appAlert: AppAlert?
+
     init(
         _ page: Page,
         _ dependencyGraph: any ValidatorGraph,
@@ -29,6 +40,27 @@ class PageEditorViewModel: ObservableObject {
     ) {
         self.page = page
         moc = context
+        pageValidator = dependencyGraph.pageValidator
+        vacationDaySubscription = page
+            .publisher(for: \.vacationDay)
+            .sink { [weak self] _ in
+                Task { @MainActor in
+                    self?.setupEntries()
+                }
+            }
+        self.setupEntries()
+    }
+
+    deinit {
+        vacationDaySubscription?.cancel()
+    }
+
+    @MainActor
+    private func setupEntries() {
+        guard !page.vacationDay else {
+            entries = [.freeText(page, [])]
+            return
+        }
         let goals = page.chapter?.goals ?? []
         let textEntries = page.pageEntries?
             .compactMap { $0 as? PageEntry }
@@ -37,17 +69,8 @@ class PageEditorViewModel: ObservableObject {
 
         entries = zip(goals, textEntries).map { goal, textEntry in
             PageEditorViewModel.Entry.text(goal, textEntry, [])
-        } +  [.freeText(page, [])]
-        pageValidator = dependencyGraph.pageValidator
+        } + [.freeText(page, [])]
     }
-
-    private let page: Page
-    private let moc: NSManagedObjectContext
-    private let pageValidator: PageValidator
-
-    @Published var entries: [Entry] = []
-    @Published var isPageUpdateToNonDraftForm = false
-    @Published var appAlert: AppAlert?
 
     func attemptToUpdateDraft() {
         switch pageValidator.validate(page) {

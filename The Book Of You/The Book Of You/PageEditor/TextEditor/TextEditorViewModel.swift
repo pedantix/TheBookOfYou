@@ -104,7 +104,6 @@ class TextEditorViewModel: ObservableObject {
     }
     @Published var errorText = ""
     @Published var isShowingEditor = false
-    // TODO: Test this get called
     @Published var appAlert: AppAlert?
 
     init(

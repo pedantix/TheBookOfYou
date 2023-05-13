@@ -34,6 +34,13 @@ extension PageEditorViewModelTests {
         XCTAssertEqual(viewModel.entries.count, 3)
     }
 
+    func testPresentationOfGoalChapterWhenInVacationMode() {
+        pageWithTwoEntries.vacationDay = true
+        let viewModel = PageEditorViewModel(pageWithTwoEntries, validatorGraph)
+        XCTAssertEqual(viewModel.entries, [.freeText(pageWithTwoEntries, [])])
+        XCTAssertEqual(viewModel.entries.count, 1)
+    }
+
     private func getEntriesFor(_ page: Page) -> [PageEditorViewModel.Entry] {
         let goals = page.chapter?.goals ?? []
         let textEntries = page.pageEntries?
