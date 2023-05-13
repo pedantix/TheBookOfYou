@@ -65,6 +65,8 @@
 		EFA0DB0D2A0C4F19002D0173 /* DateEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB0C2A0C4F19002D0173 /* DateEntryView.swift */; };
 		EFA0DB0F2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB0E2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift */; };
 		EFA0DB112A0F4325002D0173 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB102A0F4325002D0173 /* StringTests.swift */; };
+		EFA0DB132A10207A002D0173 /* PageVacationToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB122A102079002D0173 /* PageVacationToggleView.swift */; };
+		EFA0DB152A1021FD002D0173 /* PageVacationToggleViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA0DB142A1021FD002D0173 /* PageVacationToggleViewModelTests.swift */; };
 		EFA647CA29D4A78000A0B451 /* The_Book_Of_YouApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */; };
 		EFA647CE29D4A78100A0B451 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA647CD29D4A78100A0B451 /* Assets.xcassets */; };
 		EFA647D129D4A78100A0B451 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA647D029D4A78100A0B451 /* Preview Assets.xcassets */; };
@@ -165,6 +167,8 @@
 		EFA0DB0C2A0C4F19002D0173 /* DateEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEntryView.swift; sourceTree = "<group>"; };
 		EFA0DB0E2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateEntryViewViewModelTests.swift; sourceTree = "<group>"; };
 		EFA0DB102A0F4325002D0173 /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
+		EFA0DB122A102079002D0173 /* PageVacationToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVacationToggleView.swift; sourceTree = "<group>"; };
+		EFA0DB142A1021FD002D0173 /* PageVacationToggleViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVacationToggleViewModelTests.swift; sourceTree = "<group>"; };
 		EFA647C629D4A78000A0B451 /* The Book Of You.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Book Of You.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA647C929D4A78000A0B451 /* The_Book_Of_YouApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_Book_Of_YouApp.swift; sourceTree = "<group>"; };
 		EFA647CD29D4A78100A0B451 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -240,6 +244,7 @@
 				EF113FF42A095D6700CBAC0F /* PageRowViewModelTests.swift */,
 				EF56AA962A0A7A040020537E /* ChapterEditorViewModelTests.swift */,
 				EFA0DB0E2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift */,
+				EFA0DB142A1021FD002D0173 /* PageVacationToggleViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				EF49B50729FEDE1800F7B62C /* PageEditorViewModel.swift */,
 				EF56AA982A0B265B0020537E /* CreatePageView.swift */,
 				EFA0DB0C2A0C4F19002D0173 /* DateEntryView.swift */,
+				EFA0DB122A102079002D0173 /* PageVacationToggleView.swift */,
 			);
 			path = PageEditor;
 			sourceTree = "<group>";
@@ -689,6 +695,7 @@
 				EF56AA8E2A09DBE20020537E /* ChapterEditorViewModel.swift in Sources */,
 				EFA6485629E24B7B00A0B451 /* IndexView.swift in Sources */,
 				EF56AA902A09DCCE0020537E /* ChapterValidator.swift in Sources */,
+				EFA0DB132A10207A002D0173 /* PageVacationToggleView.swift in Sources */,
 				EFA6484A29E1F2EA00A0B451 /* AboutDataService.swift in Sources */,
 				EF113FF32A095D3300CBAC0F /* PageRowViewModel.swift in Sources */,
 				EF113FE72A049C1000CBAC0F /* TextEditorView.swift in Sources */,
@@ -709,6 +716,7 @@
 				EF56AA9D2A0B29C00020537E /* ModelRepositoryTests.swift in Sources */,
 				EF1AA28429F6AEAC0056293F /* ChapterCreatorViewModelTests.swift in Sources */,
 				EF56AA972A0A7A040020537E /* ChapterEditorViewModelTests.swift in Sources */,
+				EFA0DB152A1021FD002D0173 /* PageVacationToggleViewModelTests.swift in Sources */,
 				EF56AA922A09DE590020537E /* ChapterValidatorTests.swift in Sources */,
 				EF113FF52A095D6700CBAC0F /* PageRowViewModelTests.swift in Sources */,
 				EFA0DB112A0F4325002D0173 /* StringTests.swift in Sources */,

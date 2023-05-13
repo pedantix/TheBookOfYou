@@ -9,6 +9,7 @@ import CoreData
 import SwiftUI
 import Combine
 
+// TODO: handle the case of the chapter is a vacation chapter, dont showgoals
 class PageEditorViewModel: ObservableObject {
     enum Entry: Equatable, Identifiable {
         var id: URL {
@@ -57,7 +58,9 @@ class PageEditorViewModel: ObservableObject {
 
     @MainActor
     private func setupEntries() {
+        viewModelLogger.info("Setting up entries")
         guard !page.vacationDay else {
+            viewModelLogger.info("updating entries")
             entries = [.freeText(page, [])]
             return
         }
@@ -70,6 +73,10 @@ class PageEditorViewModel: ObservableObject {
         entries = zip(goals, textEntries).map { goal, textEntry in
             PageEditorViewModel.Entry.text(goal, textEntry, [])
         } + [.freeText(page, [])]
+    }
+
+    var chapterTitle: String {
+        return page.chapter?.title ?? "NO CHAPTER TITLE, Error contact Developer"
     }
 
     func attemptToUpdateDraft() {

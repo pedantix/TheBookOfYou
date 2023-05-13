@@ -8,9 +8,9 @@
 import XCTest
 @testable import The_Book_Of_You
 
-final class DateEntryViewViewModelTests: BackgroundContextTestCase {
+final class DateEntryViewModelTests: BackgroundContextTestCase {
     private var page: Page!
-    private var viewModel: DateEntryViewViewModel!
+    private var viewModel: DateEntryViewModel!
 
     override func setUp() async throws {
         try await super.setUp()

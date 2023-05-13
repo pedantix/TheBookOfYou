@@ -58,13 +58,24 @@ private struct _PageEditorView: View {
     var body: some View {
         List {
             DateEntryView(page, moc)
-            // TODO: Vacation Toggle
-            Text("TODO: Vacation Toggle")
+            PageVacationToggleView(page, moc)
             ForEach(viewModel.entries) { entry in
                 PageEntryView(entry: entry)
             }
         }
         .listStyle(.plain)
+        .navigationTitle("\(viewModel.chapterTitle) Entry")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                let text = page.isDraft ? "Publish" : "Update"
+                Button {
+                    viewModel.attemptToUpdateDraft()
+                } label: {
+                    Text(text)
+                }
+            }
+        }
     }
 }
 
