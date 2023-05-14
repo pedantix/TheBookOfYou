@@ -77,7 +77,8 @@ private struct _PageEditorView: View {
                 }
             }
         }
-        .onReceive(viewModel.$didPageSave) { _ in
+        .onReceive(viewModel.$didPageSave) { value in
+            guard value else { return }
             navStore.popBack()
         }
     }
