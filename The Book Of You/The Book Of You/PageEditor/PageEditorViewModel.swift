@@ -31,6 +31,7 @@ class PageEditorViewModel: ObservableObject {
     @ObservedObject private var page: Page
     @Published var entries: [Entry] = []
     @Published var isPageUpdateToNonDraftForm = false
+    @Published var didPageSave = false
     @Published var appAlert: AppAlert?
 
     init(
@@ -90,7 +91,9 @@ class PageEditorViewModel: ObservableObject {
     func viewDismissing() {
         guard page.isDraft else { return }
         do {
-            page.lastModifiedAt = .now
+            if moc.hasChanges {
+                page.lastModifiedAt = .now
+            }
             try moc.save()
         } catch {
             appAlert = AppAlert.persistenceAlert(error as NSError)
@@ -103,6 +106,7 @@ class PageEditorViewModel: ObservableObject {
             page.isDraft = false
             try moc.save()
             isPageUpdateToNonDraftForm = true
+            didPageSave = true
         } catch {
             appAlert = AppAlert.persistenceAlert(error as NSError)
         }

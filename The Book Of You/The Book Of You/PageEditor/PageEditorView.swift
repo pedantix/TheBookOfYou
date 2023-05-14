@@ -46,6 +46,7 @@ struct PageEditorView: View {
 }
 
 private struct _PageEditorView: View {
+    @EnvironmentObject private var navStore: NavStore
     @Environment(\.managedObjectContext) private var moc
     @ObservedObject private var viewModel: PageEditorViewModel
     @ObservedObject private var page: Page
@@ -75,6 +76,9 @@ private struct _PageEditorView: View {
                     Text(text)
                 }
             }
+        }
+        .onReceive(viewModel.$didPageSave) { _ in
+            navStore.popBack()
         }
     }
 }

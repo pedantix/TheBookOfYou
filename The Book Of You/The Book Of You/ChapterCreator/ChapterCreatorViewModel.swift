@@ -23,6 +23,7 @@ class ChapterCreatorViewModel: ObservableObject {
         guard let previousChapter = try? moc.fetch(Chapter.currentChapter()).first else { return }
         self.previousChapter = previousChapter
         title = previousChapter.title ?? ""
+        isVacation = previousChapter.isVacation
         let goals = previousChapter.chapterGoals?
             .compactMap { $0 as? ChapterGoal }
             .sorted(using: SortDescriptor(\ChapterGoal.orderIdx))
@@ -42,11 +43,12 @@ class ChapterCreatorViewModel: ObservableObject {
     @Published var formFocus: ChapterCreatorFormFocus? = .title
     @Published private(set) var chapterGoals: [Goal] = []
     @Published var actionAlert: AppAlert?
-    @Published var createdChapter: Bool = false
+    @Published var createdChapter = false
+    @Published var isVacation = false
     private var previousChapter: Chapter?
 
     var isChapterCreatable: Bool {
-        return goalsToGo == 0 && !title.isBlank
+        return (isVacation || goalsToGo == 0) && !title.isBlank
     }
     var maxGoalsReached: Bool {
         return chapterGoals.count == goalsMax
@@ -61,12 +63,15 @@ class ChapterCreatorViewModel: ObservableObject {
         do {
             let newChapter = Chapter(context: moc)
             newChapter.title = title.trimmed
+            newChapter.isVacation = isVacation
             newChapter.dateStarted = .now
-            for (idx, goal) in chapterGoals.enumerated() {
-                let chapterGoal = ChapterGoal(context: moc)
-                chapterGoal.orderIdx = Int64(idx)
-                chapterGoal.chapter = newChapter
-                chapterGoal.goal = goal
+            if !isVacation {
+                for (idx, goal) in chapterGoals.enumerated() {
+                    let chapterGoal = ChapterGoal(context: moc)
+                    chapterGoal.orderIdx = Int64(idx)
+                    chapterGoal.chapter = newChapter
+                    chapterGoal.goal = goal
+                }
             }
             // check if previous chapter attributes were similar
             guard !newChapter.compare(with: previousChapter) else {

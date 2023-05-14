@@ -47,17 +47,10 @@ struct DateEntryView: View {
         DatePicker(selection: $viewModel.editorDate, in: ...Date.now, displayedComponents: .date) {
             Text("Entry Date")
         }
-
-        .datePickerStyle(.compact)
         .id(dateId)
         .onChange(of: viewModel.editorDate) { _ in
-            dateId += 1
-        }
-        .onTapGesture {
-            dateId += 1
-        }
-        .onChange(of: viewModel.editorDate) { _ in
             viewModel.saveDate()
+            dateId += 1
         }
     }
 }

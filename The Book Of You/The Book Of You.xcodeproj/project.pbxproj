@@ -88,6 +88,7 @@
 		EFA6485029E2339C00A0B451 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6484F29E2339C00A0B451 /* UserDefaults.swift */; };
 		EFA6485429E2495400A0B451 /* CloudStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EFA6485329E2495400A0B451 /* CloudStorage */; };
 		EFA6485629E24B7B00A0B451 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6485529E24B7B00A0B451 /* IndexView.swift */; };
+		EFAD09EB2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD09EA2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +195,7 @@
 		EFA6484F29E2339C00A0B451 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		EFA6485129E2349600A0B451 /* The Book Of You.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "The Book Of You.entitlements"; sourceTree = "<group>"; };
 		EFA6485529E24B7B00A0B451 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
+		EFAD09EA2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCreatorViewModelGoalsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 				EF56AA962A0A7A040020537E /* ChapterEditorViewModelTests.swift */,
 				EFA0DB0E2A0C5A1A002D0173 /* DateEntryViewViewModelTests.swift */,
 				EFA0DB142A1021FD002D0173 /* PageVacationToggleViewModelTests.swift */,
+				EFAD09EA2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				EF56AA9D2A0B29C00020537E /* ModelRepositoryTests.swift in Sources */,
 				EF1AA28429F6AEAC0056293F /* ChapterCreatorViewModelTests.swift in Sources */,
 				EF56AA972A0A7A040020537E /* ChapterEditorViewModelTests.swift in Sources */,
+				EFAD09EB2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift in Sources */,
 				EFA0DB152A1021FD002D0173 /* PageVacationToggleViewModelTests.swift in Sources */,
 				EF56AA922A09DE590020537E /* ChapterValidatorTests.swift in Sources */,
 				EF113FF52A095D6700CBAC0F /* PageRowViewModelTests.swift in Sources */,

@@ -133,10 +133,12 @@ extension PageEditorViewModelTests {
 extension PageEditorViewModelTests {
     func testSuccessfulUpdate() {
         let viewModel = PageEditorViewModel(vacationPage, validatorGraph)
+        XCTAssertFalse(viewModel.didPageSave)
         let vacationPageId = vacationPage.objectID
         try XCTAssertTrue((context.existingObject(with: vacationPageId) as? Page)?.isDraft ?? false)
         viewModel.attemptToUpdateDraft()
         XCTAssertTrue(viewModel.isPageUpdateToNonDraftForm)
+        XCTAssertTrue(viewModel.didPageSave)
         try XCTAssertFalse((context.existingObject(with: vacationPageId) as? Page)?.isDraft ?? true)
     }
 }
@@ -148,9 +150,21 @@ extension PageEditorViewModelTests {
         let oldDate = Date.date(daysAgo: 5)
         newPage.lastModifiedAt = oldDate
         XCTAssertEqual((context.object(with: newPage.objectID) as? Page)?.lastModifiedAt, oldDate)
-        let viewModel = PageEditorViewModel(newPage, validatorGraph)
+        let viewModel = PageEditorViewModel(newPage, validatorGraph, context: context)
+        newPage.journalEntry = "some text"
         viewModel.viewDismissing()
         XCTAssertNotEqual((context.object(with: newPage.objectID) as? Page)?.lastModifiedAt, oldDate)
+    }
+
+    func testDraftIsSavedAndDateNotUpdatedUnlessChanges() throws {
+        let newPage = Page(context: context)
+        let oldDate = Date.date(daysAgo: 5)
+        newPage.lastModifiedAt = oldDate
+        try context.save()
+        XCTAssertEqual((context.object(with: newPage.objectID) as? Page)?.lastModifiedAt, oldDate)
+        let viewModel = PageEditorViewModel(newPage, validatorGraph)
+        viewModel.viewDismissing()
+        XCTAssertEqual((context.object(with: newPage.objectID) as? Page)?.lastModifiedAt, oldDate)
     }
 
     func testPublishedIsNotSavedOnDismiss() {

@@ -11,6 +11,7 @@ struct Dummy {
     let asdf: Int
 }
 
+// TODO: Chapter pages are not automagically updating
 struct ChapterSectionView: View {
     @ObservedObject private(set) var chapter: Chapter
     @State private var viewModel: IndexChapterViewModel

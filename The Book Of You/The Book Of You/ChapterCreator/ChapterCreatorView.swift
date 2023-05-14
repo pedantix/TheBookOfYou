@@ -13,7 +13,6 @@ enum ChapterCreatorFormFocus {
     case title, goalSearch
 }
 
-// TODO: Create vacatin mode toggle
 struct ChapterCreatorView: View {
     @EnvironmentObject private var navStore: NavStore
     @StateObject private var viewModel = ChapterCreatorViewModel()
@@ -30,8 +29,28 @@ struct ChapterCreatorView: View {
             .focused($formFocus, equals: .title)
             .onSubmit {
                 viewModel.formFocus = .none
-            }.padding(.fs6)
-            chapterGoals
+            }
+            .padding(.fs6)
+            vacationToggle
+                .padding(.fs6)
+            if !viewModel.isVacation {
+                chapterGoals
+            } else {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Image(systemName: "laurel.leading")
+                            .font(.largeTitle)
+                        Text("Taking Time Off Provides New Perspective!")
+                            .multilineTextAlignment(.center)
+                            .bold()
+                        Image(systemName: "laurel.trailing")
+                            .font(.largeTitle)
+                    }
+                    .padding()
+                    Spacer()
+                }
+            }
 
         }
         .onReceive(viewModel.$formFocus) { vmFocus in
@@ -54,6 +73,10 @@ struct ChapterCreatorView: View {
                 .disabled(!viewModel.isChapterCreatable)
             }
         }
+    }
+
+    private var vacationToggle: some View {
+        Toggle("Taking a vacation?", isOn: $viewModel.isVacation)
     }
 
     private var chapterGoals: some View {
