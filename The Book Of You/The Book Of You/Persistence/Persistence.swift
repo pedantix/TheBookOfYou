@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import CloudKit
 
 struct PersistenceController {
     static let shared: PersistenceController = {
@@ -44,8 +45,36 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+
+        if !inMemory {
+            #if DEBUG
+            checkAccountStatus()
+            persistenceLogger.info("Setting up DEV cloud kit schema")
+            do {
+                try container.initializeCloudKitSchema()
+            } catch let err as NSError {
+                persistenceLogger.error("Error setting up cloud kit container \(err) ")
+            }
+            persistenceLogger.info("Setup DEV cloud kit schema, remember to promote before rolling to prod")
+            #endif
+        }
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+
+    /// This check is being done to see if the CK account is available so data may or may not be sunk
+    private func checkAccountStatus() {
+        CKContainer.default().accountStatus { status, error in
+            switch status {
+            case .available:
+                persistenceLogger.info("CK Container account available!")
+            default:
+                persistenceLogger.info("CK Container not available! \(status)")
+            }
+            if let error = error {
+                print(error)
+            }
+        }
     }
 }
 
