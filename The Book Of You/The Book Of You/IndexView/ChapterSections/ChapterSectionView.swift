@@ -7,37 +7,37 @@
 
 import SwiftUI
 
-struct Dummy {
-    let asdf: Int
-}
-
-// TODO: Chapter pages are not automagically updating
 struct ChapterSectionView: View {
+    @FetchRequest private var draftPage: FetchedResults<Page>
+    @FetchRequest private var publishedPages: FetchedResults<Page>
     @ObservedObject private(set) var chapter: Chapter
-    @State private var viewModel: IndexChapterViewModel
+    @ObservedObject private var viewModel: IndexChapterViewModel
     @State private var isEditingChapter = false
     @Environment(\.managedObjectContext) private var viewContext
 
     init(chapter: Chapter) {
+        self._draftPage = FetchRequest(fetchRequest: Page.draftPages(for: chapter))
+        self._publishedPages = FetchRequest(fetchRequest: Page.publishedPages(for: chapter))
+        viewModel = IndexChapterViewModel(chapter: chapter)
         self.chapter = chapter
-        self.viewModel = IndexChapterViewModel(
-            chapter: chapter
-        )
     }
 
     var body: some View {
         Section(header: chapterChapterSectionHeader) {
-            if let draftPage = chapter.draftPage {
-                let pageViewModel = PageRowViewModel(page: draftPage)
-                NavigationLink(value: Destination.page(pageURI: pageViewModel.pageUrl)) {
-                    Text("Edit draft from \(pageViewModel.entryDate)")
+            if draftPage.count > 0 {
+                ForEach(draftPage) { draftPage in
+                    let pageViewModel = PageRowViewModel(page: draftPage)
+                    NavigationLink(value: Destination.page(pageURI: pageViewModel.pageUrl)) {
+                        Text("Edit draft from \(pageViewModel.entryDate)")
+                    }
                 }
             } else if !viewModel.chapterIsEnded {
                 NavigationLink(value: Destination.pageCreator(chapterURI: chapter.objectID.uriRepresentation())) {
                     Text("Create a New Page!")
                 }
             }
-            ForEach(Array(chapter.publishedPages.enumerated()), id: \.element) { offset, page in
+
+            ForEach(publishedPages) { page in
                 let pageVM = PageRowViewModel(page: page)
                 NavigationLink(value: Destination.page(pageURI: pageVM.pageUrl)) {
                     HStack {
@@ -49,7 +49,7 @@ struct ChapterSectionView: View {
                             Image(systemName: "laurel.trailing")
                         }
                         Spacer()
-                        Text("\(offset + 1)")
+                        Text("\((publishedPages.firstIndex(of: page) ?? 0) + 1)")
                             .underline()
                     }
                 }

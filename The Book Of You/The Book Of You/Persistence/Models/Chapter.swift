@@ -51,22 +51,3 @@ extension Chapter {
         return false
     }
 }
-
-private let isDraftPredicate = NSPredicate(format: "isDraft == true")
-private let isNotDraftPredicate = NSPredicate(format: "isDraft == false")
-// MARK: - Page Filters
-extension Chapter {
-    var draftPage: Page? {
-        guard let pageSet = self.pages?.filtered(using: isDraftPredicate) else { return nil }
-        return pageSet.first as? Page
-    }
-
-    var publishedPages: [Page] {
-        guard let pagesSet = self.pages?
-            .filtered(using: isNotDraftPredicate)
-        else { return [] }
-        return Array(pagesSet)
-            .compactMap { $0 as? Page }
-            .sorted(using: SortDescriptor(\Page.entryDate, order: .reverse))
-    }
-}

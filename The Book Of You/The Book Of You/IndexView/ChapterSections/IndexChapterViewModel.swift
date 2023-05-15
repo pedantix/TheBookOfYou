@@ -7,12 +7,15 @@
 
 import Foundation
 
-struct IndexChapterViewModel: Identifiable {
+class IndexChapterViewModel: ObservableObject, Identifiable {
     var id: ObjectIdentifier {
         return chapter.id
     }
 
     let chapter: Chapter
+    init(chapter: Chapter) {
+        self.chapter = chapter
+    }
 }
 
 private let dateFormatter: DateFormatter = {

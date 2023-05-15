@@ -89,6 +89,8 @@
 		EFA6485429E2495400A0B451 /* CloudStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EFA6485329E2495400A0B451 /* CloudStorage */; };
 		EFA6485629E24B7B00A0B451 /* IndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA6485529E24B7B00A0B451 /* IndexView.swift */; };
 		EFAD09EB2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD09EA2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift */; };
+		EFAD09ED2A11A3C7007A5873 /* PageTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD09EC2A11A3C7007A5873 /* PageTestCases.swift */; };
+		EFAD09EF2A11A3DF007A5873 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD09EE2A11A3DF007A5873 /* Page.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +198,8 @@
 		EFA6485129E2349600A0B451 /* The Book Of You.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "The Book Of You.entitlements"; sourceTree = "<group>"; };
 		EFA6485529E24B7B00A0B451 /* IndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexView.swift; sourceTree = "<group>"; };
 		EFAD09EA2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCreatorViewModelGoalsTests.swift; sourceTree = "<group>"; };
+		EFAD09EC2A11A3C7007A5873 /* PageTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PageTestCases.swift; path = "The Book Of YouTests/Models/PageTestCases.swift"; sourceTree = SOURCE_ROOT; };
+		EFAD09EE2A11A3DF007A5873 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +261,7 @@
 			children = (
 				EF4AFAE629F0612F00396FD3 /* Chapter.swift */,
 				EF1AA27729F5D4FD0056293F /* Goal.swift */,
+				EFAD09EE2A11A3DF007A5873 /* Page.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -264,6 +269,7 @@
 		EF113FF02A06816200CBAC0F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EFAD09EC2A11A3C7007A5873 /* PageTestCases.swift */,
 				EF1AA27929F5D6B80056293F /* GoalFetchRequestTests.swift */,
 				EF9F3AE029F0D8C1005CC0A0 /* ChapterTests.swift */,
 				EF56AA9C2A0B29BF0020537E /* ModelRepositoryTests.swift */,
@@ -659,6 +665,7 @@
 				EF6423C829FC6DBE009F60FF /* RangeReplaceableCollections.swift in Sources */,
 				EF91E1802A03405D00B071A3 /* DependencyInjection.swift in Sources */,
 				EF5FD05429F8ABB1003D768C /* GoalSearchRow.swift in Sources */,
+				EFAD09EF2A11A3DF007A5873 /* Page.swift in Sources */,
 				EF113FE92A049C2300CBAC0F /* TextEditorViewModel.swift in Sources */,
 				EF6423CE29FC87DB009F60FF /* View.swift in Sources */,
 				EF6423C629FC245E009F60FF /* ActionAlertView.swift in Sources */,
@@ -721,6 +728,7 @@
 				EF56AA972A0A7A040020537E /* ChapterEditorViewModelTests.swift in Sources */,
 				EFAD09EB2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift in Sources */,
 				EFA0DB152A1021FD002D0173 /* PageVacationToggleViewModelTests.swift in Sources */,
+				EFAD09ED2A11A3C7007A5873 /* PageTestCases.swift in Sources */,
 				EF56AA922A09DE590020537E /* ChapterValidatorTests.swift in Sources */,
 				EF113FF52A095D6700CBAC0F /* PageRowViewModelTests.swift in Sources */,
 				EFA0DB112A0F4325002D0173 /* StringTests.swift in Sources */,
