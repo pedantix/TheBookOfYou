@@ -43,10 +43,12 @@ private func processErrorsToErrorString(_ errors: [PageValidationFieldError]) ->
     return errorText.joined(separator: " ")
 }
 
+// TODO: validate that updating this text  here is subscribe and will change the `displayText` on change of
+// `textEntry` or `Page`
 class GoalTextEditorViewModel: TextEditorViewModel {
     private let moc: NSManagedObjectContext
-    private let goal: Goal
-    private let textEntry: TextEntry
+    @Published private var goal: Goal
+    @Published private var textEntry: TextEntry
     init(_ goal: Goal, _ textEntry: TextEntry, _ errors: [PageEntryValidationError], _ moc: NSManagedObjectContext) {
         self.goal = goal
         self.textEntry = textEntry
