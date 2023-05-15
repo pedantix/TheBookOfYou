@@ -54,6 +54,7 @@ struct PageVacationToggleView: View {
     }
 }
 
+#if DEBUG
 struct PageVacationToggleView_Previews: PreviewProvider {
     static let controller: PersistenceController = .controllerForUIPreview()
     static let page: Page = { controller.viewContext.addPage() }()
@@ -68,3 +69,4 @@ struct PageVacationToggleView_Previews: PreviewProvider {
         }
     }
 }
+#endif

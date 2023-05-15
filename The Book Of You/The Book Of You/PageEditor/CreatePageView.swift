@@ -58,6 +58,7 @@ struct CreatePageView: View {
     }
 }
 
+#if DEBUG
 struct CreatePageView_Previews: PreviewProvider {
     static var persistenceController: PersistenceController = PersistenceController.controllerForUIPreview()
 
@@ -74,3 +75,4 @@ struct CreatePageView_Previews: PreviewProvider {
             .environment(\.managedObjectContext, persistenceController.viewContext)
     }
 }
+#endif

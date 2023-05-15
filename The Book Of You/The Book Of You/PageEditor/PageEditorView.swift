@@ -100,6 +100,7 @@ private struct PageEntryView: View {
     }
 }
 
+#if DEBUG
 struct PageEditorView_Previews: PreviewProvider {
     private static let controller = PersistenceController.controllerForUIPreview()
 
@@ -130,3 +131,4 @@ struct PageEditorView_Previews: PreviewProvider {
         }
     }
 }
+#endif

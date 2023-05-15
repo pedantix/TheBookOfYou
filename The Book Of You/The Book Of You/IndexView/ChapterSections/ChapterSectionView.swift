@@ -80,6 +80,7 @@ struct ChapterSectionView: View {
     }
 }
 
+#if DEBUG
 struct ChapterSectionView_Previews: PreviewProvider {
     static let controller = PersistenceController.controllerForUIPreview()
 
@@ -104,3 +105,4 @@ struct ChapterSectionView_Previews: PreviewProvider {
         .environment(\.managedObjectContext, controller.viewContext)
     }
 }
+#endif

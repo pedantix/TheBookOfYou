@@ -77,6 +77,7 @@ struct ChapterEditorView: View {
     }
 }
 
+#if DEBUG
 struct ChapterEditorView_Previews: PreviewProvider {
     static let controller = PersistenceController.controllerForUIPreview()
 
@@ -100,3 +101,4 @@ struct ChapterEditorView_Previews: PreviewProvider {
         }
     }
 }
+#endif

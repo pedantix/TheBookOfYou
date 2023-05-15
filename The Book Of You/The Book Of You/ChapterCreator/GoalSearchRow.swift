@@ -61,6 +61,7 @@ struct GoalSearchRow: View {
     }
 }
 
+#if DEBUG
 struct GoalRow_Previews: PreviewProvider {
     private static let persistenceController = PersistenceController.preview
     private static let messenger = AppAlertMessenger()
@@ -79,3 +80,4 @@ struct GoalRow_Previews: PreviewProvider {
         .environmentObject(messenger)
     }
 }
+#endif

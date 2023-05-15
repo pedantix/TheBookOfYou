@@ -52,6 +52,7 @@ struct IndexView: View {
     }
 }
 
+#if DEBUG
 struct IndexView_Previews: PreviewProvider {
     static let preview = PersistenceController.controllerForUIPreview()
 
@@ -107,3 +108,4 @@ struct IndexViewWithFiveChapter_Previews: PreviewProvider {
         }
     }
 }
+#endif

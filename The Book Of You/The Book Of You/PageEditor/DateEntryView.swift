@@ -55,6 +55,7 @@ struct DateEntryView: View {
     }
 }
 
+#if DEBUG
 struct DateEntryView_Previews: PreviewProvider {
     static let controller: PersistenceController = .controllerForUIPreview()
     static let page: Page = { controller.viewContext.addPage() }()
@@ -69,3 +70,4 @@ struct DateEntryView_Previews: PreviewProvider {
         }
     }
 }
+#endif
