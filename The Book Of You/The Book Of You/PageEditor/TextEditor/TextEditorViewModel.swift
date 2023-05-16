@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import Combine
 
 private func processErrorsToErrorString(_ errors: [PageEntryValidationError]) -> String {
     var errorText = [String]()
@@ -43,12 +44,17 @@ private func processErrorsToErrorString(_ errors: [PageValidationFieldError]) ->
     return errorText.joined(separator: " ")
 }
 
-// TODO: validate that updating this text  here is subscribe and will change the `displayText` on change of
 // `textEntry` or `Page`
 class GoalTextEditorViewModel: TextEditorViewModel {
     private let moc: NSManagedObjectContext
     @Published private var goal: Goal
     @Published private var textEntry: TextEntry
+    private var cancellable: AnyCancellable?
+
+    deinit {
+        cancellable?.cancel()
+    }
+
     init(_ goal: Goal, _ textEntry: TextEntry, _ errors: [PageEntryValidationError], _ moc: NSManagedObjectContext) {
         self.goal = goal
         self.textEntry = textEntry
@@ -57,6 +63,15 @@ class GoalTextEditorViewModel: TextEditorViewModel {
             text: textEntry.text ?? "",
             errorText: processErrorsToErrorString(errors)
         )
+        cancellable = textEntry
+            .publisher(for: \.text)
+            .sink { text in
+                Task { @MainActor in
+                    guard let newText = text, newText != self.editorText
+                        else { return }
+                    self.didUpdateTextExternally(newText)
+                }
+        }
     }
 
     override func persistEdit(_ newText: String) {
@@ -73,6 +88,10 @@ class GoalTextEditorViewModel: TextEditorViewModel {
 class PageFreeTextEditorViewModel: TextEditorViewModel {
     private let moc: NSManagedObjectContext
     private let page: Page
+    private var cancellable: AnyCancellable?
+    deinit {
+        cancellable?.cancel()
+    }
     init(_ page: Page, _ errors: [PageValidationFieldError], _ moc: NSManagedObjectContext) {
         self.moc = moc
         self.page = page
@@ -80,6 +99,16 @@ class PageFreeTextEditorViewModel: TextEditorViewModel {
             text: page.journalEntry ?? "",
             errorText: processErrorsToErrorString(errors)
         )
+        cancellable = page
+            .publisher(for: \.journalEntry)
+            .sink { text in
+                Task { @MainActor in
+                    guard let newText = text,
+                            newText != self.editorText
+                        else { return }
+                    self.didUpdateTextExternally(newText)
+                }
+        }
     }
 
     override func persistEdit(_ newText: String) {
@@ -115,6 +144,13 @@ class TextEditorViewModel: ObservableObject {
         displayText = text
         editorText = text
         self.errorText = errorText
+    }
+
+    // This is to handle the behavior of someone editing their journal in two different places
+    // This does not have concurrent edits built in because presumably only one editor
+    @MainActor func didUpdateTextExternally(_ text: String) {
+        displayText = text
+        editorText = text
     }
 
     func commitEdit() {

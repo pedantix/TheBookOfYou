@@ -168,6 +168,26 @@ final class PageFreeTextEditorViewModelTests: BackgroundContextTestCase {
         XCTAssertFalse(context.hasChanges)
         XCTAssertEqual(page.journalEntry, "some text")
     }
+
+    func testSavingJournalChangesObservedGoalText() async throws {
+        page.journalEntry = "Some Text"
+        let viewModel = PageFreeTextEditorViewModel(page, [], context)
+        XCTAssertEqual(viewModel.editorText, "Some Text")
+
+        let updateExpectation = expectation(description: "Wait for update")
+        let theNewText = "new texts"
+        let cannelable = viewModel.$displayText.sink { newTxt in
+            guard newTxt == theNewText else { return }
+            updateExpectation.fulfill()
+        }
+
+        page.journalEntry = theNewText
+        try context.save()
+        await fulfillment(of: [updateExpectation], timeout: 2)
+        XCTAssertEqual(viewModel.displayText, theNewText)
+        XCTAssertEqual(viewModel.editorText, theNewText)
+        cannelable.cancel()
+    }
 }
 
 final class GoalTextEditorViewModellTests: BackgroundContextTestCase {
@@ -214,5 +234,25 @@ final class GoalTextEditorViewModellTests: BackgroundContextTestCase {
         viewModel.commitEdit()
         XCTAssertFalse(context.hasChanges)
         XCTAssertEqual(textEntry.text, "some text")
+    }
+
+    func testSavingGoalChangesObservedGoalText() async throws {
+        textEntry.text = "Some Text"
+        let viewModel = GoalTextEditorViewModel(goal, textEntry, [], context)
+        XCTAssertEqual(viewModel.editorText, "Some Text")
+
+        let updateExpectation = expectation(description: "Wait for update")
+        let theNewText = "new texts"
+        let cannelable = viewModel.$displayText.sink { newTxt in
+            guard newTxt == theNewText else { return }
+            updateExpectation.fulfill()
+        }
+
+        textEntry.text = theNewText
+        try context.save()
+        await fulfillment(of: [updateExpectation], timeout: 2)
+        XCTAssertEqual(viewModel.displayText, theNewText)
+        XCTAssertEqual(viewModel.editorText, theNewText)
+        cannelable.cancel()
     }
 }
