@@ -11,12 +11,11 @@ import SwiftUI
 @main
 struct The_Book_Of_YouApp: App {
 // swiftlint:enable type_name
-    let persistenceController = PersistenceController.shared
-
     var body: some Scene {
+        lazy var persistenceController = PersistenceController.shared
         WindowGroup {
             AppView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environment(\.managedObjectContext, PersistenceController.shared.viewContext)
         }
     }
 }
