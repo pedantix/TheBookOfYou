@@ -63,9 +63,16 @@ final class PageValidatorTestCase: BackgroundContextTestCase {
         XCTAssertEqual(validator.validate(page), .success(true))
         pageEntriesValidator.mockResult = .failure(.unknownEntryTypeError)
         XCTAssertEqual(validator.validate(page),
-            .failure(.fieldErrors([.pageEntriesValidationError(.unknownEntryTypeError)]))
+                       .failure(.fieldErrors([.pageEntriesValidationError(.unknownEntryTypeError)]))
         )
+    }
 
+    func testPageEntriesOnAVacationDay() {
+        page.vacationDay = true
+        page.journalEntry = "some text"
+        XCTAssertEqual(validator.validate(page), .success(true))
+        pageEntriesValidator.mockResult = .failure(.unknownEntryTypeError)
+        XCTAssertEqual(validator.validate(page), .success(true))
     }
 }
 

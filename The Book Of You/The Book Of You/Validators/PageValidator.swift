@@ -77,6 +77,7 @@ class PageValidator: Validator {
     }
 
     private func validatePageEntries(_ page: Page, fieldErrors: inout [PageValidationFieldError]) {
+        guard !page.vacationDay else { return }
         guard let pageEntries = page.pageEntries else { return }
         switch pageEntriesValidator.validate(pageEntries) {
         case .success:
