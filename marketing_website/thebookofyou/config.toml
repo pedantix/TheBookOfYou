@@ -1,7 +1,7 @@
 baseURL = 'http://getthebookofyou.com/'
 languageCode = 'en-us'
 languageName = "English"
-title = 'The Book of You'
+title = 'Get The Book of You'
 
 theme="LoveIt"
 
