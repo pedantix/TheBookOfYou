@@ -54,15 +54,12 @@ struct TextEditorView: View {
     var editorSheet: some View {
         NavigationView {
             ZStack(alignment: .topLeading) {
-                TextEditor(text: $viewModel.editorText)
-                    .focused($isFocused, equals: .textEditor)
-                    .padding()
-                if viewModel.editorText.isBlank {
-                    Text("Enter some text")
-                        .padding(.fs7 + 1)
-                        .fontWeight(.light)
-                        .opacity(0.25)
-                        .allowsHitTesting(false)
+                VStack {
+                    TextField("Enter some text", text: $viewModel.editorText, axis: .vertical)
+                        .textFieldStyle(.roundedBorder)
+                        .focused($isFocused, equals: .textEditor)
+                        .padding()
+                    Spacer()
                 }
             }
         .navigationTitle("Edit \(title)")

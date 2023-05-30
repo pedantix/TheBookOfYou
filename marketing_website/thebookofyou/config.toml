@@ -9,7 +9,7 @@ theme="LoveIt"
 [params.header]
 [params.header.title]
 name="The Book of You"
-logo="logo.png"
+logo="/logo.png"
 [author]
 name = "Shaun Hubbard"
 email = "shaun@shauncodes.com"
@@ -27,7 +27,7 @@ avatarURL = ""
 title = "Welcome to the Book of You"
 # subtitle shown in home page (HTML format is supported)
 # 主页显示的网站副标题 (允许 HTML 格式)
-subtitle = "An app created to aid folks on their own journey to the best version of themself as they desire."
+subtitle = "This app is for your journey towards the \"version of you\" you want."
 # whether to use typeit animation for subtitle
 # 是否为副标题显示打字机动画
 typeit = false
