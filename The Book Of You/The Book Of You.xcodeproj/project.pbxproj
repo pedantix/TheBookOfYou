@@ -91,6 +91,7 @@
 		EFAD09EB2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD09EA2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift */; };
 		EFAD09ED2A11A3C7007A5873 /* PageTestCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD09EC2A11A3C7007A5873 /* PageTestCases.swift */; };
 		EFAD09EF2A11A3DF007A5873 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD09EE2A11A3DF007A5873 /* Page.swift */; };
+		EFF4B31F2A271E320044FFF8 /* ChapterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF4B31E2A271E320044FFF8 /* ChapterUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +201,7 @@
 		EFAD09EA2A11A133007A5873 /* ChapterCreatorViewModelGoalsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterCreatorViewModelGoalsTests.swift; sourceTree = "<group>"; };
 		EFAD09EC2A11A3C7007A5873 /* PageTestCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PageTestCases.swift; path = "The Book Of YouTests/Models/PageTestCases.swift"; sourceTree = SOURCE_ROOT; };
 		EFAD09EE2A11A3DF007A5873 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		EFF4B31E2A271E320044FFF8 /* ChapterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +480,7 @@
 			children = (
 				EFA647EC29D4A78100A0B451 /* The_Book_Of_YouUITestsLaunchTests.swift */,
 				EF49B50929FF3FCE00F7B62C /* AboutUITests.swift */,
+				EFF4B31E2A271E320044FFF8 /* ChapterUITests.swift */,
 			);
 			path = "The Book Of YouUITests";
 			sourceTree = "<group>";
@@ -750,6 +753,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFA647ED29D4A78100A0B451 /* The_Book_Of_YouUITestsLaunchTests.swift in Sources */,
+				EFF4B31F2A271E320044FFF8 /* ChapterUITests.swift in Sources */,
 				EF49B50A29FF3FCE00F7B62C /* AboutUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

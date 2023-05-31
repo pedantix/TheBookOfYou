@@ -11,6 +11,7 @@ import Foundation
 enum LaunchScenario: String {
     case application
     case blankSlate
+    case sixGoals
 }
 
 extension LaunchScenario {
