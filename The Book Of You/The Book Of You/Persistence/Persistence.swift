@@ -15,6 +15,12 @@ struct PersistenceController {
             return PersistenceController()
         case .blankSlate:
             return PersistenceController(inMemory: true)
+        case .sixGoals:
+            let controller = PersistenceController(inMemory: true)
+            for _ in 0..<6 {
+                controller.viewContext.addGoal()
+            }
+            return controller
         }
     }()
     let container: NSPersistentCloudKitContainer
