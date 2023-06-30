@@ -20,6 +20,8 @@ struct AppView: View {
         .environmentObject(alertMessenger)
         .environmentObject(navStore)
         .task {
+            AppTestHelper().resetIfIsUITest()
+
             // Restore Nav Stack from Last State
             if let navStoreData {
                 navStore.restore(from: navStoreData)
@@ -52,6 +54,9 @@ struct AppView: View {
                         PageEditorView(pageURI: uri)
                     }
                 }
+        }
+        .onAppear {
+            UITextField.appearance().clearButtonMode = .whileEditing
         }
     }
 }

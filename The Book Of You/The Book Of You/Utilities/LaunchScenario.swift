@@ -12,6 +12,8 @@ enum LaunchScenario: String {
     case application
     case blankSlate
     case sixGoals
+    case chapterCreated
+    case chapterCreatedWithAPage
 }
 
 extension LaunchScenario {

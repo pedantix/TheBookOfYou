@@ -8,10 +8,6 @@
 import XCTest
 
 final class AboutUITests: XCTestCase {
-    override class var runsForEachTargetApplicationUIConfiguration: Bool {
-        true
-    }
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -26,8 +22,7 @@ final class AboutUITests: XCTestCase {
     func testExistence() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
-        app.launchEnvironment = ["Scenario": "blankSlate"]
-        app.launch()
+        app.launchUITestWithEnvironmentVariables(["Scenario": "blankSlate"])
 
         // Accessibility button for cover page.
         app.buttons["Click to turn the page"].tap()

@@ -17,9 +17,25 @@ struct PersistenceController {
             return PersistenceController(inMemory: true)
         case .sixGoals:
             let controller = PersistenceController(inMemory: true)
-            for _ in 0..<6 {
-                controller.viewContext.addGoal()
+            for idx in 1...6 {
+                controller.viewContext.addGoal("Goal \(idx)")
             }
+            return controller
+        case .chapterCreated:
+            let controller = PersistenceController(inMemory: true)
+            let chapter = controller.viewContext.addChapter(daysAgo: 5)
+            for idx in 1...6 {
+               controller.viewContext.addGoal("Goal \(idx)", with: chapter)
+            }
+            return controller
+
+        case .chapterCreatedWithAPage:
+            let controller = PersistenceController(inMemory: true)
+            let chapter = controller.viewContext.addChapter(daysAgo: 5)
+            for idx in 1...6 {
+               controller.viewContext.addGoal("Goal \(idx)", with: chapter)
+            }
+            controller.viewContext.addPage(to: chapter)
             return controller
         }
     }()

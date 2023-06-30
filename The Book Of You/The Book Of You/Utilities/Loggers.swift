@@ -12,6 +12,7 @@ let viewLogger = Logger(label: "View")
 let viewModelLogger = Logger(label: "ViewModel")
 let dataServiceLogger = Logger(label: "DataService")
 let persistenceLogger = Logger(label: "Persistence")
+let appLogger = Logger(label: "App")
 
 extension Logger {
     func contextError(_ error: NSError, _ customMessage: String = "", file: String = #file, line: Int = #line) {

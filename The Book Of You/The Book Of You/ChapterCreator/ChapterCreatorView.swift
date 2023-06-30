@@ -77,6 +77,7 @@ struct ChapterCreatorView: View {
 
     private var vacationToggle: some View {
         Toggle("Taking a vacation?", isOn: $viewModel.isVacation)
+            .accessibilityIdentifier("Vacation Toggle")
     }
 
     private var chapterGoals: some View {

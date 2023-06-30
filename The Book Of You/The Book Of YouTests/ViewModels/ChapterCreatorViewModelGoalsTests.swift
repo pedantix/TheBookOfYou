@@ -7,6 +7,7 @@
 
 import XCTest
 import Fakery
+import CloudStorage
 @testable import The_Book_Of_You
 
 final class ChapterCreatorViewModelGoalsTests: BackgroundContextTestCase {
@@ -14,9 +15,12 @@ final class ChapterCreatorViewModelGoalsTests: BackgroundContextTestCase {
     private let faker = Faker()
     private var ccvm: ChapterCreatorViewModel!
 
+    @CloudStorage(.identityGoalsKey) private var goals = 5
+
     override func setUp() async throws {
         try await super.setUp()
-        ccvm = await ChapterCreatorViewModel(context)
+        ccvm = ChapterCreatorViewModel(context)
+        goals = 5
     }
     // MARK: - GOALS
     func testCreateGoalIsCreatable() throws {

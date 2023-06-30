@@ -47,19 +47,14 @@ struct IntroView: View {
 
     var body: some View {
         List {
-            ZStack {
-                VStack {
-                    IntroEntryView(title: "Introduction", bodyText: introText)
-                    IntroEntryView(title: "Aggregate Change", bodyText: processImprovement)
-                    IntroEntryView(title: "Daily Reflection", bodyText: reflectionText)
-                    IntroEntryView(title: "Goals & Identity", bodyText: identityText) {
-                        Stepper("Identity Goals: \(goals)", value: $goals, in: 1...1000)
-                    }
-                    IntroEntryView(title: "Vacation Mode", bodyText: vacationModeText)
-                }
-                .listRowSeparator(.hidden)
+            IntroEntryView(title: "Introduction", bodyText: introText)
+            IntroEntryView(title: "Aggregate Change", bodyText: processImprovement)
+            IntroEntryView(title: "Daily Reflection", bodyText: reflectionText)
+            IntroEntryView(title: "Goals & Identity", bodyText: identityText) {
+                Stepper("Identity Goals: \(goals)", value: $goals, in: 1...1000)
+
             }
-            .padding(0)
+            IntroEntryView(title: "Vacation Mode", bodyText: vacationModeText)
         }
         .listStyle(.plain)
         .padding(0)
@@ -90,18 +85,23 @@ private struct IntroEntryView<ContentView: View>: View {
     }
 
     var body: some View {
-        Text(title)
-            .font(.title)
-            .padding(.fs6)
-        Text(bodyText)
-            .font(.body)
-            .padding(.fs5)
-        footerContent()
+        VStack {
+            Text(title)
+                .font(.title)
+                .padding(.fs6)
+            Text(bodyText)
+                .font(.body)
+                .padding(.fs5)
+            footerContent()
+        }
+        .listRowSeparator(.hidden)
     }
 }
 
 struct IntroView_Previews: PreviewProvider {
     static var previews: some View {
-        IntroView()
+        NavigationView {
+            IntroView()
+        }
     }
 }
