@@ -13,7 +13,11 @@ enum LaunchScenario: String {
     case blankSlate
     case sixGoals
     case chapterCreated
+    case vacationChapterCreated
+    case vacationChapterCreatedWithAPage
     case chapterCreatedWithAPage
+    case chapterCreatedWithAVacationPage
+    case twoGoalChapterCreatedWithAPage
 }
 
 extension LaunchScenario {

@@ -32,10 +32,44 @@ struct PersistenceController {
         case .chapterCreatedWithAPage:
             let controller = PersistenceController(inMemory: true)
             let chapter = controller.viewContext.addChapter(daysAgo: 5)
-            for idx in 1...6 {
-               controller.viewContext.addGoal("Goal \(idx)", with: chapter)
+            for idx in 1...5 {
+                controller.viewContext.addGoal("Goal \(idx)", with: chapter)
             }
-            controller.viewContext.addPage(to: chapter)
+            let page = controller.viewContext.addPage(to: chapter)
+            return controller
+        case .twoGoalChapterCreatedWithAPage:
+            let controller = PersistenceController(inMemory: true)
+            let chapter = controller.viewContext.addChapter(daysAgo: 5)
+            for idx in 1...2 {
+                controller.viewContext.addGoal("Goal \(idx)", with: chapter)
+            }
+            let page = controller.viewContext.addPage(to: chapter)
+            return controller
+        case .vacationChapterCreated:
+            let controller = PersistenceController(inMemory: true)
+            let chapter = controller.viewContext.addVacationChapter(daysAgo: 5)
+            return controller
+        case .vacationChapterCreatedWithAPage:
+            let controller = PersistenceController(inMemory: true)
+            let chapter = controller.viewContext.addVacationChapter(daysAgo: 5)
+            let page = controller.viewContext.addPage(to: chapter)
+            do {
+                page.journalEntry = "Vacation Chapter Journal Entry"
+                try controller.viewContext.save()
+            } catch {
+                fatalError()
+            }
+            return controller
+        case .chapterCreatedWithAVacationPage:
+            let controller = PersistenceController(inMemory: true)
+            let chapter = controller.viewContext.addChapter(daysAgo: 5)
+            let page = controller.viewContext.addPage(to: chapter)
+            do {
+                page.journalEntry = "Vacation Day Journal Entry"
+                try controller.viewContext.save()
+            } catch {
+                fatalError()
+            }
             return controller
         }
     }()
@@ -205,6 +239,14 @@ extension NSManagedObjectContext {
         do {
             let page = try creator.createPage(for: chapter)
             page.isDraft = isDraft
+            if !isDraft {
+                for entry in page.pageEntries ?? [] {
+                    guard let pageEntry = entry as? PageEntry,
+                          let textEntry = pageEntry.textEntry else { continue }
+                    textEntry.text = "Page Text \(pageEntry.entryOrder + 1)"
+
+                }
+            }
             page.vacationDay = isVacation
             page.entryDate = .date(daysAgo: daysAgo)
             try save()

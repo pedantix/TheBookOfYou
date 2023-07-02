@@ -15,3 +15,14 @@ extension XCUIApplication {
         launch()
     }
 }
+
+extension XCUIApplication {
+    func navigateToIndex() {
+        // Accessibility button for cover page.
+        self.buttons["Click to turn the page"].tap()
+        let indexButton = self.navigationBars.buttons["Index"]
+        XCTAssert(indexButton.exists)
+        indexButton.tap()
+        XCTAssertTrue(self.staticTexts["Index"].exists)
+    }
+}

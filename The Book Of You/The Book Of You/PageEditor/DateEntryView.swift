@@ -47,6 +47,7 @@ struct DateEntryView: View {
         DatePicker(selection: $viewModel.editorDate, in: ...Date.now, displayedComponents: .date) {
             Text("Entry Date")
         }
+        .accessibilityIdentifier("Entry Date")
         .id(dateId)
         .onChange(of: viewModel.editorDate) { _ in
             viewModel.saveDate()

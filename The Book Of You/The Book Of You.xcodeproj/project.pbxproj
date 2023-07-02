@@ -43,6 +43,8 @@
 		EF56AA9B2A0B28D30020537E /* ModelRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF56AA9A2A0B28D30020537E /* ModelRepository.swift */; };
 		EF56AA9D2A0B29C00020537E /* ModelRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF56AA9C2A0B29BF0020537E /* ModelRepositoryTests.swift */; };
 		EF5FD05429F8ABB1003D768C /* GoalSearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FD05329F8ABB1003D768C /* GoalSearchRow.swift */; };
+		EF63ECEC2A4F3853007D174B /* ViewingPageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF63ECEB2A4F3853007D174B /* ViewingPageTests.swift */; };
+		EF63ECEE2A520EF3007D174B /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF63ECED2A520EF3007D174B /* XCUIElement.swift */; };
 		EF6423C429FC20D8009F60FF /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6423C329FC20D8009F60FF /* ColorTheme.swift */; };
 		EF6423C629FC245E009F60FF /* ActionAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6423C529FC245E009F60FF /* ActionAlertView.swift */; };
 		EF6423C829FC6DBE009F60FF /* RangeReplaceableCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6423C729FC6DBE009F60FF /* RangeReplaceableCollections.swift */; };
@@ -150,6 +152,8 @@
 		EF56AA9A2A0B28D30020537E /* ModelRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRepository.swift; sourceTree = "<group>"; };
 		EF56AA9C2A0B29BF0020537E /* ModelRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRepositoryTests.swift; sourceTree = "<group>"; };
 		EF5FD05329F8ABB1003D768C /* GoalSearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSearchRow.swift; sourceTree = "<group>"; };
+		EF63ECEB2A4F3853007D174B /* ViewingPageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewingPageTests.swift; sourceTree = "<group>"; };
+		EF63ECED2A520EF3007D174B /* XCUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
 		EF6423C329FC20D8009F60FF /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		EF6423C529FC245E009F60FF /* ActionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionAlertView.swift; sourceTree = "<group>"; };
 		EF6423C729FC6DBE009F60FF /* RangeReplaceableCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeReplaceableCollections.swift; sourceTree = "<group>"; };
@@ -484,6 +488,8 @@
 				EF49B50929FF3FCE00F7B62C /* AboutUITests.swift */,
 				EFF4B31E2A271E320044FFF8 /* ChapterUITests.swift */,
 				EF1F7E822A4DEA8D000D518D /* XCUIApplication.swift */,
+				EF63ECEB2A4F3853007D174B /* ViewingPageTests.swift */,
+				EF63ECED2A520EF3007D174B /* XCUIElement.swift */,
 			);
 			path = "The Book Of YouUITests";
 			sourceTree = "<group>";
@@ -758,6 +764,8 @@
 			files = (
 				EF1F7E832A4DEA8D000D518D /* XCUIApplication.swift in Sources */,
 				EFF4B31F2A271E320044FFF8 /* ChapterUITests.swift in Sources */,
+				EF63ECEE2A520EF3007D174B /* XCUIElement.swift in Sources */,
+				EF63ECEC2A4F3853007D174B /* ViewingPageTests.swift in Sources */,
 				EF49B50A29FF3FCE00F7B62C /* AboutUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
