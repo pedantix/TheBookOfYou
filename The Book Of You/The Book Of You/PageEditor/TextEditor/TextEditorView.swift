@@ -41,6 +41,7 @@ struct TextEditorView: View {
                     } label: {
                         Image(systemName: "pencil")
                     }.buttonStyle(.borderedProminent)
+                    .accessibilityLabel(Text("Edit \(title)"))
                 }.padding(.fs5)
             }
         }
@@ -78,11 +79,6 @@ struct TextEditorView: View {
                     }
                 }
             }
-        }
-        .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.isFocused = .textEditor
-           }
         }
     }
 }

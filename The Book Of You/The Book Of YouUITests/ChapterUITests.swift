@@ -184,7 +184,7 @@ final class ChapterUITests: XCTestCase {
         indexButton.tap()
         XCTAssertTrue(app.staticTexts["Index"].exists)
 
-        let preexistingChapter = app.cells.staticTexts["A chapter from 5 days ago"]
+        let preexistingChapter = app.cells.staticTexts["A chapter from 1 days ago"]
 
         XCTAssertTrue(preexistingChapter.exists)
 

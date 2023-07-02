@@ -23,8 +23,8 @@ struct PersistenceController {
             return controller
         case .chapterCreated:
             let controller = PersistenceController(inMemory: true)
-            let chapter = controller.viewContext.addChapter(daysAgo: 5)
-            for idx in 1...6 {
+            let chapter = controller.viewContext.addChapter(daysAgo: 1)
+            for idx in 1...5 {
                controller.viewContext.addGoal("Goal \(idx)", with: chapter)
             }
             return controller
@@ -47,7 +47,7 @@ struct PersistenceController {
             return controller
         case .vacationChapterCreated:
             let controller = PersistenceController(inMemory: true)
-            let chapter = controller.viewContext.addVacationChapter(daysAgo: 5)
+            let chapter = controller.viewContext.addVacationChapter(daysAgo: 1)
             return controller
         case .vacationChapterCreatedWithAPage:
             let controller = PersistenceController(inMemory: true)

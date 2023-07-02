@@ -45,6 +45,7 @@
 		EF5FD05429F8ABB1003D768C /* GoalSearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5FD05329F8ABB1003D768C /* GoalSearchRow.swift */; };
 		EF63ECEC2A4F3853007D174B /* ViewingPageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF63ECEB2A4F3853007D174B /* ViewingPageTests.swift */; };
 		EF63ECEE2A520EF3007D174B /* XCUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF63ECED2A520EF3007D174B /* XCUIElement.swift */; };
+		EF63ECF12A52136F007D174B /* CreatingPagesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF63ECF02A52136F007D174B /* CreatingPagesTests.swift */; };
 		EF6423C429FC20D8009F60FF /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6423C329FC20D8009F60FF /* ColorTheme.swift */; };
 		EF6423C629FC245E009F60FF /* ActionAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6423C529FC245E009F60FF /* ActionAlertView.swift */; };
 		EF6423C829FC6DBE009F60FF /* RangeReplaceableCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6423C729FC6DBE009F60FF /* RangeReplaceableCollections.swift */; };
@@ -154,6 +155,7 @@
 		EF5FD05329F8ABB1003D768C /* GoalSearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSearchRow.swift; sourceTree = "<group>"; };
 		EF63ECEB2A4F3853007D174B /* ViewingPageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewingPageTests.swift; sourceTree = "<group>"; };
 		EF63ECED2A520EF3007D174B /* XCUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUIElement.swift; sourceTree = "<group>"; };
+		EF63ECF02A52136F007D174B /* CreatingPagesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatingPagesTests.swift; sourceTree = "<group>"; };
 		EF6423C329FC20D8009F60FF /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		EF6423C529FC245E009F60FF /* ActionAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionAlertView.swift; sourceTree = "<group>"; };
 		EF6423C729FC6DBE009F60FF /* RangeReplaceableCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeReplaceableCollections.swift; sourceTree = "<group>"; };
@@ -386,6 +388,15 @@
 			path = ChapterSections;
 			sourceTree = "<group>";
 		};
+		EF63ECEF2A52135A007D174B /* PageTests */ = {
+			isa = PBXGroup;
+			children = (
+				EF63ECEB2A4F3853007D174B /* ViewingPageTests.swift */,
+				EF63ECF02A52136F007D174B /* CreatingPagesTests.swift */,
+			);
+			path = PageTests;
+			sourceTree = "<group>";
+		};
 		EF6423BF29FC1398009F60FF /* AppAlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,7 +499,7 @@
 				EF49B50929FF3FCE00F7B62C /* AboutUITests.swift */,
 				EFF4B31E2A271E320044FFF8 /* ChapterUITests.swift */,
 				EF1F7E822A4DEA8D000D518D /* XCUIApplication.swift */,
-				EF63ECEB2A4F3853007D174B /* ViewingPageTests.swift */,
+				EF63ECEF2A52135A007D174B /* PageTests */,
 				EF63ECED2A520EF3007D174B /* XCUIElement.swift */,
 			);
 			path = "The Book Of YouUITests";
@@ -765,6 +776,7 @@
 				EF1F7E832A4DEA8D000D518D /* XCUIApplication.swift in Sources */,
 				EFF4B31F2A271E320044FFF8 /* ChapterUITests.swift in Sources */,
 				EF63ECEE2A520EF3007D174B /* XCUIElement.swift in Sources */,
+				EF63ECF12A52136F007D174B /* CreatingPagesTests.swift in Sources */,
 				EF63ECEC2A4F3853007D174B /* ViewingPageTests.swift in Sources */,
 				EF49B50A29FF3FCE00F7B62C /* AboutUITests.swift in Sources */,
 			);

@@ -124,10 +124,6 @@ final class ViewingPageTests: XCTestCase {
         dateFormatter.dateStyle = .medium
         let dateStr = dateFormatter.string(from: .now)
         XCTAssertEqual(dateView.buttons.firstMatch.value as? String, dateStr)
-
-        let vacationToggle = app.switches["Vacation Day"]
-        XCTAssertEqual(vacationToggle.value as? String, "0")
-
         XCTAssert(app.staticTexts["Vacation Chapter Journal Entry"].exists)
     }
 }

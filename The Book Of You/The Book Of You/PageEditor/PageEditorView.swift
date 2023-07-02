@@ -59,7 +59,9 @@ private struct _PageEditorView: View {
     var body: some View {
         List {
             DateEntryView(page, moc)
-            PageVacationToggleView(page, moc)
+            if !viewModel.isVacationChapter {
+                PageVacationToggleView(page, moc)
+            }
             ForEach(viewModel.entries) { entry in
                 PageEntryView(entry: entry)
             }

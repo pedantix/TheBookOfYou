@@ -139,4 +139,8 @@ class PageEditorViewModel: ObservableObject {
             }
         }
     }
+
+    var isVacationChapter: Bool {
+        return page.chapter?.isVacation ?? false
+    }
 }

@@ -24,6 +24,12 @@ final class PageEditorViewModelTests: BackgroundContextTestCase {
         pageWithTwoEntries = context.addPage(goals: 2)
         validatorGraph = .init()
     }
+
+    func testIsVacation() {
+        XCTAssertTrue(PageEditorViewModel(vacationChapterPage, validatorGraph).isVacationChapter)
+
+        XCTAssertFalse(PageEditorViewModel(pageWithTwoEntries, validatorGraph).isVacationChapter)
+    }
 }
 
 // MARK: - Presentation of Page
